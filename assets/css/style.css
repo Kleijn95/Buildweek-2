@@ -1,0 +1,19 @@
+.headNav {
+  position: fixed;
+}
+
+.navbar {
+  height: 320px;
+}
+
+.height100 {
+  height: 100%;
+}
+
+.playlists {
+  height: 30%;
+}
+
+.heart {
+  background: linear-gradient(135deg, #9b5de5, #6a4bf4, #5e8ef7, #00bbf9, #00f5d4);
+}
