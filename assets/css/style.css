@@ -23,6 +23,22 @@ header {
 }
 
 .overflow-y-scroll::-webkit-scrollbar-thumb {
-  background-color: grey;
+  background-color: rgba(128, 128, 128, 0.774);
   border-radius: 4px;
+}
+
+main {
+  background-color: #202020;
+}
+
+.fa-angle-left,
+.fa-angle-right {
+  background-color: #131313;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.play {
+  background-color: #1ed760;
+  padding: 1em 0;
 }

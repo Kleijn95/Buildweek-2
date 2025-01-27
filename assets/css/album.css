@@ -1,0 +1,16 @@
+h2 {
+  font-size: 4rem;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+.musicList,
+main {
+  height: 100vh;
+}
+
+.play {
+  padding: 14px 17px;
+}
