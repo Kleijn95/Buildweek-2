@@ -1,5 +1,5 @@
 .music-box {
-  background: linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, rgba(33, 37, 41, 1) 91%);
+  background: linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, #202020 91%);
 }
 
 h2 {
@@ -9,4 +9,10 @@ h2 {
 .hide,
 .show {
   cursor: pointer;
+  background-color: #222222;
+}
+.hide,
+.show,
+.album {
+  font-size: 0.7em;
 }
