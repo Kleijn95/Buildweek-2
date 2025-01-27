@@ -1,16 +1,13 @@
-.headNav {
-  position: fixed;
+header {
+  height: 100vh;
 }
 
 .navbar {
   height: 320px;
 }
-.vh100 {
-  height: 100vh;
-}
 
 .playlists {
-  height: 30%;
+  height: 100vh;
 }
 
 .heart {
