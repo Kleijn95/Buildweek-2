@@ -39,3 +39,15 @@ h2 {
   background-color: grey;
   border-radius: 4px;
 }
+.song {
+  width: 50px;
+}
+h6 {
+  font-size: 10px;
+}
+.subtitle {
+  font-size: 9px;
+}
+.player {
+  font-size: 30px;
+}
