@@ -21,3 +21,8 @@ header {
 h2 {
   font-size: 4rem;
 }
+
+.hide,
+.show {
+  cursor: pointer;
+}
