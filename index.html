@@ -63,7 +63,8 @@
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column mt-5">
                     <li class="nav-item d-flex align-items-center">
                       <a class="nav-link text-white px-0" aria-current="page" href="#"
-                        ><i class="fa-solid fa-plus fs-5 me-2"></i>Crea playlist</a
+                        ><i class="fa-solid fa-plus fs-5 me-2 p-1 rounded-1 bg-secondary text-black"></i>Crea
+                        playlist</a
                       >
                     </li>
                     <li class="nav-item">
@@ -117,17 +118,58 @@
         </header>
 
         <main class="col bg-dark">
-          <div class="container mt-5">
-            <div class="container d-flex bg-black p-4">
-              <div><img src="./assets/imgs/main/image-1.jpg" /></div>
+          <div class="container mt-4">
+            <div class="d-flex justify-content-between">
+              <div class="text-white mb-3">
+                <i class="fa-solid fa-angle-left bg-black text-secondary p-2 rounded-circle fs-5"></i>
+                <i class="fa-solid fa-angle-right bg-black text-secondary p-2 rounded-circle fs-5 ms-3"></i>
+              </div>
+              <div class="d-flex bg-black rounded-pill align-items-center gap-2 pe-2" style="height: 30px">
+                <img src="./assets/imgs/search/image-1.jpeg" class="img-fluid h-100 rounded-circle" />
+                <p class="text-white mb-0">Username</p>
+                <button
+                  class="bg-transparent border-0 text-white dropdown-toggle align-self-end"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                ></button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="container d-flex bg-black p-4 music-box gap-3">
+              <div><img src="./assets/imgs/main/image-1.jpg" class="img-fluid" /></div>
               <div class="container text-white">
-                <p>Album</p>
-                <h2 class="fs-1">VIOLA (feat. Salmo)</h2>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>ALBUM</p>
+                  <p class="bg-dark rounded-pill py-1 px-2 text-secondary">NASCONDI ANNUNCI</p>
+                </div>
+                <h2>VIOLA (feat. Salmo)</h2>
                 <p>Fedez, Salmo</p>
                 <p>Ascolta il nuovo singolo di Fedez e Salmo!</p>
                 <div class="d-flex">
-                  <button type="button" class="btn btn-success">Primary</button>
-                  <button type="button" class="btn btn-dark">Dark</button>
+                  <button type="button" class="btn btn-success rounded-pill text-black px-4 py-2 me-4">Play</button>
+                  <button type="button" class="btn btn-black border border-secondary text-white rounded-pill px-4 py-2">
+                    Salva
+                  </button>
+                  <div class="dropdown">
+                    <button
+                      class="bg-transparent border-0 text-secondary ms-3 fs-2"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -197,6 +239,8 @@
         </aside>
       </div>
     </div>
+
+    <script src="./assets/js/script.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

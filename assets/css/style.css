@@ -13,3 +13,11 @@ header {
 .heart {
   background: linear-gradient(135deg, #9b5de5, #6a4bf4, #5e8ef7, #00bbf9, #00f5d4);
 }
+
+.music-box {
+  background: linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, rgba(33, 37, 41, 1) 91%);
+}
+
+h2 {
+  font-size: 4rem;
+}
