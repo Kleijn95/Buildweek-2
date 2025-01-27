@@ -1,9 +1,9 @@
-header {
-  height: 100vh;
+body {
+  font-family: "Circular";
 }
 
-.navbar {
-  height: 320px;
+header {
+  height: 100vh;
 }
 
 .playlists {
