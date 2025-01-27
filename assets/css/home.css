@@ -1,0 +1,12 @@
+.music-box {
+  background: linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, rgba(33, 37, 41, 1) 91%);
+}
+
+h2 {
+  font-size: 4rem;
+}
+
+.hide,
+.show {
+  cursor: pointer;
+}
