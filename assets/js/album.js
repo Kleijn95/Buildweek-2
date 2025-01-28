@@ -51,11 +51,10 @@ fetch(URL, {
       songTitle.style.cursor = "pointer";
       const preview = albums[i].preview;
       songTitle.addEventListener("click", () => {
-        let currentIndex = 1;
         const audio = document.createElement("audio");
         audio.controls = true;
         audio.innerHTML = `
-                <source src="${albums[currentIndex].link}" type="audio/mpeg">
+                <source src="${preview}" type="audio/mpeg">
                 Il tuo browser non supporta l'elemento audio.`;
         document.body.appendChild(audio);
         audio.play().catch((error) => {
