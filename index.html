@@ -24,7 +24,10 @@
   </head>
 
   <body>
-    <div class="container-fluid">
+    <div class="container-fluid osition-relative">
+      <button class="bg-transparent border-0 showAside position-absolute d-none">
+        <i class="fa fa-arrow-left text-gray"></i>
+      </button>
       <div class="row">
         <header class="col-2 px-0 bg-black pt-4">
           <div class="d-flex flex-column h-100 sidebar">
@@ -33,23 +36,47 @@
                 <div id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column">
                     <li class="nav-item">
-                      <a class="nav-link text-white active px-0" aria-current="page" href="#"><i class="fa-solid fa-house fs-5 me-2"></i> Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link text-white px-0" aria-current="page" href="#">
-                        <i class="fa-solid fa-magnifying-glass fs-5 me-2"></i>
-                        Cerca</a
+                      <a class="nav-link text-white active px-0" aria-current="page" href="#"
+                        ><i class="fa-solid fa-house fs-5 me-2"></i> Home</a
                       >
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link text-white px-0" href="#"
+                      <a class="nav-link px-0" aria-current="page" href="#">
+                        <div class="p-0">
+                          <button
+                            class="btn p-0"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#searchBar"
+                            aria-expanded="false"
+                            aria-controls="searchBar"
+                          >
+                            <p class="text-gray m-0 p-0 searchText">
+                              <i class="fa fa-magnifying-glass fs-5 me-2 p-1"></i>Cerca
+                            </p>
+                          </button>
+                        </div>
+                        <div class="d-flex px-1 align-items-center">
+                          <div class="collapse collapse-horizontal" id="searchBar">
+                            <input
+                              class="form-control me-2 bg-dark border-0 p-1 text-white"
+                              type="search"
+                              placeholder="Search"
+                              aria-label="Search"
+                            />
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-gray px-0" href="#"
                         ><svg
                           data-encore-id="icon"
                           role="img"
                           aria-hidden="true"
                           class="Svg-sc-ytk21e-0 bneLcE e-9541-icon"
                           viewBox="0 0 24 24"
-                          style="width: 25px; fill: white"
+                          style="width: 25px; fill: #abb0ad"
                         >
                           <path
                             d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"
@@ -62,18 +89,20 @@
 
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column mt-5">
                     <li class="nav-item d-flex align-items-center">
-                      <a class="nav-link text-white px-0" aria-current="page" href="#"
-                        ><i class="fa-solid fa-plus fs-5 me-2 p-1 rounded-1 bg-secondary text-black"></i>Crea playlist</a
+                      <a class="nav-link text-gray px-0" aria-current="page" href="#"
+                        ><i class="fa-solid fa-plus fs-5 me-2 p-1 rounded-1 bg-secondary text-black"></i>Crea
+                        playlist</a
                       >
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link text-white px-0" aria-current="page" href="#"
+                      <a class="nav-link text-gray px-0" aria-current="page" href="#"
                         ><i class="fa-solid heart fa-heart fs-5 me-2 p-1 rounded-1"></i>Brani che ti piacciono</a
                       >
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link text-white px-0" href="#"
-                        ><i class="fas fa-bookmark fs-5 me-2 bg-success py-1 px-2 rounded-1" style="color: #27ddaa"></i>I tuoi episodi</a
+                      <a class="nav-link text-gray px-0" href="#"
+                        ><i class="fas fa-bookmark fs-5 me-2 bg-success py-1 px-2 rounded-1" style="color: #27ddaa"></i
+                        >I tuoi episodi</a
                       >
                     </li>
                   </ul>
@@ -85,7 +114,7 @@
             </div>
 
             <div class="container overflow-y-scroll">
-              <div class="playlists text-white bg-black">
+              <div class="playlists text-gray bg-black">
                 <p>PLACEHOLDER</p>
                 <p>PLACEHOLDER</p>
                 <p>PLACEHOLDER</p>
@@ -156,9 +185,16 @@
                 <p>Ascolta il nuovo singolo di Fedez e Salmo!</p>
                 <div class="d-flex">
                   <button type="button" class="btn btn-success rounded-pill text-black px-4 py-2 me-4">Play</button>
-                  <button type="button" class="btn btn-black border border-secondary text-white rounded-pill px-4 py-2">Salva</button>
+                  <button type="button" class="btn btn-black border border-secondary text-white rounded-pill px-4 py-2">
+                    Salva
+                  </button>
                   <div class="dropdown">
-                    <button class="bg-transparent border-0 text-secondary ms-3 fs-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button
+                      class="bg-transparent border-0 text-secondary ms-3 fs-2"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
                       <i class="fa-solid fa-ellipsis"></i>
                     </button>
                     <ul class="dropdown-menu">
@@ -172,49 +208,69 @@
             </div>
             <h3 class="text-white my-4 fs-1">Buonasera</h3>
             <div class="row" id="mainRow"></div>
+            <div class="row" id="mainRow"></div>
           </div>
         </main>
 
         <aside class="col-2 bg-black">
-          <div class="container pt-4">
-            <div class="d-flex justify-content-between">
-              <h3 class="text-white fs-4">Attività amici</h3>
-              <div class="text-secondary fs-5"><i class="fa-solid fa-user-group me-3"></i><i class="fa-solid fa-x"></i></div>
+          <div class="container pt-4 pe-0">
+            <div class="d-flex justify-content-between align-items-center">
+              <h3 class="text-white mb-0">Attività amici</h3>
+              <div class="text-secondary">
+                <button class="asideBtn bg-transparent border-0">
+                  <i class="fa-solid fa-user-group text-gray me-1"></i>
+                </button>
+                <button class="asideBtn bg-transparent border-0 closeAside">
+                  <i class="fa-solid fa-x text-gray"></i>
+                </button>
+              </div>
             </div>
           </div>
-          <div class="container mt-5 text-white">
+          <div class="container mt-5 text-gray notifications pe-0">
             <div class="d-flex justify-content-between gap-1">
               <div class="d-flex gap-2">
-                <img style="width: 50px; height: 50px; border-radius: 50%" class="img-fluid" src="./assets/imgs/search/image-11.jpg" />
+                <img
+                  style="width: 35px; height: 35px; border-radius: 50%"
+                  class="img-fluid"
+                  src="./assets/imgs/search/image-11.jpg"
+                />
                 <div>
-                  <h4 style="font-size: 1rem" class="">Charlie Hookham</h4>
-                  <p class="mb-1" style="font-size: 0.5rem">In Camera - Yumi Zouma</p>
-                  <p style="font-size: 0.5rem"><i class="fas fa-music me-1" style="color: #ffffff"></i> EP III</p>
+                  <h4 class="mb-0 fw-bold">Charlie Hookham</h4>
+                  <p class="mb-1">In Camera - Yumi Zouma</p>
+                  <p><i class="fas fa-music me-1" style="color: #ffffff"></i> EP III</p>
                 </div>
               </div>
-              <p style="font-size: 0.8rem">4 ore</p>
+              <p class="time">4 ore</p>
             </div>
             <div class="d-flex justify-content-between gap-1 mt-3">
               <div class="d-flex gap-2">
-                <img style="width: 50px; height: 50px; border-radius: 50%" class="img-fluid" src="./assets/imgs/search/image-12.jpg" />
+                <img
+                  style="width: 35px; height: 35px; border-radius: 50%"
+                  class="img-fluid"
+                  src="./assets/imgs/search/image-12.jpg"
+                />
                 <div>
-                  <h4 style="font-size: 1rem" class="">lightdark02</h4>
-                  <p class="mb-1" style="font-size: 0.5rem">Aimed to kill - Jared LeMac</p>
-                  <p style="font-size: 0.5rem"><i class="fas fa-music me-1" style="color: #ffffff"></i> Aimed to Kill</p>
+                  <h4 class="mb-0 fw-bold">lightdark02</h4>
+                  <p class="mb-1">Aimed to kill - Jared LeMac</p>
+                  <p><i class="fas fa-music me-1" style="color: #ffffff"></i> Aimed to Kill</p>
                 </div>
               </div>
-              <p style="font-size: 0.8rem">8 ore</p>
+              <p class="time">8 ore</p>
             </div>
             <div class="d-flex justify-content-between gap-1 mt-3">
               <div class="d-flex gap-2">
-                <img style="width: 50px; height: 50px; border-radius: 50%" class="img-fluid" src="./assets/imgs/search/image-15.jpg" />
+                <img
+                  style="width: 35px; height: 35px; border-radius: 50%"
+                  class="img-fluid"
+                  src="./assets/imgs/search/image-15.jpg"
+                />
                 <div>
-                  <h4 style="font-size: 1rem" class="">Valeria Traverso</h4>
-                  <p class="mb-1" style="font-size: 0.5rem">New Kings - Sleeping Wolf</p>
-                  <p style="font-size: 0.5rem"><i class="fas fa-music me-1" style="color: #ffffff"></i>Twint Badass mood</p>
+                  <h4 class="mb-0 fw-bold">Valeria Traverso</h4>
+                  <p class="mb-1">New Kings - Sleeping Wolf</p>
+                  <p><i class="fas fa-music me-1" style="color: #ffffff"></i>Twint Badass mood</p>
                 </div>
               </div>
-              <p style="font-size: 0.8rem">3 giorni</p>
+              <p class="time">3 giorni</p>
             </div>
           </div>
         </aside>
@@ -225,7 +281,12 @@
     <nav class="navbar navbar-expand-lg sticky-bottom text-white" style="background-color: #181818">
       <div class="container-fluid">
         <div class="d-flex align-items-center gap-3">
-          <img class="song" src="./assets/imgs/search/image-13.jpeg" alt="" style="width: 50px; height: 50px; object-fit: cover" />
+          <img
+            class="song"
+            src="./assets/imgs/search/image-13.jpeg"
+            alt=""
+            style="width: 50px; height: 50px; object-fit: cover"
+          />
           <div>
             <h6 class="text-white m-0">Lorem ipsum dolor</h6>
             <p class="text-secondary m-0 subtitle">lorem lorem</p>
@@ -256,7 +317,14 @@
             </button>
           </div>
           <div class="progress mt-2">
-            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+            <div
+              class="progress-bar"
+              role="progressbar"
+              style="width: 80%"
+              aria-valuenow="20"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
           </div>
         </div>
 
@@ -270,7 +338,16 @@
           <button class="btn btn-link text-white p-0 volume"><i class="fas fa-volume-up"></i></button>
           <button class="btn btn-link text-white p-0 d-none noVolume"><i class="fas fa-volume-mute"></i></button>
           <div class="progress mt-2">
-            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">assasasaassas</div>
+            <div
+              class="progress-bar"
+              role="progressbar"
+              style="width: 80%"
+              aria-valuenow="20"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              assasasaassas
+            </div>
           </div>
           <button class="btn btn-link text-white p-0"><i class="fas fa-expand-alt"></i></button>
         </div>

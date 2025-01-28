@@ -1,5 +1,10 @@
 body {
   font-family: "Circular";
+  font-size: 0.8rem;
+}
+
+.text-gray {
+  color: #abb0ad;
 }
 
 header {
@@ -8,10 +13,6 @@ header {
 
 .playlists {
   height: 100vh;
-}
-
-.heart {
-  background: linear-gradient(135deg, #9b5de5, #6a4bf4, #5e8ef7, #00bbf9, #00f5d4);
 }
 
 .overflow-y-scroll::-webkit-scrollbar {
@@ -41,6 +42,32 @@ main {
 .play {
   background-color: #1ed760;
   padding: 1em 0;
+}
+
+.showAside {
+  right: 12px;
+  top: 25px;
+  font-size: 1.2em;
+}
+
+aside {
+  h3 {
+    font-size: 1.5em;
+  }
+  .asideBtn {
+    font-size: 1.2em;
+  }
+  .notifications {
+    h4 {
+      font-size: 1em;
+    }
+    p {
+      font-size: 0.8em;
+    }
+    .time {
+      font-size: 0.7em;
+    }
+  }
 }
 .song {
   width: 50px;
