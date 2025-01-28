@@ -148,14 +148,9 @@ h6 {
 .visualizza {
   font-size: 12px;
 }
-
-.hide,
-.show {
+.slider-track-input {
+  -webkit-appearance: none;
+  background: gray;
   cursor: pointer;
-  background-color: #222222;
-}
-.hide,
-.show,
-.album {
-  font-size: 0.7em;
+  height: 3px;
 }
