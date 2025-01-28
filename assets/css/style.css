@@ -20,6 +20,9 @@ header {
   .playlists {
     height: 100vh;
   }
+  .heart {
+    background: linear-gradient(135deg, #9b5de5, #6a4bf4, #5e8ef7, #00bbf9, #00f5d4);
+  }
 
   .searchText {
     font-size: 0.8em;
@@ -133,6 +136,17 @@ h6 {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.title {
+  font-size: 17px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Numero di righe massimo (cambia qui per più righe) */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.visualizza {
+  font-size: 12px;
 }
 
 .hide,

@@ -71,7 +71,7 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
 
     albums.slice(0, 6).forEach((album) => {
       const mainRow = document.getElementById("mainRow");
-      console.log(album);
+      //console.log(album);
       const card = document.createElement("div");
       card.classList.add("col-4");
       const innerCard = document.createElement("div");
@@ -106,11 +106,16 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
 
       const outerCardBody = document.createElement("div");
       outerCardBody.classList.add("col-md-8", "d-flex", "align-items-center");
+      outerCardBody.style.cursor = "pointer";
       const cardBody = document.createElement("div");
       cardBody.classList.add("card-body");
       const cardTitle = document.createElement("h5");
       cardTitle.classList.add("card-title", "text-white", "text-truncate-multiline");
       cardTitle.innerText = album.album.title;
+
+      outerCardBody.addEventListener("click", function () {
+        window.location.assign(`./album.html?albumId=${album.album.id}`);
+      });
 
       mainRow.appendChild(card);
       card.appendChild(innerCard);
@@ -124,5 +129,64 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
       cardRow.appendChild(outerCardBody);
       outerCardBody.appendChild(cardBody);
       cardBody.appendChild(cardTitle);
+    });
+  });
+
+fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+
+    Authorization: "Bearer cdd499bc73msh8003c69cf9aa9dcp12c566jsnf97718531566", // Verifica se è necessario
+  },
+})
+  .then((resp) => {
+    if (resp.ok) {
+      return resp.json();
+    } else {
+      throw new Error("Impossibile recuperare gli album. Riprova più tardi.");
+    }
+  })
+
+  .then((data) => {
+    const albums = data.data;
+    const albumRaw = document.querySelector("#albumRaw");
+    //Creazione card nella ezione "altro di ciò che ti piace"
+    const containerRow = document.createElement("div");
+    containerRow.classList.add("row", "d-felx", "gap-1", "justify-content-between");
+    albums.forEach((album) => {
+      const cardAlbum = document.createElement("div");
+      cardAlbum.classList.add("card", "col-2", "bg-dark", "h-100", "rounded", "p-2", "d-flex", "flex-column", "m-2");
+      cardAlbum.style.cursor = "pointer";
+
+      const imgAlbum = document.createElement("img");
+      imgAlbum.classList.add("card-img-top", "rounded");
+      imgAlbum.src = album.artist.picture_xl;
+
+      const cardBody = document.createElement("div");
+      cardBody.classList.add("card-body");
+
+      const artist = document.createElement("h6");
+      artist.classList.add("card-title", "text-white", "title");
+      artist.innerHTML = album.artist.name;
+
+      const title = document.createElement("p");
+      title.classList.add("card-text", "text-secondary", "text-truncate-multiline");
+      title.innerHTML = album.album.title;
+
+      cardAlbum.addEventListener("click", function () {
+        window.location.assign(`./album.html?albumId=${album.album.id}`);
+      });
+
+      cardBody.appendChild(artist);
+      cardBody.appendChild(title);
+
+      cardAlbum.appendChild(imgAlbum);
+      cardAlbum.appendChild(cardBody);
+
+      containerRow.appendChild(cardAlbum);
+      albumRaw.appendChild(containerRow);
+
+      console.log(album);
     });
   });
