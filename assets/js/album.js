@@ -28,7 +28,8 @@ fetch(URL, {
   })
   .then((data) => {
     const albums = data.tracks.data; // Assumi che la risposta sia un array di album in "data"
-    console.log(data);
+
+    console.log(data.artist.id);
     for (i = 0; i < albums.length; i++) {
       console.log(albums[i].album.title);
       //iterare la playlist o l'album
