@@ -42,6 +42,32 @@ main {
   background-color: #1ed760;
   padding: 1em 0;
 }
+.song {
+  width: 50px;
+}
+h6 {
+  font-size: 10px;
+}
+.subtitle {
+  font-size: 9px;
+}
+.player {
+  font-size: 30px;
+}
+.songTime {
+  width: 200%;
+}
+
+.progress {
+  height: 8px;
+  background-color: #333;
+}
+.progress-bar {
+  background-color: white;
+}
+.time {
+  font-size: 14px;
+}
 
 .text-truncate-multiline {
   display: -webkit-box;
