@@ -1,7 +1,5 @@
 let hide = document.querySelector(".hide");
 let banner = document.querySelector(".banner");
-let show = document.querySelector(".show");
-let showBanner = document.querySelector(".showBan");
 let like = document.querySelector(".like");
 let dislike = document.querySelector(".dislike");
 let volume = document.querySelector(".volume");
@@ -13,13 +11,13 @@ let closeAside = document.querySelector(".closeAside");
 let showAside = document.querySelector(".showAside");
 
 hide.addEventListener("click", () => {
-  banner.classList.add("d-none");
-  showBanner.classList.remove("d-none");
-
-  show.addEventListener("click", () => {
+  if (banner.classList.contains("d-none")) {
     banner.classList.remove("d-none");
-    showBanner.classList.add("d-none");
-  });
+    hide.innerText = "NASCONDI ANNUNCI";
+  } else {
+    banner.classList.add("d-none");
+    hide.innerText = "MOSTRA ANNUNCI";
+  }
 });
 
 like.addEventListener("click", () => {
@@ -189,4 +187,125 @@ fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
 
       console.log(album);
     });
+  });
+
+//CAROSELLO
+
+fetch("https://striveschool-api.herokuapp.com/api/deezer/album/119606", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+
+    Authorization: "Bearer cdd499bc73msh8003c69cf9aa9dcp12c566jsnf97718531566", // Verifica se è necessario
+  },
+})
+  .then((resp) => {
+    if (resp.ok) {
+      return resp.json();
+    } else {
+      throw new Error("Impossibile recuperare le canzoni. Riprova più tardi.");
+    }
+  })
+  .then((data) => {
+    let songs = data.tracks.data;
+    songs
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 6)
+      .forEach((song, index) => {
+        console.log(song);
+        let carousel = document.querySelector(".carousel-inner");
+
+        let carouselItem = document.createElement("div");
+
+        if (index === 0) {
+          carouselItem.classList.add("carousel-item", "active");
+        } else {
+          carouselItem.classList.add("carousel-item");
+        }
+
+        let container = document.createElement("div");
+        container.classList.add("container", "d-flex", "bg-black", "p-4", "music-box", "gap-3", "banner");
+
+        let imgDiv = document.createElement("div", "imgDiv"); //AGGIUNGERE STYLE WIDTH 350PX
+        let imgBanner = document.createElement("img");
+        imgBanner.src = song.album.cover_xl;
+        imgBanner.classList.add("img-fluid", "imgBanner");
+        imgBanner.alt = song.artist.name;
+
+        let container2 = document.createElement("div");
+        container2.classList.add("container", "text-white");
+
+        let pAlbum = document.createElement("p");
+        pAlbum.classList.add("album", "fw-bold");
+        pAlbum.innerText = "ALBUM";
+
+        let h2 = document.createElement("h2");
+        h2.classList.add("fw-bold");
+        h2.innerText = song.title;
+
+        let pArtist = document.createElement("p");
+        pArtist.innerText = song.artist.name;
+        let pText = document.createElement("p");
+        pText.innerText = "Ascolta le nuove musiche di " + song.artist.name;
+
+        let divBtn = document.createElement("div");
+        divBtn.classList.add("d-flex");
+        let playBtn = document.createElement("button");
+        playBtn.classList.add("btn", "playBtn", "rounded-pill", "text-black", "px-4", "py-2", "me-4");
+        playBtn.innerText = "Play";
+
+        let saveBtn = document.createElement("button");
+        saveBtn.classList.add(
+          "btn",
+          "btn-black",
+          "rounded-pill",
+          "text-white",
+          "px-4",
+          "py-2",
+          "border",
+          "border-secondary"
+        );
+        saveBtn.innerText = "Salva";
+
+        let dropdown = document.createElement("div");
+        dropdown.classList.add("dropdown");
+        let dropdownButton = document.createElement("button");
+        dropdownButton.classList.add("bg-transparent", "border-0", "text-secondary", "ms-3", "fs-2");
+        dropdownButton.setAttribute("type", "button");
+        dropdownButton.setAttribute("data-bs-toggle", "dropdown");
+        dropdownButton.setAttribute("aria-expanded", "false");
+
+        let icon = document.createElement("i");
+        icon.classList.add("fa-solid", "fa-ellipsis");
+        dropdownButton.appendChild(icon);
+
+        let dropdownMenu = document.createElement("ul");
+        dropdownMenu.classList.add("dropdown-menu");
+
+        let actions = ["Action", "Another action", "Something else here"];
+        actions.forEach((actionText) => {
+          let listItem = document.createElement("li");
+          let link = document.createElement("a");
+          link.classList.add("dropdown-item", "text-white");
+          link.setAttribute("href", "#");
+          link.innerText = actionText;
+
+          listItem.appendChild(link);
+          dropdownMenu.appendChild(listItem);
+        });
+
+        let dropdownDiv = document.createElement("div");
+        dropdownDiv.classList.add("dropdown");
+
+        carousel.appendChild(carouselItem);
+        carouselItem.appendChild(container);
+        container.append(imgDiv, container2);
+
+        imgDiv.appendChild(imgBanner);
+
+        container2.append(pAlbum, h2, pArtist, pText, divBtn);
+        dropdownDiv.appendChild(dropdownButton);
+        dropdownDiv.appendChild(dropdownMenu);
+        divBtn.append(playBtn, saveBtn, dropdownDiv);
+      });
   });

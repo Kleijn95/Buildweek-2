@@ -1,6 +1,6 @@
 body {
   font-family: "Circular";
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .text-gray {
@@ -22,10 +22,6 @@ header {
   }
   .heart {
     background: linear-gradient(135deg, #9b5de5, #6a4bf4, #5e8ef7, #00bbf9, #00f5d4);
-  }
-
-  .searchText {
-    font-size: 0.8em;
   }
 
   .nav-link {
@@ -148,9 +144,14 @@ h6 {
 .visualizza {
   font-size: 12px;
 }
-.slider-track-input {
-  -webkit-appearance: none;
-  background: gray;
+
+.hide,
+.show {
   cursor: pointer;
-  height: 3px;
+  background-color: #222222;
+}
+.hide,
+.show,
+.album {
+  font-size: 0.7em;
 }
