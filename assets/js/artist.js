@@ -1,3 +1,4 @@
+let top5 = 5;
 function formatDuration(seconds) {
   const minutes = Math.floor(seconds / 60); // Calcola i minuti interi
   const remainingSeconds = seconds % 60; // Ottieni i secondi rimanenti
@@ -32,7 +33,7 @@ fetch(URL, {
     const artistName = document.getElementById("artistName");
     artistName.innerText = artist.data[0].artist.name;
 
-    for (i = 0; i < artist.data.length; i++) {
+    for (i = 0; i < top5; i++) {
       //iterare la playlist o l'album
       const songsContainer = document.getElementById("artistTracks");
       const songRow = document.createElement("div");
