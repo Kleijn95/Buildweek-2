@@ -52,6 +52,8 @@ header {
 
 main {
   background-color: #202020;
+
+  height: 100vh;
 }
 
 .fa-angle-left,
