@@ -7,7 +7,7 @@ function formatDuration(seconds) {
 }
 const params = new URLSearchParams(window.location.search);
 const artistId = params.get("artistId");
-const URL = "https://striveschool-api.herokuapp.com/api/deezer/artist/" + artistId + "/top?limit=10";
+const URL = "https://striveschool-api.herokuapp.com/api/deezer/artist/" + artistId + "/top?limit=15";
 const songsContainer = document.getElementById("artistTracks");
 
 function fetchArtist() {
