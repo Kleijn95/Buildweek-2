@@ -148,3 +148,9 @@ h6 {
 .visualizza {
   font-size: 12px;
 }
+.slider-track-input {
+  -webkit-appearance: none;
+  background: gray;
+  cursor: pointer;
+  height: 3px;
+}
