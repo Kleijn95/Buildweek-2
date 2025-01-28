@@ -20,3 +20,7 @@ h2 {
   top: 100px;
   z-index: 2;
 }
+
+.hideDiv2 {
+  right: 180px;
+}
