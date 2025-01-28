@@ -53,7 +53,7 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
 
     albums.slice(0, 6).forEach((album) => {
       const mainRow = document.getElementById("mainRow");
-
+      console.log(album);
       const card = document.createElement("div");
       card.classList.add("col-4");
       const innerCard = document.createElement("div");
@@ -64,7 +64,11 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
       containerBig.classList.add("col-md-4");
       const imgContainer = document.createElement("div");
       imgContainer.classList.add("d-flex", "flex-wrap", "h-100");
+      imgContainer.style.cursor = "pointer";
 
+      imgContainer.addEventListener("click", function () {
+        window.location.assign(`./album.html?albumId=${album.album.id}`);
+      });
       const img1 = document.createElement("img");
       img1.classList.add("img-fluid", "w-50", "p-0");
       img1.alt = `img1 alt`;
