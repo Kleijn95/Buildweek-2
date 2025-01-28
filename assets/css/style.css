@@ -18,7 +18,7 @@ header {
     line-height: 22px;
   }
   .playlists {
-    height: 100vh;
+    max-height: 100vh;
   }
   .heart {
     background: linear-gradient(135deg, #9b5de5, #6a4bf4, #5e8ef7, #00bbf9, #00f5d4);
