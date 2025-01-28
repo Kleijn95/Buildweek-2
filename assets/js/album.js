@@ -27,13 +27,3 @@ for (i = 0; i < 10; i++) {
   titleContainer.appendChild(songTitle);
   durationContainer.appendChild(duration);
 }
-/* <div class="row align-items-center">
-                  <div class="col-1">
-                    <p class="text-white">1</p>
-                  </div>
-                  <div class="col-7"><h3 class="text-white">Titolo canzone</h3></div>
-                  <div class="col-4">
-                    <h3 class="d-flex justify-content-end text-white">0:00</h3>
-                  </div>
-                </div>
- */
