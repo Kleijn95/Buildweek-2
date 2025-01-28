@@ -68,3 +68,11 @@ h6 {
 .time {
   font-size: 14px;
 }
+
+.text-truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Numero di righe massimo (cambia qui per più righe) */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

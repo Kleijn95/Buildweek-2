@@ -87,7 +87,7 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
       const cardBody = document.createElement("div");
       cardBody.classList.add("card-body");
       const cardTitle = document.createElement("h5");
-      cardTitle.classList.add("card-title", "text-nowrap", "text-white");
+      cardTitle.classList.add("card-title", "text-white", "text-truncate-multiline");
       cardTitle.innerText = album.album.title;
 
       mainRow.appendChild(card);
