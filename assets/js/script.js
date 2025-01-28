@@ -4,6 +4,8 @@ let show = document.querySelector(".show");
 let showBanner = document.querySelector(".showBan");
 let like = document.querySelector(".like");
 let dislike = document.querySelector(".dislike");
+let volume = document.querySelector(".volume");
+let noVolume = document.querySelector(".noVolume");
 
 hide.addEventListener("click", () => {
   banner.classList.add("d-none");
@@ -21,6 +23,14 @@ like.addEventListener("click", () => {
 dislike.addEventListener("click", () => {
   like.classList.remove("d-none");
   dislike.classList.add("d-none");
+});
+volume.addEventListener("click", () => {
+  volume.classList.add("d-none");
+  noVolume.classList.remove("d-none");
+});
+noVolume.addEventListener("click", () => {
+  volume.classList.remove("d-none");
+  noVolume.classList.add("d-none");
 });
 
 fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
