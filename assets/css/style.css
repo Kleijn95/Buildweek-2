@@ -54,3 +54,14 @@ h6 {
 .songTime {
   width: 200%;
 }
+
+.progress {
+  height: 8px;
+  background-color: #333;
+}
+.progress-bar {
+  background-color: white;
+}
+.time {
+  font-size: 14px;
+}
