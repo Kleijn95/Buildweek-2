@@ -1,4 +1,5 @@
 let hide = document.querySelector(".hide");
+let hideDiv = document.querySelector(".hideDiv");
 let banner = document.querySelector(".banner");
 let like = document.querySelector(".like");
 let dislike = document.querySelector(".dislike");
@@ -39,13 +40,16 @@ noVolume.addEventListener("click", () => {
 
 closeAside.addEventListener("click", () => {
   aside.classList.add("d-none");
+  hideDiv.classList.add("hideDiv2");
 });
 
 showAside.addEventListener("click", () => {
   if (aside.classList.contains("d-none")) {
     aside.classList.remove("d-none");
+    hideDiv.classList.remove("hideDiv2");
   } else {
     aside.classList.add("d-none");
+    hideDiv.classList.add("hideDiv2");
   }
 });
 

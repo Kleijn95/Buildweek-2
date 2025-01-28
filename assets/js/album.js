@@ -29,7 +29,7 @@ fetch(URL, {
     const albums = data.tracks.data; // Assumi che la risposta sia un array di album in "data"
     console.log(data);
     for (i = 0; i < albums.length; i++) {
-      console.log(albums[i].album.title);
+      /* console.log(albums[i].album.title); */
       //iterare la playlist o l'album
       const songsContainer = document.getElementById("songsContainer");
       const songRow = document.createElement("div");
@@ -47,10 +47,11 @@ fetch(URL, {
       const artist = document.createElement("a");
       songTitle.style.cursor = "pointer";
       songTitle.addEventListener("click", () => {
+        let currentIndex = 1;
         const audio = document.createElement("audio");
         audio.controls = true;
         audio.innerHTML = `
-                <source src="${albums[i].preview}" type="audio/mpeg">
+                <source src="${albums[currentIndex].link}" type="audio/mpeg">
                 Il tuo browser non supporta l'elemento audio.`;
         document.body.appendChild(audio);
         audio.play().catch((error) => {
