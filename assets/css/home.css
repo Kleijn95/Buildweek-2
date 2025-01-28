@@ -13,6 +13,9 @@ h2 {
 
 .playBtn {
   background-color: #1ed760;
+  &:hover {
+    background-color: #ffffff;
+  }
 }
 
 .hideDiv {
