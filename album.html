@@ -32,7 +32,7 @@
                 <div id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column">
                     <li class="nav-item">
-                      <a class="nav-link text-white px-0 d-flex align-items-center" aria-current="page" href="./index.html"
+                      <a class="nav-link text-gray px-0 d-flex align-items-center" aria-current="page" href="#"
                         ><i class="fa-solid fa-house me-3 iconNav"></i> Home</a
                       >
                     </li>
@@ -46,12 +46,19 @@
                           aria-expanded="false"
                           aria-controls="searchBar"
                         >
-                          <p class="text-gray m-0 searchText"><i class="fa fa-magnifying-glass me-3 iconNav"></i>Cerca</p>
+                          <p class="text-gray m-0 searchText">
+                            <i class="fa fa-magnifying-glass me-3 iconNav"></i>Cerca
+                          </p>
                         </button>
 
                         <div class="d-flex px-1 align-items-center">
                           <div class="collapse collapse-horizontal" id="searchBar">
-                            <input class="form-control me-2 bg-dark border-0 p-1 text-white" type="search" placeholder="Search" aria-label="Search" />
+                            <input
+                              class="form-control me-2 bg-dark border-0 p-1 text-white"
+                              type="search"
+                              placeholder="Search"
+                              aria-label="Search"
+                            />
                           </div>
                         </div>
                       </a>
@@ -88,7 +95,8 @@
                     </li>
                     <li class="nav-item">
                       <a class="nav-link text-gray px-0 d-flex align-items-center" href="#"
-                        ><i class="fas fa-bookmark me-3 bg-success iconNav rounded-1" style="color: #27ddaa"></i>I tuoi episodi</a
+                        ><i class="fas fa-bookmark me-3 bg-success iconNav rounded-1" style="color: #27ddaa"></i>I tuoi
+                        episodi</a
                       >
                     </li>
                   </ul>
@@ -131,38 +139,50 @@
         </header>
 
         <main class="container p-0 col bg-secondary overflow-y-scroll">
-          <div class="container px-4 mt-4">
+          <div class="container mt-4">
             <div class="d-flex justify-content-between">
               <div class="text-white mb-3">
                 <i class="fa-solid fa-angle-left text-secondary rounded-circle fs-5"></i>
                 <i class="fa-solid fa-angle-right text-secondary rounded-circle fs-5 ms-3"></i>
               </div>
-              <div class="d-flex rounded-pill align-items-center gap-2 pe-2" style="height: 30px">
+              <div class="d-flex bg-black rounded-pill align-items-center gap-2 pe-2" style="height: 30px">
                 <img src="./assets/imgs/search/image-1.jpeg" class="img-fluid h-100 rounded-circle" />
-                <p class="text-white mb-0">Username</p>
                 <button
-                  class="bg-transparent border-0 text-white dropdown-toggle align-self-end"
+                  class="bg-transparent border-0 text-white dropdown-toggle"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                ></button>
+                >
+                  Username
+                </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item text-white" href="#">Modifica Profilo</a></li>
+                  <li><a class="dropdown-item text-white" href="#">Impostazioni</a></li>
+                  <li><a class="dropdown-item text-white showAside" href="#">Attività Amici</a></li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="container d-flex p-4 music-box gap-3 banner">
-            <div><img id="albumImg" src="./assets/imgs/main/image-1.jpg" class="img-fluid" /></div>
 
+          <div class="container d-flex p-4 music-box gap-3 banner">
+            <div style="width: 350px">
+              <img id="albumImg" src="./assets/imgs/main/image-1.jpg" class="img-fluid" />
+            </div>
             <div class="container text-white">
-              <div class="d-flex align-items-center">
-                <p>ALBUM</p>
+              <div class="d-flex flex-column justify-content-center h-100">
+                <div class="my-auto">
+                  <p class="mb-0">ALBUM</p>
+                  <h2 id="songName">VIOLA (feat. Salmo)</h2>
+                </div>
+                <div class="d-flex align-items-center mt-auto">
+                  <img src="./assets/imgs/main/image-1.jpg" alt="..." height="25px" class="rounded-circle artistPic" />
+                  <p class="mb-0 ms-2">
+                    <span class="fw-bold" id="artist">Fedez, Salmo</span> - <span class="year fw-bold">Anno</span> -
+                    <span class="tracks fw-bold">Numero Brani</span>,
+                    <span class="duration text-gray">Durata totale</span>
+                  </p>
+                </div>
               </div>
-              <h2 id="songName">VIOLA (feat. Salmo)</h2>
-              <p id="artist">Fedez, Salmo</p>
             </div>
           </div>
 
@@ -173,7 +193,12 @@
                 <i class="fa-regular fa-heart text-white fs-3 ms-3"></i>
                 <i class="fa-regular fa-circle-down text-white fs-3 ms-4"></i>
                 <div class="dropdown">
-                  <button class="bg-transparent border-0 text-secondary ms-3 fs-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button
+                    class="bg-transparent border-0 text-secondary ms-3 fs-2"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
                     <i class="fa-solid fa-ellipsis"></i>
                   </button>
                   <ul class="dropdown-menu">
@@ -223,7 +248,11 @@
           <div class="container mt-5 text-gray notifications ps-1 pe-0">
             <div class="d-flex justify-content-between gap-1">
               <div class="d-flex gap-2">
-                <img style="width: 35px; height: 35px; border-radius: 50%" class="img-fluid" src="./assets/imgs/search/image-11.jpg" />
+                <img
+                  style="width: 35px; height: 35px; border-radius: 50%"
+                  class="img-fluid"
+                  src="./assets/imgs/search/image-11.jpg"
+                />
                 <div>
                   <h4 class="mb-0 fw-bold notificationText">Charlie Hookham</h4>
                   <p class="mb-1 notificationText">In Camera - Yumi Zouma</p>
@@ -234,7 +263,11 @@
             </div>
             <div class="d-flex justify-content-between gap-1 mt-3">
               <div class="d-flex gap-2">
-                <img style="width: 35px; height: 35px; border-radius: 50%" class="img-fluid" src="./assets/imgs/search/image-12.jpg" />
+                <img
+                  style="width: 35px; height: 35px; border-radius: 50%"
+                  class="img-fluid"
+                  src="./assets/imgs/search/image-12.jpg"
+                />
                 <div>
                   <h4 class="mb-0 fw-bold notificationText">lightdark02</h4>
                   <p class="mb-1 notificationText">Aimed to kill - Jared LeMac</p>
@@ -245,7 +278,11 @@
             </div>
             <div class="d-flex justify-content-between gap-1 mt-3">
               <div class="d-flex gap-2">
-                <img style="width: 35px; height: 35px; border-radius: 50%" class="img-fluid" src="./assets/imgs/search/image-15.jpg" />
+                <img
+                  style="width: 35px; height: 35px; border-radius: 50%"
+                  class="img-fluid"
+                  src="./assets/imgs/search/image-15.jpg"
+                />
                 <div>
                   <h4 class="mb-0 fw-bold notificationText">Valeria Traverso</h4>
                   <p class="mb-1 notificationText">New Kings - Sleeping Wolf</p>

@@ -148,3 +148,14 @@ h6 {
 .visualizza {
   font-size: 12px;
 }
+
+.hide,
+.show {
+  cursor: pointer;
+  background-color: #222222;
+}
+.hide,
+.show,
+.album {
+  font-size: 0.7em;
+}
