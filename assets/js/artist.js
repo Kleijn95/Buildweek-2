@@ -10,6 +10,8 @@ const artistId = params.get("artistId");
 const URL = "https://striveschool-api.herokuapp.com/api/deezer/artist/" + artistId + "/top?limit=15";
 const songsContainer = document.getElementById("artistTracks");
 
+// ciclo per popolare asidebar sinistra delle playlist. L'array playlist è chiamato in cima (reminder!! ho dato display none ai placeholder)
+
 function fetchArtist() {
   fetch(URL, {
     method: "GET",

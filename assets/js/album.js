@@ -6,8 +6,11 @@ function formatDuration(seconds) {
   // Formatta i secondi per avere 2 cifre (es. "05" invece di "5")
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
+
 const params = new URLSearchParams(window.location.search);
 const albumId = params.get("albumId");
+
+// ciclo per popolare asidebar sinistra delle playlist. L'array playlist è chiamato in cima (reminder!! ho dato display none ai placeholder)
 
 const URL = "https://striveschool-api.herokuapp.com/api/deezer/album/" + albumId;
 fetch(URL, {
@@ -28,7 +31,7 @@ fetch(URL, {
 
   .then((data) => {
     const albums = data.tracks.data; // Assumi che la risposta sia un array di album in "data"
-    console.log(data);
+    console.log(albums);
 
     for (i = 0; i < albums.length; i++) {
       /* console.log(albums[i].album.title); */
