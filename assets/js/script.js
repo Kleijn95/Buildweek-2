@@ -2,6 +2,10 @@ let hide = document.querySelector(".hide");
 let banner = document.querySelector(".banner");
 let show = document.querySelector(".show");
 let showBanner = document.querySelector(".showBan");
+let like = document.querySelector(".like");
+let dislike = document.querySelector(".dislike");
+let volume = document.querySelector(".volume");
+let noVolume = document.querySelector(".noVolume");
 
 let aside = document.querySelector("aside");
 let closeAside = document.querySelector(".closeAside");
@@ -15,6 +19,22 @@ hide.addEventListener("click", () => {
     banner.classList.remove("d-none");
     showBanner.classList.add("d-none");
   });
+});
+like.addEventListener("click", () => {
+  like.classList.add("d-none");
+  dislike.classList.remove("d-none");
+});
+dislike.addEventListener("click", () => {
+  like.classList.remove("d-none");
+  dislike.classList.add("d-none");
+});
+volume.addEventListener("click", () => {
+  volume.classList.add("d-none");
+  noVolume.classList.remove("d-none");
+});
+noVolume.addEventListener("click", () => {
+  volume.classList.remove("d-none");
+  noVolume.classList.add("d-none");
 });
 
 closeAside.addEventListener("click", () => {
@@ -47,7 +67,7 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
 
     albums.slice(0, 6).forEach((album) => {
       const mainRow = document.getElementById("mainRow");
-
+      console.log(album);
       const card = document.createElement("div");
       card.classList.add("col-4");
       const innerCard = document.createElement("div");
@@ -58,7 +78,11 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
       containerBig.classList.add("col-md-4");
       const imgContainer = document.createElement("div");
       imgContainer.classList.add("d-flex", "flex-wrap", "h-100");
+      imgContainer.style.cursor = "pointer";
 
+      imgContainer.addEventListener("click", function () {
+        window.location.assign(`./album.html?albumId=${album.album.id}`);
+      });
       const img1 = document.createElement("img");
       img1.classList.add("img-fluid", "w-50", "p-0");
       img1.alt = `img1 alt`;
@@ -81,7 +105,7 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
       const cardBody = document.createElement("div");
       cardBody.classList.add("card-body");
       const cardTitle = document.createElement("h5");
-      cardTitle.classList.add("card-title", "text-nowrap", "text-white");
+      cardTitle.classList.add("card-title", "text-white", "text-truncate-multiline");
       cardTitle.innerText = album.album.title;
 
       mainRow.appendChild(card);
