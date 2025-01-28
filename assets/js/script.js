@@ -106,11 +106,16 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
 
       const outerCardBody = document.createElement("div");
       outerCardBody.classList.add("col-md-8", "d-flex", "align-items-center");
+      outerCardBody.style.cursor = "pointer";
       const cardBody = document.createElement("div");
       cardBody.classList.add("card-body");
       const cardTitle = document.createElement("h5");
       cardTitle.classList.add("card-title", "text-white", "text-truncate-multiline");
       cardTitle.innerText = album.album.title;
+
+      outerCardBody.addEventListener("click", function () {
+        window.location.assign(`./album.html?albumId=${album.album.id}`);
+      });
 
       mainRow.appendChild(card);
       card.appendChild(innerCard);
@@ -146,12 +151,13 @@ fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
   .then((data) => {
     const albums = data.data;
     const albumRaw = document.querySelector("#albumRaw");
-
+    //Creazione card nella ezione "altro di ciò che ti piace"
     const containerRow = document.createElement("div");
     containerRow.classList.add("row", "d-felx", "gap-1", "justify-content-between");
     albums.forEach((album) => {
       const cardAlbum = document.createElement("div");
-      cardAlbum.classList.add("card", "col-2", "bg-dark", "h-100", "rounded", "p-2", "d-flex", "flex-column", "mt-2");
+      cardAlbum.classList.add("card", "col-2", "bg-dark", "h-100", "rounded", "p-2", "d-flex", "flex-column", "m-2");
+      cardAlbum.style.cursor = "pointer";
 
       const imgAlbum = document.createElement("img");
       imgAlbum.classList.add("card-img-top", "rounded");
@@ -168,6 +174,10 @@ fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
       title.classList.add("card-text", "text-secondary", "text-truncate-multiline");
       title.innerHTML = album.album.title;
 
+      cardAlbum.addEventListener("click", function () {
+        window.location.assign(`./album.html?albumId=${album.album.id}`);
+      });
+
       cardBody.appendChild(artist);
       cardBody.appendChild(title);
 
@@ -176,18 +186,6 @@ fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
 
       containerRow.appendChild(cardAlbum);
       albumRaw.appendChild(containerRow);
-
-      /*
-              <div class="row" >
-                <div class="card col-2 bg-dark">
-                  <img src="./assets/imgs/main/image-10.jpg" class="card-img-top rounded" alt="..." />
-                  <div class="card-body">
-                    <h5 class="card-title text-white">Card title</h5>
-                    <p class="card-text text-secondary">Some quick example text</p>
-                  </div>
-                </div>
-              </div>
-            </div> */
 
       console.log(album);
     });
