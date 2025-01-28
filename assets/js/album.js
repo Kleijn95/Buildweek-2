@@ -14,7 +14,8 @@ for (i = 0; i < 15; i++) {
   const songTitle = document.createElement("h3");
   songTitle.classList.add("text-white");
   songTitle.innerText = "Titolo canzone"; //sostituire con titolo canzone
-  const artist = document.createElement("h5");
+  const artist = document.createElement("a");
+  artist.href = "#"; //sostituire con link artista
   artist.classList.add("text-secondary");
   artist.innerText = "Artista sconosciuto"; // sostituire con artista
   const durationContainer = document.createElement("div");
