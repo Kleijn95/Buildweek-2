@@ -30,9 +30,8 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
   })
   .then((data) => {
     const albums = data.data; // Assumi che la risposta sia un array di album in "data"
-    const row = document.getElementById("albumsList");
-    row.innerHTML = ""; // Pulisce la riga per evitare duplicazioni
-    for (i = 0; i < 6; i++) {
+
+    albums.slice(0, 6).forEach((album) => {
       const mainRow = document.getElementById("mainRow");
 
       const card = document.createElement("div");
@@ -83,5 +82,5 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
       cardRow.appendChild(outerCardBody);
       outerCardBody.appendChild(cardBody);
       cardBody.appendChild(cardTitle);
-    }
+    });
   });
