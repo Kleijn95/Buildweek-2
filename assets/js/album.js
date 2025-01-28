@@ -25,11 +25,13 @@ fetch(URL, {
       throw new Error("Impossibile recuperare gli album. Riprova più tardi.");
     }
   })
+
   .then((data) => {
     const albums = data.tracks.data; // Assumi che la risposta sia un array di album in "data"
     console.log(data);
+
     for (i = 0; i < albums.length; i++) {
-      console.log(albums[i].album.title);
+      //console.log(albums[i].album.title);
       //iterare la playlist o l'album
       const songsContainer = document.getElementById("songsContainer");
       const songRow = document.createElement("div");
@@ -45,18 +47,21 @@ fetch(URL, {
       songTitle.classList.add("text-white", "mb-0");
       songTitle.innerText = albums[i].title; //sostituire con titolo canzone
       const artist = document.createElement("a");
+      console.log(albums[i].preview);
       songTitle.style.cursor = "pointer";
+      const preview = albums[i].preview;
       songTitle.addEventListener("click", () => {
         const audio = document.createElement("audio");
         audio.controls = true;
         audio.innerHTML = `
-                <source src="${albums[i].preview}" type="audio/mpeg">
+                <source src="${preview}" type="audio/mpeg">
                 Il tuo browser non supporta l'elemento audio.`;
         document.body.appendChild(audio);
         audio.play().catch((error) => {
           console.error("Errore durante la riproduzione:", error);
         });
       });
+
       artist.classList.add("text-secondary", "text-decoration-none", "artist");
       artist.href = "./artist.html?artistId=" + albums[i].artist.id;
       artist.innerText = albums[i].artist.name; // sostituire con artista
