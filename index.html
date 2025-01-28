@@ -142,12 +142,28 @@
           </div>
         </header>
 
-        <main class="container p-0 col overflow-y-scroll">
+        <main class="container p-0 col overflow-y-scroll position-relative">
           <div class="container mt-4">
             <div class="d-flex justify-content-between">
               <div class="text-white mb-3">
-                <i class="fa-solid fa-angle-left text-secondary rounded-circle fs-5"></i>
-                <i class="fa-solid fa-angle-right text-secondary rounded-circle fs-5 ms-3"></i>
+                <button
+                  class="bg-transparent border-0"
+                  type="button"
+                  data-bs-target="#carouselBanner"
+                  data-bs-slide="prev"
+                >
+                  <span aria-hidden="true"
+                    ><i class="fa-solid fa-angle-left text-secondary rounded-circle fs-5"></i
+                  ></span>
+                </button>
+                <button
+                  class="bg-transparent border-0"
+                  type="button"
+                  data-bs-target="#carouselBanner"
+                  data-bs-slide="next"
+                >
+                  <i class="fa-solid fa-angle-right text-secondary rounded-circle fs-5 ms-3"></i>
+                </button>
               </div>
               <div class="d-flex bg-black rounded-pill align-items-center gap-2 pe-2" style="height: 30px">
                 <img src="./assets/imgs/search/image-1.jpeg" class="img-fluid h-100 rounded-circle" />
@@ -166,47 +182,15 @@
                 </ul>
               </div>
             </div>
-            <div class="container showBan d-none p-4">
-              <div class="container d-flex justify-content-end f">
-                <button class="rounded-pill py-1 px-2 text-secondary show border-0">MOSTRA ANNUNCI</button>
-              </div>
-            </div>
-            <div class="container d-flex bg-black p-4 music-box gap-3 banner">
-              <div style="width: 350px">
-                <img id="albumImg" src="./assets/imgs/main/image-1.jpg" class="img-fluid" />
-              </div>
 
-              <div class="container text-white">
-                <div class="d-flex justify-content-between align-items-center">
-                  <p class="album fw-bold">ALBUM</p>
-                  <button class="rounded-pill py-1 px-2 text-secondary hide border-0">NASCONDI ANNUNCI</button>
-                </div>
-                <h2 class="fw-bold">VIOLA (feat. Salmo)</h2>
-                <p>Fedez, Salmo</p>
-                <p>Ascolta il nuovo singolo di Fedez e Salmo!</p>
-                <div class="d-flex">
-                  <button type="button" class="btn btn-success rounded-pill text-black px-4 py-2 me-4">Play</button>
-                  <button type="button" class="btn btn-black border border-secondary text-white rounded-pill px-4 py-2">
-                    Salva
-                  </button>
-                  <div class="dropdown">
-                    <button
-                      class="bg-transparent border-0 text-secondary ms-3 fs-2"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <i class="fa-solid fa-ellipsis"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item text-white" href="#">Action</a></li>
-                      <li><a class="dropdown-item text-white" href="#">Another action</a></li>
-                      <li><a class="dropdown-item text-white" href="#">Something else here</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+            <div class="hideDiv position-absolute">
+              <button class="rounded-pill py-1 px-2 text-secondary border-0 hide">NASCONDI ANNUNCI</button>
             </div>
+
+            <div id="carouselBanner" class="carousel slide banner">
+              <div class="carousel-inner carousel"></div>
+            </div>
+
             <h3 class="text-white my-4 fs-1">Buonasera</h3>
             <div class="row" id="mainRow"></div>
             <div class="d-flex justify-content-between align-items-center">
