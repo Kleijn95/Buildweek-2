@@ -2,6 +2,14 @@ let hide = document.querySelector(".hide");
 let banner = document.querySelector(".banner");
 let show = document.querySelector(".show");
 let showBanner = document.querySelector(".showBan");
+let like = document.querySelector(".like");
+let dislike = document.querySelector(".dislike");
+let volume = document.querySelector(".volume");
+let noVolume = document.querySelector(".noVolume");
+
+let aside = document.querySelector("aside");
+let closeAside = document.querySelector(".closeAside");
+let showAside = document.querySelector(".showAside");
 
 hide.addEventListener("click", () => {
   banner.classList.add("d-none");
@@ -11,6 +19,32 @@ hide.addEventListener("click", () => {
     banner.classList.remove("d-none");
     showBanner.classList.add("d-none");
   });
+});
+like.addEventListener("click", () => {
+  like.classList.add("d-none");
+  dislike.classList.remove("d-none");
+});
+dislike.addEventListener("click", () => {
+  like.classList.remove("d-none");
+  dislike.classList.add("d-none");
+});
+volume.addEventListener("click", () => {
+  volume.classList.add("d-none");
+  noVolume.classList.remove("d-none");
+});
+noVolume.addEventListener("click", () => {
+  volume.classList.remove("d-none");
+  noVolume.classList.add("d-none");
+});
+
+closeAside.addEventListener("click", () => {
+  aside.classList.add("d-none");
+  showAside.classList.remove("d-none");
+});
+
+showAside.addEventListener("click", () => {
+  aside.classList.remove("d-none");
+  showAside.classList.add("d-none");
 });
 
 fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
@@ -30,50 +64,61 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
   })
   .then((data) => {
     const albums = data.data; // Assumi che la risposta sia un array di album in "data"
-    const row = document.getElementById("albumsList");
-    row.innerHTML = ""; // Pulisce la riga per evitare duplicazioni
 
     albums.slice(0, 6).forEach((album) => {
-      console.log(album.album.cover_xl);
-      // Crea dinamicamente gli elementi
-      const col = document.createElement("div");
-      col.className = "col-4";
-      console.log(album.album.cover_xl);
-
+      const mainRow = document.getElementById("mainRow");
+      console.log(album);
       const card = document.createElement("div");
-      card.className = "card mb-3 bg-dark";
-      card.style.maxWidth = "540px";
+      card.classList.add("col-4");
+      const innerCard = document.createElement("div");
+      innerCard.classList.add("card", "mb-3", "bg-secondary", "overflow-hidden");
+      const cardRow = document.createElement("div");
+      cardRow.classList.add("row", "g-0");
+      const containerBig = document.createElement("div");
+      containerBig.classList.add("col-md-4");
+      const imgContainer = document.createElement("div");
+      imgContainer.classList.add("d-flex", "flex-wrap", "h-100");
+      imgContainer.style.cursor = "pointer";
 
-      const rowDiv = document.createElement("div");
-      rowDiv.className = "row g-0";
+      imgContainer.addEventListener("click", function () {
+        window.location.assign(`./album.html?albumId=${album.album.id}`);
+      });
+      const img1 = document.createElement("img");
+      img1.classList.add("img-fluid", "w-50", "p-0");
+      img1.alt = `img1 alt`;
+      img1.src = album.album.cover_xl;
+      const img2 = document.createElement("img");
+      img2.classList.add("img-fluid", "w-50", "p-0");
+      img2.alt = `img2 alt`;
+      img2.src = "./assets/imgs/main/image-10.jpg";
+      const img3 = document.createElement("img");
+      img3.classList.add("img-fluid", "w-50", "p-0");
+      img3.alt = `img3 alt`;
+      img3.src = "./assets/imgs/main/image-10.jpg";
+      const img4 = document.createElement("img");
+      img4.classList.add("img-fluid", "w-50", "p-0");
+      img4.alt = `img4 alt`;
+      img4.src = "./assets/imgs/main/image-10.jpg";
 
-      const colImg = document.createElement("div");
-      colImg.className = "col-md-4";
-
-      const img = document.createElement("img");
-      img.src = album.album.cover_xl; // Immagine dall'album
-      img.alt = album.album.title;
-      img.className = "img-fluid w-100";
-
-      colImg.appendChild(img);
-
-      const colBody = document.createElement("div");
-      colBody.className = "col-md-8 d-flex align-items-center";
-
+      const outerCardBody = document.createElement("div");
+      outerCardBody.classList.add("col-md-8", "d-flex", "align-items-center");
       const cardBody = document.createElement("div");
-      cardBody.className = "card-body";
+      cardBody.classList.add("card-body");
+      const cardTitle = document.createElement("h5");
+      cardTitle.classList.add("card-title", "text-white", "text-truncate-multiline");
+      cardTitle.innerText = album.album.title;
 
-      const title = document.createElement("h5");
-      title.className = "card-title text-truncate-multiline text-white";
-      title.textContent = album.album.title; // Titolo dell'album
-
-      cardBody.appendChild(title);
-      colBody.appendChild(cardBody);
-      rowDiv.appendChild(colImg);
-      rowDiv.appendChild(colBody);
-      card.appendChild(rowDiv);
-      col.appendChild(card);
-
-      row.appendChild(col); // Aggiungi al contenitore
+      mainRow.appendChild(card);
+      card.appendChild(innerCard);
+      innerCard.appendChild(cardRow);
+      cardRow.appendChild(containerBig);
+      containerBig.appendChild(imgContainer);
+      imgContainer.appendChild(img1);
+      imgContainer.appendChild(img2);
+      imgContainer.appendChild(img3);
+      imgContainer.appendChild(img4);
+      cardRow.appendChild(outerCardBody);
+      outerCardBody.appendChild(cardBody);
+      cardBody.appendChild(cardTitle);
     });
   });

@@ -1,5 +1,10 @@
 body {
   font-family: "Circular";
+  font-size: 0.8rem;
+}
+
+.text-gray {
+  color: #abb0ad;
 }
 
 header {
@@ -10,21 +15,93 @@ header {
   height: 100vh;
 }
 
-.heart {
-  background: linear-gradient(135deg, #9b5de5, #6a4bf4, #5e8ef7, #00bbf9, #00f5d4);
+.overflow-y-scroll::-webkit-scrollbar {
+  width: 10px;
 }
 
-.music-box {
-  background: linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, rgba(33, 37, 41, 1) 91%);
+.overflow-y-scroll::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-h2 {
-  font-size: 4rem;
+.overflow-y-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(128, 128, 128, 0.774);
+  border-radius: 4px;
 }
 
-.hide,
-.show {
-  cursor: pointer;
+main {
+  background-color: #202020;
+}
+
+.fa-angle-left,
+.fa-angle-right {
+  background-color: #131313;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.play {
+  background-color: #1ed760;
+  padding: 1em 0;
+}
+
+.showAside {
+  right: 12px;
+  top: 25px;
+  font-size: 1.2em;
+}
+
+aside {
+  h3 {
+    font-size: 1.5em;
+  }
+  .asideBtn {
+    font-size: 1.2em;
+  }
+  .notifications {
+    h4 {
+      font-size: 1em;
+    }
+    p {
+      font-size: 0.8em;
+    }
+    .time {
+      font-size: 0.7em;
+    }
+  }
+}
+.song {
+  width: 50px;
+}
+h6 {
+  font-size: 10px;
+}
+.subtitle {
+  font-size: 9px;
+}
+.player {
+  font-size: 30px;
+}
+.songTime {
+  width: 200%;
+}
+
+.progress {
+  height: 8px;
+  background-color: #333;
+}
+.progress-bar {
+  background-color: white;
+}
+.time {
+  font-size: 14px;
+}
+
+.text-truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Numero di righe massimo (cambia qui per più righe) */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .text-truncate-multiline {
