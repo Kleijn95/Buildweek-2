@@ -1,4 +1,4 @@
-for (i = 0; i < 10; i++) {
+for (i = 0; i < 15; i++) {
   //iterare la playlist o l'album
   const songsContainer = document.getElementById("songsContainer");
   const songRow = document.createElement("div");
@@ -13,6 +13,9 @@ for (i = 0; i < 10; i++) {
   const songTitle = document.createElement("h3");
   songTitle.classList.add("text-white");
   songTitle.innerText = "Titolo canzone"; //sostituire con titolo canzone
+  const artist = document.createElement("h4");
+  artist.classList.add("text-secondary");
+  artist.innerText = "Artista sconosciuto"; // sostituire con artista
   const durationContainer = document.createElement("div");
   durationContainer.classList.add("col-4");
   const duration = document.createElement("h3");
@@ -24,6 +27,6 @@ for (i = 0; i < 10; i++) {
   songsContainer.appendChild(songRow);
   songRow.append(songNumberContainer, titleContainer, durationContainer, hr);
   songNumberContainer.appendChild(songNumber);
-  titleContainer.appendChild(songTitle);
+  titleContainer.append(songTitle, artist);
   durationContainer.appendChild(duration);
 }
