@@ -1,4 +1,34 @@
-const arrayPlaylist = [8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122];
+const arrayPlaylist = [
+  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
+  1313621735, 1116187241, 733113466,
+];
+
+arrayPlaylist.forEach((playlistId) => {
+  fetch(`https://deezerdevs-deezer.p.rapidapi.com/playlist/${playlistId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "x-rapidapi-key": "ad4ebc50e8msh21d6de872e740a5p1740a2jsn2f44656a84db",
+      "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+    },
+  })
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.json();
+      } else {
+        throw new Error("Impossibile recuperare gli album. Riprova più tardi.");
+      }
+    })
+    .then((data) => {
+      const albums = data;
+      let placeholderPlaylist = document.querySelector(".playlists");
+      console.log(placeholderPlaylist);
+      let pPlaylist = document.createElement("p");
+      pPlaylist.innerText = albums.title;
+      placeholderPlaylist.appendChild(pPlaylist);
+    });
+});
+
 let cardCount = 0;
 const maxCards = 6;
 arrayPlaylist.forEach((playlistId) => {
@@ -66,6 +96,7 @@ arrayPlaylist.forEach((playlistId) => {
         img3.src = arrayAlbums[2].album.cover_xl;
         img4.src = arrayAlbums[3].album.cover_xl;
       }
+
       const outerCardBody = document.createElement("div");
       outerCardBody.classList.add("col-md-8", "d-flex", "align-items-center");
       outerCardBody.style.cursor = "pointer";
