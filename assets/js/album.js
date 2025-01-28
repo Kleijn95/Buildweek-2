@@ -38,15 +38,15 @@ fetch(URL, {
       const songNumberContainer = document.createElement("div");
       songNumberContainer.classList.add("col-1");
       const songNumber = document.createElement("p");
-      songNumber.classList.add("text-secondary");
+      songNumber.classList.add("text-secondary", "text-end", "songNumber", "fw-bold", "mb-2");
       songNumber.innerText = i + 1; // iterare l'array delle canzoni contenute nella playlist o nell'album
       const titleContainer = document.createElement("div");
-      titleContainer.classList.add("col-7");
+      titleContainer.classList.add("col-7", "mb-3");
       const songTitle = document.createElement("h3");
-      songTitle.classList.add("text-white");
+      songTitle.classList.add("text-white", "mb-0");
       songTitle.innerText = albums[i].title; //sostituire con titolo canzone
       const artist = document.createElement("a");
-      artist.classList.add("text-secondary", "fs-5", "text-decoration-none");
+      artist.classList.add("text-secondary", "text-decoration-none", "artist");
       artist.href = "./artist.html?artistId=" + albums[i].artist.name;
       artist.innerText = albums[i].artist.name; // sostituire con artista
       const durationContainer = document.createElement("div");
@@ -57,8 +57,6 @@ fetch(URL, {
       const duration = document.createElement("h3");
       duration.classList.add("text-secondary");
       duration.innerText = formatDuration(albums[i].duration); //sostituire con durata
-      const hr = document.createElement("hr");
-      hr.classList.add("text-secondary");
 
       const albumImg = document.getElementById("albumImg");
       const artistName = document.getElementById("artist");
@@ -74,7 +72,7 @@ fetch(URL, {
       document.querySelector(".duration").innerText = formatDuration(data.duration);
 
       songsContainer.appendChild(songRow);
-      songRow.append(songNumberContainer, titleContainer, durationContainer, hr);
+      songRow.append(songNumberContainer, titleContainer, durationContainer);
       songNumberContainer.appendChild(songNumber);
       titleContainer.append(songTitle, artist);
       durationContainer.append(reproductions, duration);

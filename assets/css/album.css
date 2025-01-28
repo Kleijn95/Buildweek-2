@@ -2,7 +2,8 @@ h2 {
   font-size: 4rem;
 }
 
-h3 {
+h3,
+.artist {
   font-size: 1.2em;
 }
 
@@ -12,4 +13,8 @@ h3 {
 
 .play {
   padding: 14px 17px;
+}
+
+.songNumber {
+  font-size: 1.2em;
 }
