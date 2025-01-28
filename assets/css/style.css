@@ -9,10 +9,32 @@ body {
 
 header {
   height: 100vh;
-}
+  .iconNav {
+    font-size: 1.2em;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    text-align: center;
+    line-height: 22px;
+  }
+  .playlists {
+    height: 100vh;
+  }
 
-.playlists {
-  height: 100vh;
+  .searchText {
+    font-size: 0.8em;
+  }
+
+  .nav-link {
+    &:hover,
+    &:focus {
+      color: white;
+      background-color: inherit;
+    }
+  }
+  .e-9541-icon {
+    margin-right: 1em;
+  }
 }
 
 .overflow-y-scroll::-webkit-scrollbar {
@@ -44,10 +66,17 @@ main {
   padding: 1em 0;
 }
 
-.showAside {
-  right: 12px;
-  top: 25px;
-  font-size: 1.2em;
+.dropdown-item {
+  font-size: 1.3em;
+  &:hover {
+    background-color: gray;
+  }
+}
+
+.dropdown-toggle:active,
+.dropdown-toggle:focus {
+  transform: none;
+  font-size: inherit;
 }
 
 aside {
@@ -98,7 +127,7 @@ h6 {
 
 .text-truncate-multiline {
   display: -webkit-box;
-  -webkit-line-clamp: 1; /* Numero di righe massimo (cambia qui per più righe) */
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

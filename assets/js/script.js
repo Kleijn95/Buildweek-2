@@ -9,6 +9,7 @@ let noVolume = document.querySelector(".noVolume");
 
 let aside = document.querySelector("aside");
 let closeAside = document.querySelector(".closeAside");
+
 let showAside = document.querySelector(".showAside");
 
 hide.addEventListener("click", () => {
@@ -20,6 +21,7 @@ hide.addEventListener("click", () => {
     showBanner.classList.add("d-none");
   });
 });
+
 like.addEventListener("click", () => {
   like.classList.add("d-none");
   dislike.classList.remove("d-none");
@@ -39,12 +41,14 @@ noVolume.addEventListener("click", () => {
 
 closeAside.addEventListener("click", () => {
   aside.classList.add("d-none");
-  showAside.classList.remove("d-none");
 });
 
 showAside.addEventListener("click", () => {
-  aside.classList.remove("d-none");
-  showAside.classList.add("d-none");
+  if (aside.classList.contains("d-none")) {
+    aside.classList.remove("d-none");
+  } else {
+    aside.classList.add("d-none");
+  }
 });
 
 fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
@@ -52,7 +56,7 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
   headers: {
     "Content-Type": "application/json",
 
-    Authorization: "Bearer cdd499bc73msh8003c69cf9aa9dcp12c566jsnf97718531566", // Verifica se è necessario
+    Authorization: "Bearer cdd499bc73msh8003c69cf9aa9dcp12c566jsnf97718531566",
   },
 })
   .then((resp) => {
@@ -63,7 +67,7 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
     }
   })
   .then((data) => {
-    const albums = data.data; // Assumi che la risposta sia un array di album in "data"
+    const albums = data.data;
 
     albums.slice(0, 6).forEach((album) => {
       const mainRow = document.getElementById("mainRow");

@@ -25,9 +25,6 @@
 
   <body>
     <div class="container-fluid osition-relative">
-      <button class="bg-transparent border-0 showAside position-absolute d-none">
-        <i class="fa fa-arrow-left text-gray"></i>
-      </button>
       <div class="row">
         <header class="col-2 px-0 bg-black pt-4">
           <div class="d-flex flex-column h-100 sidebar">
@@ -36,26 +33,25 @@
                 <div id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column">
                     <li class="nav-item">
-                      <a class="nav-link text-white active px-0" aria-current="page" href="#"
-                        ><i class="fa-solid fa-house fs-5 me-2"></i> Home</a
+                      <a class="nav-link text-white px-0 d-flex align-items-center" aria-current="page" href="#"
+                        ><i class="fa-solid fa-house me-3 iconNav"></i> Home</a
                       >
                     </li>
                     <li class="nav-item">
                       <a class="nav-link px-0" aria-current="page" href="#">
-                        <div class="p-0">
-                          <button
-                            class="btn p-0"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#searchBar"
-                            aria-expanded="false"
-                            aria-controls="searchBar"
-                          >
-                            <p class="text-gray m-0 p-0 searchText">
-                              <i class="fa fa-magnifying-glass fs-5 me-2 p-1"></i>Cerca
-                            </p>
-                          </button>
-                        </div>
+                        <button
+                          class="btn p-0"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#searchBar"
+                          aria-expanded="false"
+                          aria-controls="searchBar"
+                        >
+                          <p class="text-gray m-0 searchText">
+                            <i class="fa fa-magnifying-glass me-3 iconNav"></i>Cerca
+                          </p>
+                        </button>
+
                         <div class="d-flex px-1 align-items-center">
                           <div class="collapse collapse-horizontal" id="searchBar">
                             <input
@@ -76,7 +72,7 @@
                           aria-hidden="true"
                           class="Svg-sc-ytk21e-0 bneLcE e-9541-icon"
                           viewBox="0 0 24 24"
-                          style="width: 25px; fill: #abb0ad"
+                          style="width: 22px; fill: #abb0ad"
                         >
                           <path
                             d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"
@@ -88,21 +84,20 @@
                   </ul>
 
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column mt-5">
-                    <li class="nav-item d-flex align-items-center">
-                      <a class="nav-link text-gray px-0" aria-current="page" href="#"
-                        ><i class="fa-solid fa-plus fs-5 me-2 p-1 rounded-1 bg-secondary text-black"></i>Crea
-                        playlist</a
+                    <li class="nav-item d-flex">
+                      <a class="nav-link text-gray px-0 d-flex align-items-center" aria-current="page" href="#"
+                        ><i class="fa-solid fa-plus me-3 iconNav rounded-1 bg-secondary text-black"></i>Crea playlist</a
                       >
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link text-gray px-0" aria-current="page" href="#"
-                        ><i class="fa-solid heart fa-heart fs-5 me-2 p-1 rounded-1"></i>Brani che ti piacciono</a
+                      <a class="nav-link text-gray px-0 d-flex align-items-center" aria-current="page" href="#"
+                        ><i class="fa-solid me-3 heart fa-heart iconNav rounded-1"></i>Brani che ti piacciono</a
                       >
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link text-gray px-0" href="#"
-                        ><i class="fas fa-bookmark fs-5 me-2 bg-success py-1 px-2 rounded-1" style="color: #27ddaa"></i
-                        >I tuoi episodi</a
+                      <a class="nav-link text-gray px-0 d-flex align-items-center" href="#"
+                        ><i class="fas fa-bookmark me-3 bg-success iconNav rounded-1" style="color: #27ddaa"></i>I tuoi
+                        episodi</a
                       >
                     </li>
                   </ul>
@@ -153,22 +148,23 @@
               </div>
               <div class="d-flex bg-black rounded-pill align-items-center gap-2 pe-2" style="height: 30px">
                 <img src="./assets/imgs/search/image-1.jpeg" class="img-fluid h-100 rounded-circle" />
-                <p class="text-white mb-0">Username</p>
                 <button
-                  class="bg-transparent border-0 text-white dropdown-toggle align-self-end"
+                  class="bg-transparent border-0 text-white dropdown-toggle"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                ></button>
+                >
+                  Username
+                </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item text-white" href="#">Modifica Profilo</a></li>
+                  <li><a class="dropdown-item text-white" href="#">Impostazioni</a></li>
+                  <li><a class="dropdown-item text-white showAside" href="#">Attività Amici</a></li>
                 </ul>
               </div>
             </div>
             <div class="container showBan d-none p-4">
-              <div class="container d-flex justify-content-end">
+              <div class="container d-flex justify-content-end f">
                 <button class="rounded-pill py-1 px-2 text-secondary show border-0">MOSTRA ANNUNCI</button>
               </div>
             </div>
@@ -198,9 +194,9 @@
                       <i class="fa-solid fa-ellipsis"></i>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><a class="dropdown-item text-white" href="#">Action</a></li>
+                      <li><a class="dropdown-item text-white" href="#">Another action</a></li>
+                      <li><a class="dropdown-item text-white" href="#">Something else here</a></li>
                     </ul>
                   </div>
                 </div>
@@ -213,11 +209,11 @@
         </main>
 
         <aside class="col-2 bg-black">
-          <div class="container pt-4 pe-0">
+          <div class="container pt-4 ps-1 pe-0">
             <div class="d-flex justify-content-between align-items-center">
               <h3 class="text-white mb-0">Attività amici</h3>
-              <div class="text-secondary">
-                <button class="asideBtn bg-transparent border-0">
+              <div class="text-secondary d-flex flex-nowrap">
+                <button class="asideBtn bg-transparent border-0 d-none d-lg-block">
                   <i class="fa-solid fa-user-group text-gray me-1"></i>
                 </button>
                 <button class="asideBtn bg-transparent border-0 closeAside">
@@ -226,7 +222,7 @@
               </div>
             </div>
           </div>
-          <div class="container mt-5 text-gray notifications pe-0">
+          <div class="container mt-5 text-gray notifications ps-1 pe-0">
             <div class="d-flex justify-content-between gap-1">
               <div class="d-flex gap-2">
                 <img
@@ -235,12 +231,12 @@
                   src="./assets/imgs/search/image-11.jpg"
                 />
                 <div>
-                  <h4 class="mb-0 fw-bold">Charlie Hookham</h4>
-                  <p class="mb-1">In Camera - Yumi Zouma</p>
+                  <h4 class="mb-0 fw-bold notificationText">Charlie Hookham</h4>
+                  <p class="mb-1 notificationText">In Camera - Yumi Zouma</p>
                   <p><i class="fas fa-music me-1" style="color: #ffffff"></i> EP III</p>
                 </div>
               </div>
-              <p class="time">4 ore</p>
+              <p class="time d-none d-lg-block">4 ore</p>
             </div>
             <div class="d-flex justify-content-between gap-1 mt-3">
               <div class="d-flex gap-2">
@@ -250,12 +246,12 @@
                   src="./assets/imgs/search/image-12.jpg"
                 />
                 <div>
-                  <h4 class="mb-0 fw-bold">lightdark02</h4>
-                  <p class="mb-1">Aimed to kill - Jared LeMac</p>
+                  <h4 class="mb-0 fw-bold notificationText">lightdark02</h4>
+                  <p class="mb-1 notificationText">Aimed to kill - Jared LeMac</p>
                   <p><i class="fas fa-music me-1" style="color: #ffffff"></i> Aimed to Kill</p>
                 </div>
               </div>
-              <p class="time">8 ore</p>
+              <p class="time d-none d-lg-block">8 ore</p>
             </div>
             <div class="d-flex justify-content-between gap-1 mt-3">
               <div class="d-flex gap-2">
@@ -265,12 +261,12 @@
                   src="./assets/imgs/search/image-15.jpg"
                 />
                 <div>
-                  <h4 class="mb-0 fw-bold">Valeria Traverso</h4>
-                  <p class="mb-1">New Kings - Sleeping Wolf</p>
+                  <h4 class="mb-0 fw-bold notificationText">Valeria Traverso</h4>
+                  <p class="mb-1 notificationText">New Kings - Sleeping Wolf</p>
                   <p><i class="fas fa-music me-1" style="color: #ffffff"></i>Twint Badass mood</p>
                 </div>
               </div>
-              <p class="time">3 giorni</p>
+              <p class="time d-none d-lg-block">3 giorni</p>
             </div>
           </div>
         </aside>
