@@ -47,7 +47,7 @@ fetch(URL, {
       songTitle.innerText = albums[i].title; //sostituire con titolo canzone
       const artist = document.createElement("a");
       artist.classList.add("text-secondary", "text-decoration-none", "artist");
-      artist.href = "./artist.html?artistId=" + albums[i].artist.name;
+      artist.href = "./artist.html?artistId=" + albums[i].artist.id;
       artist.innerText = albums[i].artist.name; // sostituire con artista
       const durationContainer = document.createElement("div");
       durationContainer.classList.add("col-4", "d-flex", "justify-content-between");
