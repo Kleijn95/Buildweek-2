@@ -46,6 +46,18 @@ fetch(URL, {
       songTitle.classList.add("text-white", "mb-0");
       songTitle.innerText = albums[i].title; //sostituire con titolo canzone
       const artist = document.createElement("a");
+      songTitle.style.cursor = "pointer";
+      songTitle.addEventListener("click", () => {
+        const audio = document.createElement("audio");
+        audio.controls = true;
+        audio.innerHTML = `
+                <source src="${albums[i].preview}" type="audio/mpeg">
+                Il tuo browser non supporta l'elemento audio.`;
+        document.body.appendChild(audio);
+        audio.play().catch((error) => {
+          console.error("Errore durante la riproduzione:", error);
+        });
+      });
       artist.classList.add("text-secondary", "text-decoration-none", "artist");
       artist.href = "./artist.html?artistId=" + albums[i].artist.id;
       artist.innerText = albums[i].artist.name; // sostituire con artista
