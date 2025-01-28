@@ -5,3 +5,18 @@
 h2 {
   font-size: 4rem;
 }
+
+.imgBanner {
+  width: 350px;
+  min-width: 200px;
+}
+
+.playBtn {
+  background-color: #1ed760;
+}
+
+.hideDiv {
+  right: 40px;
+  top: 100px;
+  z-index: 2;
+}
