@@ -32,7 +32,7 @@
                 <div id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column">
                     <li class="nav-item">
-                      <a class="nav-link text-white px-0 d-flex align-items-center" aria-current="page" href="#"
+                      <a class="nav-link text-gray px-0 d-flex align-items-center" aria-current="page" href="#"
                         ><i class="fa-solid fa-house me-3 iconNav"></i> Home</a
                       >
                     </li>
@@ -139,38 +139,50 @@
         </header>
 
         <main class="container p-0 col bg-secondary overflow-y-scroll">
-          <div class="container px-4 mt-4">
+          <div class="container mt-4">
             <div class="d-flex justify-content-between">
               <div class="text-white mb-3">
                 <i class="fa-solid fa-angle-left text-secondary rounded-circle fs-5"></i>
                 <i class="fa-solid fa-angle-right text-secondary rounded-circle fs-5 ms-3"></i>
               </div>
-              <div class="d-flex rounded-pill align-items-center gap-2 pe-2" style="height: 30px">
+              <div class="d-flex bg-black rounded-pill align-items-center gap-2 pe-2" style="height: 30px">
                 <img src="./assets/imgs/search/image-1.jpeg" class="img-fluid h-100 rounded-circle" />
-                <p class="text-white mb-0">Username</p>
                 <button
-                  class="bg-transparent border-0 text-white dropdown-toggle align-self-end"
+                  class="bg-transparent border-0 text-white dropdown-toggle"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                ></button>
+                >
+                  Username
+                </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item text-white" href="#">Modifica Profilo</a></li>
+                  <li><a class="dropdown-item text-white" href="#">Impostazioni</a></li>
+                  <li><a class="dropdown-item text-white showAside" href="#">Attività Amici</a></li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="container d-flex p-4 music-box gap-3 banner">
-            <div><img id="albumImg" src="./assets/imgs/main/image-1.jpg" class="img-fluid" /></div>
 
+          <div class="container d-flex p-4 music-box gap-3 banner">
+            <div style="width: 350px">
+              <img id="albumImg" src="./assets/imgs/main/image-1.jpg" class="img-fluid" />
+            </div>
             <div class="container text-white">
-              <div class="d-flex align-items-center">
-                <p>ALBUM</p>
+              <div class="d-flex flex-column justify-content-center h-100">
+                <div class="my-auto">
+                  <p class="mb-0">ALBUM</p>
+                  <h2 id="songName">VIOLA (feat. Salmo)</h2>
+                </div>
+                <div class="d-flex align-items-center mt-auto">
+                  <img src="./assets/imgs/main/image-1.jpg" alt="..." height="25px" class="rounded-circle artistPic" />
+                  <p class="mb-0 ms-2">
+                    <span class="fw-bold" id="artist">Fedez, Salmo</span> - <span class="year fw-bold">Anno</span> -
+                    <span class="tracks fw-bold">Numero Brani</span>,
+                    <span class="duration text-gray">Durata totale</span>
+                  </p>
+                </div>
               </div>
-              <h2 id="songName">VIOLA (feat. Salmo)</h2>
-              <p id="artist">Fedez, Salmo</p>
             </div>
           </div>
 

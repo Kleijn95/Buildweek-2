@@ -28,7 +28,7 @@ fetch(URL, {
   })
   .then((data) => {
     const albums = data.tracks.data; // Assumi che la risposta sia un array di album in "data"
-    console.log(albums);
+    console.log(data);
     for (i = 0; i < albums.length; i++) {
       console.log(albums[i].album.title);
       //iterare la playlist o l'album
@@ -63,6 +63,12 @@ fetch(URL, {
       artistName.innerText = albums[0].artist.name;
       songName.innerText = albums[0].album.title;
 
+      document.querySelector(".artistPic").src = data.artist.picture;
+      document.querySelector(".artistPic").alt = data.artist.name;
+      document.querySelector(".tracks").innerText = i + 1 + " brani";
+      document.querySelector(".year").innerText = data.release_date.slice(0, 4);
+      document.querySelector(".duration").innerText = formatDuration(data.duration);
+
       songsContainer.appendChild(songRow);
       songRow.append(songNumberContainer, titleContainer, durationContainer, hr);
       songNumberContainer.appendChild(songNumber);
@@ -70,3 +76,20 @@ fetch(URL, {
       durationContainer.appendChild(duration);
     }
   });
+
+let aside = document.querySelector("aside");
+let closeAside = document.querySelector(".closeAside");
+
+let showAside = document.querySelector(".showAside");
+
+closeAside.addEventListener("click", () => {
+  aside.classList.add("d-none");
+});
+
+showAside.addEventListener("click", () => {
+  if (aside.classList.contains("d-none")) {
+    aside.classList.remove("d-none");
+  } else {
+    aside.classList.add("d-none");
+  }
+});

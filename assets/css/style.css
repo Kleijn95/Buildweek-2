@@ -134,3 +134,14 @@ h6 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.hide,
+.show {
+  cursor: pointer;
+  background-color: #222222;
+}
+.hide,
+.show,
+.album {
+  font-size: 0.7em;
+}
