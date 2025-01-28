@@ -10,7 +10,7 @@ const params = new URLSearchParams(window.location.search);
 const albumId = params.get("albumId");
 
 const URL = "https://striveschool-api.herokuapp.com/api/deezer/album/" + albumId;
-
+let top5 = 5;
 fetch(URL, {
   method: "GET",
   headers: {
@@ -29,7 +29,7 @@ fetch(URL, {
   .then((data) => {
     const albums = data.tracks.data; // Assumi che la risposta sia un array di album in "data"
     console.log(data);
-    for (i = 0; i < albums.length; i++) {
+    for (i = 0; i < top5; i++) {
       console.log(albums[i].album.title);
       //iterare la playlist o l'album
       const songsContainer = document.getElementById("songsContainer");
@@ -47,7 +47,7 @@ fetch(URL, {
       songTitle.innerText = albums[i].title; //sostituire con titolo canzone
       const artist = document.createElement("a");
       artist.classList.add("text-secondary", "text-decoration-none", "artist");
-      artist.href = "./artist.html?artistId=" + albums[i].artist.name;
+      artist.href = "./artist.html?artistId=" + albums[i].artist.id;
       artist.innerText = albums[i].artist.name; // sostituire con artista
       const durationContainer = document.createElement("div");
       durationContainer.classList.add("col-4", "d-flex", "justify-content-between");
