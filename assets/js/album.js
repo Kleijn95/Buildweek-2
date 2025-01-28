@@ -1,3 +1,4 @@
+//mettere dentro alla fetch con l'id della playlist o dell'album
 for (i = 0; i < 15; i++) {
   //iterare la playlist o l'album
   const songsContainer = document.getElementById("songsContainer");
