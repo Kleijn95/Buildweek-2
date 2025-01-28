@@ -76,3 +76,14 @@ h6 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.title {
+  font-size: 17px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Numero di righe massimo (cambia qui per più righe) */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.visualizza {
+  font-size: 12px;
+}
