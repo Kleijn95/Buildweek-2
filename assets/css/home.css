@@ -5,14 +5,3 @@
 h2 {
   font-size: 4rem;
 }
-
-.hide,
-.show {
-  cursor: pointer;
-  background-color: #222222;
-}
-.hide,
-.show,
-.album {
-  font-size: 0.7em;
-}
