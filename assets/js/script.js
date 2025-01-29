@@ -75,13 +75,21 @@ arrayPlaylist.forEach((playlistId) => {
       }
     })
     .then((data) => {
-      const albums = data;
+      const playlist = data;
       let placeholderPlaylist = document.querySelector(".playlists");
-      console.log(placeholderPlaylist);
+
       let pPlaylist = document.createElement("p");
-      pPlaylist.innerText = albums.title;
+      pPlaylist.style.cursor = "pointer";
+      pPlaylist.innerText = playlist.title;
+
+      // Aggiunge l'evento click solo a questo <p>
+      pPlaylist.addEventListener("click", function () {
+        window.open(`./album.html?playlistId=${playlist.id}`);
+      });
+
       placeholderPlaylist.appendChild(pPlaylist);
-    });
+    })
+    .catch((error) => console.error(error));
 });
 
 let cardCount = 0;
@@ -105,11 +113,11 @@ arrayPlaylist.forEach((playlistId) => {
     })
     .then((data) => {
       if (cardCount >= maxCards) return;
-      const albums = data;
+      const playlist = data;
       const arrayAlbums = data.tracks.data;
-      console.log(albums);
+      console.log(playlist);
       console.log(arrayAlbums);
-      console.log(albums.picture_xl);
+      console.log(playlist.picture_xl);
 
       const mainRow = document.getElementById("mainRow");
       //console.log(album);
@@ -126,12 +134,12 @@ arrayPlaylist.forEach((playlistId) => {
       imgContainer.style.cursor = "pointer";
 
       imgContainer.addEventListener("click", function () {
-        window.location.assign(`./album.html?albumsId=${albums.id}`);
+        window.location.assign(`./album.html?playlistId=${playlist.id}`);
       });
       const img1 = document.createElement("img");
       img1.classList.add("img-fluid", "w-50", "p-0");
       img1.alt = `img1 alt`;
-      img1.src = albums.picture_xl;
+      img1.src = playlist.picture_xl;
       const img2 = document.createElement("img");
 
       img2.classList.add("img-fluid", "w-50", "p-0");
@@ -159,7 +167,7 @@ arrayPlaylist.forEach((playlistId) => {
       cardBody.classList.add("card-body");
       const cardTitle = document.createElement("h5");
       cardTitle.classList.add("card-title", "text-white", "text-truncate-multiline");
-      cardTitle.innerText = albums.title;
+      cardTitle.innerText = playlist.title;
       mainRow.appendChild(card);
       card.appendChild(innerCard);
       innerCard.appendChild(cardRow);
