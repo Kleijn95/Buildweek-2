@@ -6,11 +6,39 @@ function formatDuration(seconds) {
   // Formatta i secondi per avere 2 cifre (es. "05" invece di "5")
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
-
+const arrayPlaylist = [
+  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
+  1313621735, 1116187241, 733113466,
+];
 const params = new URLSearchParams(window.location.search);
 const albumId = params.get("albumId");
 
 // ciclo per popolare asidebar sinistra delle playlist. L'array playlist è chiamato in cima (reminder!! ho dato display none ai placeholder)
+arrayPlaylist.forEach((playlistId) => {
+  fetch(`https://deezerdevs-deezer.p.rapidapi.com/playlist/${playlistId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "x-rapidapi-key": "ad4ebc50e8msh21d6de872e740a5p1740a2jsn2f44656a84db",
+      "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+    },
+  })
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.json();
+      } else {
+        throw new Error("Impossibile recuperare gli album. Riprova più tardi.");
+      }
+    })
+    .then((data) => {
+      const albums = data;
+      let placeholderPlaylist = document.querySelector(".playlists");
+      console.log(placeholderPlaylist);
+      let pPlaylist = document.createElement("p");
+      pPlaylist.innerText = albums.title;
+      placeholderPlaylist.appendChild(pPlaylist);
+    });
+});
 
 const URL = "https://striveschool-api.herokuapp.com/api/deezer/album/" + albumId;
 fetch(URL, {
