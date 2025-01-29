@@ -84,7 +84,7 @@ arrayPlaylist.forEach((playlistId) => {
 
       // Aggiunge l'evento click solo a questo <p>
       pPlaylist.addEventListener("click", function () {
-        window.open(`./album.html?playlistId=${playlist.id}`);
+        window.location.assign(`./album.html?playlistId=${playlist.id}`);
       });
 
       placeholderPlaylist.appendChild(pPlaylist);

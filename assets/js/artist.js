@@ -1,4 +1,4 @@
-let top5 = 5;
+let hidden = true;
 function formatDuration(seconds) {
   const minutes = Math.floor(seconds / 60); // Calcola i minuti interi
   const remainingSeconds = seconds % 60; // Ottieni i secondi rimanenti
@@ -38,7 +38,7 @@ function fetchArtist() {
       const artistName = document.getElementById("artistName");
       artistName.innerText = artist.data[0].artist.name;
 
-      for (i = 0; i < top5; i++) {
+      for (i = 0; i < 15; i++) {
         const songRow = document.createElement("div");
         songRow.classList.add("row", "align-items-center", "d-flex", "pb-3");
         const songNumberContainer = document.createElement("div");
@@ -86,6 +86,10 @@ function fetchArtist() {
         titleContainer.appendChild(songTitle);
         durationContainer.append(reproductions, duration);
         albumArtContainer.appendChild(albumArt);
+
+        if (i > 4) {
+          songRow.classList.add("hideAndShow", "d-none");
+        }
       }
     })
     .finally(() => {
@@ -93,20 +97,40 @@ function fetchArtist() {
       showOthers.setAttribute("id", "showOthers");
       showOthers.classList.add("text-secondary");
       songsContainer.appendChild(showOthers);
-      if (top5 === 5) {
-        showOthers.innerText = "Visualizza Altro";
-      } else {
-        showOthers.innerText = "Nascondi";
-      }
+
+      showOthers.innerText = "Visualizza Altro";
+
       document.getElementById("showOthers").onclick = () => {
-        if (top5 === 5) {
-          top5 = 15;
+        if (hidden === true) {
+          hidden = false;
+          showOthers.innerText = "Nascondi";
+          for (element of document.querySelectorAll(".hideAndShow")) {
+            element.classList.remove("d-none");
+          }
         } else {
-          top5 = 5;
+          hidden = true;
+          showOthers.innerText = "Visualizza Altro";
+          for (element of document.querySelectorAll(".hideAndShow")) {
+            element.classList.add("d-none");
+          }
         }
-        songsContainer.innerHTML = "";
-        fetchArtist();
       };
     });
 }
 fetchArtist();
+let aside = document.querySelector("aside");
+let closeAside = document.querySelector(".closeAside");
+
+let showAside = document.querySelector(".showAside");
+
+closeAside.addEventListener("click", () => {
+  aside.classList.add("d-none");
+});
+
+showAside.addEventListener("click", () => {
+  if (aside.classList.contains("d-none")) {
+    aside.classList.remove("d-none");
+  } else {
+    aside.classList.add("d-none");
+  }
+});

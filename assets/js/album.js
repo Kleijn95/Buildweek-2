@@ -6,7 +6,24 @@ function formatDuration(seconds) {
   // Formatta i secondi per avere 2 cifre (es. "05" invece di "5")
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
+//Variabile per l'audio
+let audio = document.createElement("audio");
+//Variabile che si aggiorna se un audio è in riproduzione
+let currentAudio = null;
 
+//Variabile per imgPlayer
+let imgPlayer = document.createElement("img");
+//Variabile che tine conto dell'immagine nel player
+let currentImg = null;
+
+let player = document.querySelector(".playerSong");
+
+let logo = document.querySelector(".spotify");
+
+const arrayPlaylist = [
+  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
+  1313621735, 1116187241, 733113466,
+];
 const params = new URLSearchParams(window.location.search);
 const albumId = params.get("albumId");
 const playlistId = params.get("playlistId");
@@ -61,19 +78,40 @@ if (URL) {
           songTitle.classList.add("text-white", "mb-0");
           songTitle.innerText = album[i].title;
           const artist = document.createElement("a");
-          console.log(album[i].preview);
+
+          console.log(album[i].album.cover_small);
+          const imgCanz = album[i].album.cover_small;
           songTitle.style.cursor = "pointer";
           const preview = album[i].preview;
+          songTitle.style.cursor = "pointer";
+          //Funzione per far partire le canzoni
+          function playSong(previewUrl) {
+            if (currentAudio === previewUrl) {
+              if (!audio.paused) {
+                audio.pause();
+              } else {
+                audio.play();
+              }
+            } else {
+              audio.src = previewUrl;
+              audio.play();
+              currentAudio = previewUrl;
+            }
+          }
+          function imgSong(imgSong) {
+            if (currentImg === imgSong) {
+              imgPlayer.src.remove();
+              logo.classList.add("d-none");
+            } else {
+              imgPlayer.src = imgSong;
+              player.appendChild(imgPlayer);
+              logo.classList.add("d-none");
+            }
+          }
+          //Evento che chiama la funzione per far partire le canzoni
           songTitle.addEventListener("click", () => {
-            const audio = document.createElement("audio");
-            audio.controls = true;
-            audio.innerHTML = `
-                <source src="${preview}" type="audio/mpeg">
-                Il tuo browser non supporta l'elemento audio.`;
-            document.body.appendChild(audio);
-            audio.play().catch((error) => {
-              console.error("Errore durante la riproduzione:", error);
-            });
+            playSong(preview);
+            imgSong(imgCanz);
           });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
@@ -128,19 +166,6 @@ if (URL) {
           songTitle.innerText = playlist[i].title;
           const artist = document.createElement("a");
           console.log(playlist[i].preview);
-          songTitle.style.cursor = "pointer";
-          const preview = playlist[i].preview;
-          songTitle.addEventListener("click", () => {
-            const audio = document.createElement("audio");
-            audio.controls = true;
-            audio.innerHTML = `
-                <source src="${preview}" type="audio/mpeg">
-                Il tuo browser non supporta l'elemento audio.`;
-            document.body.appendChild(audio);
-            audio.play().catch((error) => {
-              console.error("Errore durante la riproduzione:", error);
-            });
-          });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
           artist.href = "./artist.html?artistId=" + playlist[i].artist.id;
