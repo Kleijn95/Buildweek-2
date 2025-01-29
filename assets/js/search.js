@@ -14,11 +14,8 @@ rap.style.backgroundColor = "green";
 
 const generi = [pop, rock, blues, metal, elettronica, rap];
 
-for (element of generi) {
-  element.onclick = () => {
-    window.location.assign("./search.html?query="+);
+generi.forEach((genere) => {
+  genere.onclick = () => {
+    window.location.assign("./search.html?query=" + genere.innerText.toLowerCase());
   };
-}
-{
-  /* <div class="rounded-1 text-white bg-primary p-5">Genere</div> */
-}
+});
