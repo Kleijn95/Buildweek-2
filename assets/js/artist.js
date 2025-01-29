@@ -117,3 +117,19 @@ function fetchArtist() {
     });
 }
 fetchArtist();
+let aside = document.querySelector("aside");
+let closeAside = document.querySelector(".closeAside");
+
+let showAside = document.querySelector(".showAside");
+
+closeAside.addEventListener("click", () => {
+  aside.classList.add("d-none");
+});
+
+showAside.addEventListener("click", () => {
+  if (aside.classList.contains("d-none")) {
+    aside.classList.remove("d-none");
+  } else {
+    aside.classList.add("d-none");
+  }
+});
