@@ -214,6 +214,28 @@ if (URL) {
           albumImg.src = album[0].album.cover_big;
           artistName.innerText = album[0].artist.name;
           songName.innerText = album[0].album.title;
+          albumImg.crossOrigin = "Anonymous";
+
+          const colorThief = new ColorThief();
+
+          // Quando l'immagine è caricata, estrai il colore dominante
+          albumImg.onload = () => {
+            // Estrai il colore dominante
+            const dominantColor = colorThief.getColor(albumImg); // Passa l'elemento immagine, non l'URL
+            console.log(dominantColor);
+            const darkColor = dominantColor.map((c) => Math.max(c - 50, 0)); // Riduce la luminosità di 50
+
+            // Crea un gradiente che va dal colore dominante al colore più scuro
+            const gradient = `linear-gradient(to bottom, rgb(${dominantColor.join(",")}), rgb(${darkColor.join(",")}))`;
+
+            // Imposta il gradiente come sfondo
+            document.querySelector("main").style.background = gradient;
+          };
+
+          // Gestisci l'errore nel caso l'immagine non si carichi
+          albumImg.onerror = () => {
+            console.error("Immagine non caricata correttamente.");
+          };
 
           document.querySelector(".artistPic").src = data.artist.picture;
           document.querySelector(".artistPic").alt = data.artist.name;
@@ -267,6 +289,29 @@ if (URL) {
           albumImg.src = data.picture_xl;
           artistName.innerText = data.creator.name;
           songName.innerText = data.title;
+
+          albumImg.crossOrigin = "Anonymous";
+
+          const colorThief = new ColorThief();
+
+          // Quando l'immagine è caricata, estrai il colore dominante
+          albumImg.onload = () => {
+            // Estrai il colore dominante
+            const dominantColor = colorThief.getColor(albumImg); // Passa l'elemento immagine, non l'URL
+            console.log(dominantColor);
+            const darkColor = dominantColor.map((c) => Math.max(c - 50, 0)); // Riduce la luminosità di 50
+
+            // Crea un gradiente che va dal colore dominante al colore più scuro
+            const gradient = `linear-gradient(to bottom, rgb(${dominantColor.join(",")}), rgb(${darkColor.join(",")}))`;
+
+            // Imposta il gradiente come sfondo
+            document.querySelector("main").style.background = gradient;
+          };
+
+          // Gestisci l'errore nel caso l'immagine non si carichi
+          albumImg.onerror = () => {
+            console.error("Immagine non caricata correttamente.");
+          };
 
           document.querySelector(".artistPic").src = data.picture_xl;
           document.querySelector(".artistPic").alt = data.creator.name;
