@@ -16,9 +16,38 @@ let imgPlayer = document.createElement("img");
 //Variabile che tine conto dell'immagine nel player
 let currentImg = null;
 
+let titlePlayer = document.querySelector(".titolo");
+let artistPlayer = document.querySelector(".artista");
+
+currentTitlePlayer = null;
+currentArtistPlayer = null;
+
 let player = document.querySelector(".playerSong");
 
 let logo = document.querySelector(".spotify");
+
+let like = document.querySelector(".like");
+let dislike = document.querySelector(".dislike");
+let volume = document.querySelector(".volume");
+let noVolume = document.querySelector(".noVolume");
+
+like.addEventListener("click", () => {
+  like.classList.add("d-none");
+  dislike.classList.remove("d-none");
+});
+dislike.addEventListener("click", () => {
+  like.classList.remove("d-none");
+  dislike.classList.add("d-none");
+});
+
+volume.addEventListener("click", () => {
+  volume.classList.add("d-none");
+  noVolume.classList.remove("d-none");
+});
+noVolume.addEventListener("click", () => {
+  volume.classList.remove("d-none");
+  noVolume.classList.add("d-none");
+});
 
 const arrayPlaylist = [
   8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
@@ -82,6 +111,9 @@ if (URL) {
           const imgCanz = album[i].album.cover_small;
           songTitle.style.cursor = "pointer";
           const preview = album[i].preview;
+          const titolo = album[i].title;
+          const nomeArtista = album[i].artist.name;
+
           songTitle.style.cursor = "pointer";
           //Funzione per far partire le canzoni
           function playSong(previewUrl) {
@@ -107,10 +139,28 @@ if (URL) {
               logo.classList.add("d-none");
             }
           }
+          function titleSong(titleSong) {
+            if (currentTitlePlayer === titleSong) {
+              titlePlayer.innerHTML = "";
+            } else {
+              titlePlayer.innerHTML = titleSong;
+            }
+          }
+          function artista(artista) {
+            if (currentArtistPlayer === artista) {
+              artistPlayer.innerHTML = "";
+            } else {
+              artistPlayer.innerHTML = artista;
+            }
+          }
+
           //Evento che chiama la funzione per far partire le canzoni
           songTitle.addEventListener("click", () => {
             playSong(preview);
             imgSong(imgCanz);
+            like.classList.remove("d-none");
+            titleSong(titolo);
+            artista(nomeArtista);
           });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
