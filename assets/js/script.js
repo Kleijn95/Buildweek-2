@@ -58,7 +58,7 @@ showAside.addEventListener("click", () => {
   }
 });
 
-let playlists = JSON.parse(sessionStorage.getItem("playlists")) || [];
+let playlists = JSON.parse(sessionStorage.getItem("playlists"));
 let fetchCount = 0;
 
 // ciclo per popolare asidebar sinistra delle playlist. L'array playlist è chiamato in cima (reminder!! ho dato display none ai placeholder)

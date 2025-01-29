@@ -133,3 +133,22 @@ showAside.addEventListener("click", () => {
     aside.classList.add("d-none");
   }
 });
+
+let playlists = JSON.parse(sessionStorage.getItem("playlists"));
+
+console.log(playlists);
+
+playlists.forEach((playlistId) => {
+  let placeholderPlaylist = document.querySelector(".playlists");
+
+  let pPlaylist = document.createElement("p");
+  pPlaylist.style.cursor = "pointer";
+  pPlaylist.innerText = playlistId.title;
+
+  // Aggiunge l'evento click solo a questo <p>
+  pPlaylist.addEventListener("click", function () {
+    window.location.assign(`./album.html?playlistId=${playlistId.id}`);
+  });
+
+  placeholderPlaylist.appendChild(pPlaylist);
+});

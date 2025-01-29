@@ -50,7 +50,8 @@ noVolume.addEventListener("click", () => {
 });
 
 const arrayPlaylist = [
-  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064, 1313621735, 1116187241, 733113466,
+  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
+  1313621735, 1116187241, 733113466,
 ];
 const params = new URLSearchParams(window.location.search);
 const albumId = params.get("albumId");
@@ -266,4 +267,23 @@ showAside.addEventListener("click", () => {
   } else {
     aside.classList.add("d-none");
   }
+});
+
+let playlists = JSON.parse(sessionStorage.getItem("playlists"));
+
+console.log(playlists);
+
+playlists.forEach((playlistId) => {
+  let placeholderPlaylist = document.querySelector(".playlists");
+
+  let pPlaylist = document.createElement("p");
+  pPlaylist.style.cursor = "pointer";
+  pPlaylist.innerText = playlistId.title;
+
+  // Aggiunge l'evento click solo a questo <p>
+  pPlaylist.addEventListener("click", function () {
+    window.location.assign(`./album.html?playlistId=${playlistId.id}`);
+  });
+
+  placeholderPlaylist.appendChild(pPlaylist);
 });
