@@ -6,9 +6,54 @@ function formatDuration(seconds) {
   // Formatta i secondi per avere 2 cifre (es. "05" invece di "5")
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
+//Variabile per l'audio
+let audio = document.createElement("audio");
+//Variabile che si aggiorna se un audio è in riproduzione
+let currentAudio = null;
+
+//Variabile per imgPlayer
+let imgPlayer = document.createElement("img");
+//Variabile che tine conto dell'immagine nel player
+let currentImg = null;
+
+let titlePlayer = document.querySelector(".titolo");
+let artistPlayer = document.querySelector(".artista");
+
+currentTitlePlayer = null;
+currentArtistPlayer = null;
+
+let player = document.querySelector(".playerSong");
+
+let logo = document.querySelector(".spotify");
+
+let like = document.querySelector(".like");
+let dislike = document.querySelector(".dislike");
+let volume = document.querySelector(".volume");
+let noVolume = document.querySelector(".noVolume");
+
+let start = document.querySelector(".start");
+let pause = document.querySelector(".pausa");
+
+like.addEventListener("click", () => {
+  like.classList.add("d-none");
+  dislike.classList.remove("d-none");
+});
+dislike.addEventListener("click", () => {
+  like.classList.remove("d-none");
+  dislike.classList.add("d-none");
+});
+
+volume.addEventListener("click", () => {
+  volume.classList.add("d-none");
+  noVolume.classList.remove("d-none");
+});
+noVolume.addEventListener("click", () => {
+  volume.classList.remove("d-none");
+  noVolume.classList.add("d-none");
+});
+
 const arrayPlaylist = [
-  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
-  1313621735, 1116187241, 733113466,
+  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064, 1313621735, 1116187241, 733113466,
 ];
 const params = new URLSearchParams(window.location.search);
 const albumId = params.get("albumId");
@@ -64,19 +109,90 @@ if (URL) {
           songTitle.classList.add("text-white", "mb-0");
           songTitle.innerText = album[i].title;
           const artist = document.createElement("a");
-          console.log(album[i].preview);
+
+          console.log(album[i].album.cover_small);
+          const imgCanz = album[i].album.cover_small;
           songTitle.style.cursor = "pointer";
           const preview = album[i].preview;
+          const titolo = album[i].title;
+          const nomeArtista = album[i].artist.name;
+
+          songTitle.style.cursor = "pointer";
+          //Funzione per far partire le canzoni
+          function playSong(previewUrl) {
+            if (currentAudio === previewUrl) {
+              if (!audio.paused) {
+                audio.pause();
+              } else {
+                audio.play();
+                pause.classList.add("d-none");
+              }
+            } else {
+              audio.src = previewUrl;
+              audio.play();
+              currentAudio = previewUrl;
+              start.classList.add("d-none");
+            }
+          }
+          //Funzione per il tasto play
+          function playSong2(previewUrl) {
+            if (currentAudio === previewUrl) {
+              if (!audio.paused) {
+                audio.pause();
+              }
+            }
+          }
+          //Funzione per l'immagine nella playbar
+          function imgSong(imgSong) {
+            if (currentImg === imgSong) {
+              imgPlayer.src.remove();
+              logo.classList.add("d-none");
+            } else {
+              imgPlayer.src = imgSong;
+              player.appendChild(imgPlayer);
+              logo.classList.add("d-none");
+            }
+          }
+          //Funzione per il titolo della canzone nella play
+          function titleSong(titleSong) {
+            if (currentTitlePlayer === titleSong) {
+              titlePlayer.innerHTML = "";
+            } else {
+              titlePlayer.innerHTML = titleSong;
+            }
+          }
+          //Funzione per il nome dell'artista nella play
+          function artista(artista) {
+            if (currentArtistPlayer === artista) {
+              artistPlayer.innerHTML = "";
+            } else {
+              artistPlayer.innerHTML = artista;
+            }
+          }
+
+          //Evento che chiama la funzione per far partire le canzoni
           songTitle.addEventListener("click", () => {
-            const audio = document.createElement("audio");
-            audio.controls = true;
-            audio.innerHTML = `
-                <source src="${preview}" type="audio/mpeg">
-                Il tuo browser non supporta l'elemento audio.`;
-            document.body.appendChild(audio);
-            audio.play().catch((error) => {
-              console.error("Errore durante la riproduzione:", error);
-            });
+            playSong(preview);
+            imgSong(imgCanz);
+            like.classList.remove("d-none");
+            titleSong(titolo);
+            artista(nomeArtista);
+            pause.classList.remove("d-none");
+          });
+          //Eventi della playbar
+          start.addEventListener("click", () => {
+            playSong(preview);
+            imgSong(imgCanz);
+            like.classList.remove("d-none");
+            titleSong(titolo);
+            artista(nomeArtista);
+            pause.classList.remove("d-none");
+            start.classList.add("d-none");
+          });
+          pause.addEventListener("click", () => {
+            playSong2(preview);
+            start.classList.remove("d-none");
+            pause.classList.add("d-none");
           });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
@@ -97,6 +213,28 @@ if (URL) {
           albumImg.src = album[0].album.cover_big;
           artistName.innerText = album[0].artist.name;
           songName.innerText = album[0].album.title;
+          albumImg.crossOrigin = "Anonymous";
+
+          const colorThief = new ColorThief();
+
+          // Quando l'immagine è caricata, estrai il colore dominante
+          albumImg.onload = () => {
+            // Estrai il colore dominante
+            const dominantColor = colorThief.getColor(albumImg); // Passa l'elemento immagine, non l'URL
+            console.log(dominantColor);
+            const darkColor = dominantColor.map((c) => Math.max(c - 50, 0)); // Riduce la luminosità di 50
+
+            // Crea un gradiente che va dal colore dominante al colore più scuro
+            const gradient = `linear-gradient(to bottom, rgb(${dominantColor.join(",")}), rgb(${darkColor.join(",")}))`;
+
+            // Imposta il gradiente come sfondo
+            document.querySelector("main").style.background = gradient;
+          };
+
+          // Gestisci l'errore nel caso l'immagine non si carichi
+          albumImg.onerror = () => {
+            console.error("Immagine non caricata correttamente.");
+          };
 
           document.querySelector(".artistPic").src = data.artist.picture;
           document.querySelector(".artistPic").alt = data.artist.name;
@@ -131,19 +269,6 @@ if (URL) {
           songTitle.innerText = playlist[i].title;
           const artist = document.createElement("a");
           console.log(playlist[i].preview);
-          songTitle.style.cursor = "pointer";
-          const preview = playlist[i].preview;
-          songTitle.addEventListener("click", () => {
-            const audio = document.createElement("audio");
-            audio.controls = true;
-            audio.innerHTML = `
-                <source src="${preview}" type="audio/mpeg">
-                Il tuo browser non supporta l'elemento audio.`;
-            document.body.appendChild(audio);
-            audio.play().catch((error) => {
-              console.error("Errore durante la riproduzione:", error);
-            });
-          });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
           artist.href = "./artist.html?artistId=" + playlist[i].artist.id;
@@ -163,6 +288,29 @@ if (URL) {
           albumImg.src = data.picture_xl;
           artistName.innerText = data.creator.name;
           songName.innerText = data.title;
+
+          albumImg.crossOrigin = "Anonymous";
+
+          const colorThief = new ColorThief();
+
+          // Quando l'immagine è caricata, estrai il colore dominante
+          albumImg.onload = () => {
+            // Estrai il colore dominante
+            const dominantColor = colorThief.getColor(albumImg); // Passa l'elemento immagine, non l'URL
+            console.log(dominantColor);
+            const darkColor = dominantColor.map((c) => Math.max(c - 50, 0)); // Riduce la luminosità di 50
+
+            // Crea un gradiente che va dal colore dominante al colore più scuro
+            const gradient = `linear-gradient(to bottom, rgb(${dominantColor.join(",")}), rgb(${darkColor.join(",")}))`;
+
+            // Imposta il gradiente come sfondo
+            document.querySelector("main").style.background = gradient;
+          };
+
+          // Gestisci l'errore nel caso l'immagine non si carichi
+          albumImg.onerror = () => {
+            console.error("Immagine non caricata correttamente.");
+          };
 
           document.querySelector(".artistPic").src = data.picture_xl;
           document.querySelector(".artistPic").alt = data.creator.name;
@@ -195,4 +343,23 @@ showAside.addEventListener("click", () => {
   } else {
     aside.classList.add("d-none");
   }
+});
+
+let playlists = JSON.parse(sessionStorage.getItem("playlists"));
+
+console.log(playlists);
+
+playlists.forEach((playlistId) => {
+  let placeholderPlaylist = document.querySelector(".playlists");
+
+  let pPlaylist = document.createElement("p");
+  pPlaylist.style.cursor = "pointer";
+  pPlaylist.innerText = playlistId.title;
+
+  // Aggiunge l'evento click solo a questo <p>
+  pPlaylist.addEventListener("click", function () {
+    window.location.assign(`./album.html?playlistId=${playlistId.id}`);
+  });
+
+  placeholderPlaylist.appendChild(pPlaylist);
 });

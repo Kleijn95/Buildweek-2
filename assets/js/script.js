@@ -5,6 +5,7 @@ let like = document.querySelector(".like");
 let dislike = document.querySelector(".dislike");
 let volume = document.querySelector(".volume");
 let noVolume = document.querySelector(".noVolume");
+let hidden = true;
 const arrayPlaylist = [
   8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
   1313621735, 1116187241, 733113466,
@@ -222,7 +223,7 @@ fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
     //Creazione card nella ezione "altro di ciò che ti piace"
     const containerRow = document.createElement("div");
     containerRow.classList.add("row", "d-felx", "gap-1", "justify-content-between");
-    albums.forEach((album) => {
+    albums.forEach((album, i) => {
       const cardAlbum = document.createElement("div");
       cardAlbum.classList.add("card", "col-2", "bg-dark", "h-100", "rounded", "p-2", "d-flex", "flex-column", "m-2");
       cardAlbum.style.cursor = "pointer";
@@ -256,17 +257,44 @@ fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
       albumRaw.appendChild(containerRow);
 
       console.log(album);
+
+      if (i > 4) {
+        cardAlbum.classList.add("hideAndShow", "d-none");
+      }
     });
+  })
+  .finally(() => {
+    const showOthers = document.getElementById("viewAll");
+    showOthers.classList.add("text-secondary");
+
+    showOthers.innerText = "VISUALIZZA TUTTO";
+
+    showOthers.onclick = () => {
+      if (hidden === true) {
+        hidden = false;
+        showOthers.innerText = "NASCONDI";
+        for (element of document.querySelectorAll(".hideAndShow")) {
+          element.classList.remove("d-none");
+        }
+      } else {
+        hidden = true;
+        showOthers.innerText = "VISUALIZZA TUTTO";
+        for (element of document.querySelectorAll(".hideAndShow")) {
+          element.classList.add("d-none");
+        }
+      }
+    };
+    33333;
   });
 
 //CAROSELLO
 
-fetch("https://striveschool-api.herokuapp.com/api/deezer/album/119606", {
+fetch("https://deezerdevs-deezer.p.rapidapi.com/playlist/1282495565", {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
-
-    Authorization: "Bearer cdd499bc73msh8003c69cf9aa9dcp12c566jsnf97718531566", // Verifica se è necessario
+    "x-rapidapi-key": "ad4ebc50e8msh21d6de872e740a5p1740a2jsn2f44656a84db",
+    "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com", // Verifica se è necessario
   },
 })
   .then((resp) => {
@@ -310,7 +338,7 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/album/119606", {
         pAlbum.innerText = "ALBUM";
 
         let h2 = document.createElement("h2");
-        h2.classList.add("fw-bold");
+        h2.classList.add("fw-bold", "text-truncate");
         h2.innerText = song.title;
 
         let pArtist = document.createElement("p");
