@@ -11,6 +11,12 @@ const arrayPlaylist = [
   1313621735, 1116187241, 733113466,
 ];
 
+const searchButton = document.getElementById("searchButton");
+
+searchButton.addEventListener("click", function () {
+  window.location.assign("./search.html");
+});
+
 let aside = document.querySelector("aside");
 let closeAside = document.querySelector(".closeAside");
 
