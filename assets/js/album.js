@@ -53,7 +53,8 @@ noVolume.addEventListener("click", () => {
 });
 
 const arrayPlaylist = [
-  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064, 1313621735, 1116187241, 733113466,
+  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
+  1313621735, 1116187241, 733113466,
 ];
 const params = new URLSearchParams(window.location.search);
 const albumId = params.get("albumId");
@@ -169,10 +170,11 @@ if (URL) {
               artistPlayer.innerHTML = artista;
             }
           }
-
+          console.log(preview);
           //Evento che chiama la funzione per far partire le canzoni
           songTitle.addEventListener("click", () => {
             playSong(preview);
+
             imgSong(imgCanz);
             like.classList.remove("d-none");
             titleSong(titolo);
