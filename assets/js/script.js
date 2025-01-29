@@ -5,6 +5,7 @@ let like = document.querySelector(".like");
 let dislike = document.querySelector(".dislike");
 let volume = document.querySelector(".volume");
 let noVolume = document.querySelector(".noVolume");
+let hidden = true;
 const arrayPlaylist = [
   8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
   1313621735, 1116187241, 733113466,
@@ -222,7 +223,7 @@ fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
     //Creazione card nella ezione "altro di ciò che ti piace"
     const containerRow = document.createElement("div");
     containerRow.classList.add("row", "d-felx", "gap-1", "justify-content-between");
-    albums.forEach((album) => {
+    albums.forEach((album, i) => {
       const cardAlbum = document.createElement("div");
       cardAlbum.classList.add("card", "col-2", "bg-dark", "h-100", "rounded", "p-2", "d-flex", "flex-column", "m-2");
       cardAlbum.style.cursor = "pointer";
@@ -256,7 +257,33 @@ fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
       albumRaw.appendChild(containerRow);
 
       console.log(album);
+
+      if (i > 4) {
+        cardAlbum.classList.add("hideAndShow", "d-none");
+      }
     });
+  })
+  .finally(() => {
+    const showOthers = document.getElementById("viewAll");
+    showOthers.classList.add("text-secondary");
+
+    showOthers.innerText = "VISUALIZZA TUTTO";
+
+    showOthers.onclick = () => {
+      if (hidden === true) {
+        hidden = false;
+        showOthers.innerText = "NASCONDI";
+        for (element of document.querySelectorAll(".hideAndShow")) {
+          element.classList.remove("d-none");
+        }
+      } else {
+        hidden = true;
+        showOthers.innerText = "VISUALIZZA TUTTO";
+        for (element of document.querySelectorAll(".hideAndShow")) {
+          element.classList.add("d-none");
+        }
+      }
+    };
   });
 
 //CAROSELLO
