@@ -40,25 +40,49 @@
                 <div id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column">
                     <li class="nav-item">
-                      <a class="nav-link text-white active px-0" aria-current="page" href="./index.html"
-                        ><i class="fa-solid fa-house fs-5 me-2"></i> Home</a
+                      <a
+                        class="nav-link active text-white px-0 d-flex align-items-center"
+                        aria-current="page"
+                        href="./index.html"
+                        ><i class="fa-solid fa-house me-3 iconNav"></i> Home</a
                       >
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link text-white px-0" aria-current="page" href="#">
-                        <i class="fa-solid fa-magnifying-glass fs-5 me-2"></i>
-                        Cerca</a
-                      >
+                      <a class="nav-link px-0" aria-current="page" href="#">
+                        <button
+                          class="btn p-0"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#searchBar"
+                          aria-expanded="false"
+                          aria-controls="searchBar"
+                        >
+                          <p class="text-gray m-0 searchText">
+                            <i class="fa fa-magnifying-glass me-3 iconNav"></i>Cerca
+                          </p>
+                        </button>
+
+                        <div class="d-flex px-1 align-items-center">
+                          <div class="collapse collapse-horizontal" id="searchBar">
+                            <input
+                              class="form-control me-2 bg-dark border-0 p-1 text-white"
+                              type="search"
+                              placeholder="Search"
+                              aria-label="Search"
+                            />
+                          </div>
+                        </div>
+                      </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link text-white px-0" href="#"
+                      <a class="nav-link text-gray px-0" href="#"
                         ><svg
                           data-encore-id="icon"
                           role="img"
                           aria-hidden="true"
                           class="Svg-sc-ytk21e-0 bneLcE e-9541-icon"
                           viewBox="0 0 24 24"
-                          style="width: 25px; fill: white"
+                          style="width: 22px; fill: #abb0ad"
                         >
                           <path
                             d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"
@@ -70,21 +94,20 @@
                   </ul>
 
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column mt-5">
-                    <li class="nav-item d-flex align-items-center">
-                      <a class="nav-link text-white px-0" aria-current="page" href="#"
-                        ><i class="fa-solid fa-plus fs-5 me-2 p-1 rounded-1 bg-secondary text-black"></i>Crea
-                        playlist</a
+                    <li class="nav-item d-flex">
+                      <a class="nav-link text-gray px-0 d-flex align-items-center" aria-current="page" href="#"
+                        ><i class="fa-solid fa-plus me-3 iconNav rounded-1 bg-secondary text-black"></i>Crea playlist</a
                       >
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link text-white px-0" aria-current="page" href="#"
-                        ><i class="fa-solid heart fa-heart fs-5 me-2 p-1 rounded-1"></i>Brani che ti piacciono</a
+                      <a class="nav-link text-gray px-0 d-flex align-items-center" aria-current="page" href="#"
+                        ><i class="fa-solid me-3 heart fa-heart iconNav rounded-1"></i>Brani che ti piacciono</a
                       >
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link text-white px-0" href="#"
-                        ><i class="fas fa-bookmark fs-5 me-2 bg-success py-1 px-2 rounded-1" style="color: #27ddaa"></i
-                        >I tuoi episodi</a
+                      <a class="nav-link text-gray px-0 d-flex align-items-center" href="#"
+                        ><i class="fas fa-bookmark me-3 bg-success iconNav rounded-1" style="color: #27ddaa"></i>I tuoi
+                        episodi</a
                       >
                     </li>
                   </ul>
@@ -96,7 +119,7 @@
             </div>
 
             <div class="container overflow-y-scroll">
-              <div class="playlists text-white bg-black"></div>
+              <div class="playlists text-gray bg-black"></div>
             </div>
           </div>
         </header>
@@ -106,22 +129,39 @@
             <div class="container mt-4 px-0">
               <div class="d-flex justify-content-between">
                 <div class="text-white mb-3">
-                  <i class="fa-solid fa-angle-left text-secondary rounded-circle fs-5"></i>
-                  <i class="fa-solid fa-angle-right text-secondary rounded-circle fs-5 ms-3"></i>
-                </div>
-                <div class="d-flex rounded-pill align-items-center gap-2 pe-2 bg-black" style="height: 30px">
-                  <img src="./assets/imgs/search/image-1.jpeg" class="img-fluid h-100 rounded-circle" />
-                  <p class="text-white mb-0">Username</p>
                   <button
-                    class="bg-transparent border-0 text-white dropdown-toggle align-self-end"
+                    class="bg-transparent border-0"
+                    type="button"
+                    data-bs-target="#carouselBanner"
+                    data-bs-slide="prev"
+                  >
+                    <span aria-hidden="true"
+                      ><i class="fa-solid fa-angle-left text-secondary rounded-circle fs-5"></i
+                    ></span>
+                  </button>
+                  <button
+                    class="bg-transparent border-0"
+                    type="button"
+                    data-bs-target="#carouselBanner"
+                    data-bs-slide="next"
+                  >
+                    <i class="fa-solid fa-angle-right text-secondary rounded-circle fs-5 ms-3"></i>
+                  </button>
+                </div>
+                <div class="d-flex bg-black rounded-pill align-items-center gap-2 pe-2" style="height: 30px">
+                  <img src="./assets/imgs/search/image-1.jpeg" class="img-fluid h-100 rounded-circle" />
+                  <button
+                    class="bg-transparent border-0 text-white dropdown-toggle"
                     type="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
-                  ></button>
+                  >
+                    Username
+                  </button>
                   <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item text-white" href="#">Modifica Profilo</a></li>
+                    <li><a class="dropdown-item text-white" href="#">Impostazioni</a></li>
+                    <li><a class="dropdown-item text-white showAside" href="#">Attività Amici</a></li>
                   </ul>
                 </div>
               </div>

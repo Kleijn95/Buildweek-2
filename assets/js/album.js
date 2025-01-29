@@ -110,6 +110,7 @@ if (URL) {
           songTitle.innerText = album[i].title;
           const artist = document.createElement("a");
 
+          console.log(album[i].album.cover_small);
           const imgCanz = album[i].album.cover_small;
           songTitle.style.cursor = "pointer";
           const preview = album[i].preview;
@@ -209,12 +210,11 @@ if (URL) {
           const albumImg = document.getElementById("albumImg");
           const artistName = document.getElementById("artist");
           const songName = document.getElementById("songName");
-
-          // Imposta l'immagine dell'album
           albumImg.src = album[0].album.cover_big;
+          artistName.innerText = album[0].artist.name;
+          songName.innerText = album[0].album.title;
           albumImg.crossOrigin = "Anonymous";
-          console.log(album[0].album.cover_big);
-          // Crea un'istanza di ColorThief
+
           const colorThief = new ColorThief();
 
           // Quando l'immagine è caricata, estrai il colore dominante
@@ -235,9 +235,6 @@ if (URL) {
           albumImg.onerror = () => {
             console.error("Immagine non caricata correttamente.");
           };
-
-          artistName.innerText = album[0].artist.name;
-          songName.innerText = album[0].album.title;
 
           document.querySelector(".artistPic").src = data.artist.picture;
           document.querySelector(".artistPic").alt = data.artist.name;
@@ -289,9 +286,10 @@ if (URL) {
           const artistName = document.getElementById("artist");
           const songName = document.getElementById("songName");
           albumImg.src = data.picture_xl;
-          albumImg.crossOrigin = "Anonymous";
           artistName.innerText = data.creator.name;
           songName.innerText = data.title;
+
+          albumImg.crossOrigin = "Anonymous";
 
           const colorThief = new ColorThief();
 
@@ -345,4 +343,23 @@ showAside.addEventListener("click", () => {
   } else {
     aside.classList.add("d-none");
   }
+});
+
+let playlists = JSON.parse(sessionStorage.getItem("playlists"));
+
+console.log(playlists);
+
+playlists.forEach((playlistId) => {
+  let placeholderPlaylist = document.querySelector(".playlists");
+
+  let pPlaylist = document.createElement("p");
+  pPlaylist.style.cursor = "pointer";
+  pPlaylist.innerText = playlistId.title;
+
+  // Aggiunge l'evento click solo a questo <p>
+  pPlaylist.addEventListener("click", function () {
+    window.location.assign(`./album.html?playlistId=${playlistId.id}`);
+  });
+
+  placeholderPlaylist.appendChild(pPlaylist);
 });
