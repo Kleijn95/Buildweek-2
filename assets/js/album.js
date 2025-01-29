@@ -6,7 +6,9 @@ function formatDuration(seconds) {
   // Formatta i secondi per avere 2 cifre (es. "05" invece di "5")
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
+//Variabile per l'audio
 let audio = document.createElement("audio");
+//Variabile che si aggiorna se un audio è in riproduzione
 let currentAudio = null;
 const arrayPlaylist = [
   8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064, 1313621735, 1116187241, 733113466,
@@ -69,6 +71,7 @@ if (URL) {
           songTitle.style.cursor = "pointer";
           const preview = album[i].preview;
           songTitle.style.cursor = "pointer";
+          //Funzione per far partire le canzoni
           function playSong(previewUrl) {
             if (currentAudio === previewUrl) {
               if (!audio.paused) {
@@ -82,6 +85,7 @@ if (URL) {
               currentAudio = previewUrl;
             }
           }
+          //Evento che chiama la funzione per far partire le canzoni
           songTitle.addEventListener("click", () => {
             playSong(preview);
           });
