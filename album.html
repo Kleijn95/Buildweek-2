@@ -1,290 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Album</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link href="./assets/css/style.css" rel="stylesheet" />
+    <link href="./assets/css/album.css" rel="stylesheet" />
+    <link href="./assets/css/circular-font.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/colorthief@2.3.0/dist/color-thief.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Album</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-  <link href="./assets/css/style.css" rel="stylesheet" />
-  <link href="./assets/css/album.css" rel="stylesheet" />
-  <link href="./assets/css/circular-font.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/colorthief@2.3.0/dist/color-thief.min.js"></script>
-</head>
-
-<body>
-  <div class="container-fluid">
-    <div class="row">
-      <header class="col-2 px-0 bg-black pt-4">
-        <div class="d-flex flex-column h-100 sidebar">
-          <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-              <div id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column">
-                  <li class="nav-item">
-                    <a class="nav-link text-gray px-0 d-flex align-items-center" aria-current="page"
-                      href="./index.html"><i class="fa-solid fa-house me-3 iconNav"></i> Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link px-0" aria-current="page" href="#">
-                      <button class="btn p-0" type="button" data-bs-toggle="collapse" data-bs-target="#searchBar"
-                        aria-expanded="false" aria-controls="searchBar">
-                        <p class="text-gray m-0 searchText"><i class="fa fa-magnifying-glass me-3 iconNav"></i>Cerca</p>
-                      </button>
-
-                      <div class="d-flex px-1 align-items-center">
-                        <div class="collapse collapse-horizontal" id="searchBar">
-                          <input class="form-control me-2 bg-dark border-0 p-1 text-white" type="search"
-                            placeholder="Search" aria-label="Search" />
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-gray px-0" href="#"><svg data-encore-id="icon" role="img" aria-hidden="true"
-                        class="Svg-sc-ytk21e-0 bneLcE e-9541-icon" viewBox="0 0 24 24"
-                        style="width: 22px; fill: #abb0ad">
-                        <path
-                          d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z">
-                        </path>
-                      </svg>
-                      La tua libreria</a>
-                  </li>
-                </ul>
-
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column mt-5">
-                  <li class="nav-item d-flex">
-                    <a class="nav-link text-gray px-0 d-flex align-items-center" aria-current="page" href="#"><i
-                        class="fa-solid fa-plus me-3 iconNav rounded-1 bg-secondary text-black"></i>Crea playlist</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-gray px-0 d-flex align-items-center" aria-current="page" href="#"><i
-                        class="fa-solid me-3 heart fa-heart iconNav rounded-1"></i>Brani che ti piacciono</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-gray px-0 d-flex align-items-center" href="#"><i
-                        class="fas fa-bookmark me-3 bg-success iconNav rounded-1" style="color: #27ddaa"></i>I tuoi
-                      episodi</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-          <div class="container">
-            <hr class="text-white" />
-          </div>
-
-          <div class="container overflow-y-scroll">
-            <div class="playlists text-gray bg-black"></div>
-          </div>
-        </div>
-      </header>
-
-      <main class="container p-0 col  overflow-y-scroll">
-        <div class="container mt-4">
-          <div class="d-flex justify-content-between">
-            <div class="text-white mb-3">
-              <i class="fa-solid fa-angle-left text-secondary rounded-circle fs-5"></i>
-              <i class="fa-solid fa-angle-right text-secondary rounded-circle fs-5 ms-3"></i>
-            </div>
-            <div class="d-flex bg-black rounded-pill align-items-center gap-2 pe-2" style="height: 30px">
-              <img src="./assets/imgs/search/image-1.jpeg" class="img-fluid h-100 rounded-circle" />
-              <button class="bg-transparent border-0 text-white dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Username
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item text-white" href="#">Modifica Profilo</a></li>
-                <li><a class="dropdown-item text-white" href="#">Impostazioni</a></li>
-                <li><a class="dropdown-item text-white showAside" href="#">Attività Amici</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="container d-flex p-4 music-box gap-3 banner">
-          <div style="width: 350px">
-            <img id="albumImg" src="https://iili.io/HlHy9Yx.png" class="img-fluid shadow-lg" />
-          </div>
-          <div class="container text-white">
-            <div class="d-flex flex-column justify-content-center h-100">
-              <div class="my-auto">
-                <p class="mb-0">ALBUM</p>
-                <h2 id="songName">TITOLO</h2>
-              </div>
-              <div class="d-flex align-items-center mt-auto">
-                <img src="https://iili.io/HlHy9Yx.png" alt="albumart" height="25px" class="rounded-circle artistPic" />
-                <p class="mb-0 ms-2">
-                  <span class="fw-bold" id="artist">Artista</span> - <span class="year fw-bold">Anno</span> -
-                  <span class="tracks fw-bold">Numero Brani</span>,
-                  <span class="duration text-gray">Durata totale</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <section
-          style="background: linear-gradient(0deg, rgba(0,0,0,1) 45%, rgba(33,37,41,0.599118871181285) 100%); min-height: 100%;"
-          class="container-fluid">
-          <div class="container musicList h-100">
-            <div class="d-flex align-items-center">
-              <i class="fa-solid fa-play text-black play rounded-circle m-3 fs-5"></i>
-              <i class="fa-regular fa-heart text-white fs-3 ms-3"></i>
-              <i class="fa-regular fa-circle-down text-white fs-3 ms-4"></i>
-              <div class="dropdown">
-                <button class="bg-transparent border-0 text-secondary ms-3 fs-2" type="button" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <i class="fa-solid fa-ellipsis"></i>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="container mt-2" id="songsContainer">
-              <div class="row">
-                <div class="col-1">
-                  <h3 class="text-secondary">
-                    <p class="text-end mb-0">#</p>
-                  </h3>
-                </div>
-                <div class="col-7">
-                  <h3 class="text-secondary">TITOLO</h3>
-                </div>
-                <div class="col-4 d-flex justify-content-between">
-                  <span class="text-secondary">RIPRODUZIONI</span>
-                  <h3>
-                    <i class="fa-regular fa-clock text-secondary align-self-end"></i>
-                  </h3>
-                </div>
-                <hr class="text-secondary" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-      </main>
-
-      <aside class="col-2 bg-black">
-        <div class="container pt-4 ps-1 pe-0">
-          <div class="d-flex justify-content-between align-items-center">
-            <h3 class="text-white mb-0">Attività amici</h3>
-            <div class="text-secondary d-flex flex-nowrap">
-              <button class="asideBtn bg-transparent border-0 d-none d-lg-block">
-                <i class="fa-solid fa-user-group text-gray me-1"></i>
-              </button>
-              <button class="asideBtn bg-transparent border-0 closeAside">
-                <i class="fa-solid fa-x text-gray"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="container mt-5 text-gray notifications ps-1 pe-0">
-          <div class="d-flex justify-content-between gap-1">
-            <div class="d-flex gap-2">
-              <img style="width: 35px; height: 35px; border-radius: 50%" class="img-fluid"
-                src="./assets/imgs/search/image-11.jpg" />
-              <div>
-                <h4 class="mb-0 fw-bold notificationText">Charlie Hookham</h4>
-                <p class="mb-1 notificationText">In Camera - Yumi Zouma</p>
-                <p><i class="fas fa-music me-1" style="color: #ffffff"></i> EP III</p>
-              </div>
-            </div>
-            <p class="time d-none d-lg-block">4 ore</p>
-          </div>
-          <div class="d-flex justify-content-between gap-1 mt-3">
-            <div class="d-flex gap-2">
-              <img style="width: 35px; height: 35px; border-radius: 50%" class="img-fluid"
-                src="./assets/imgs/search/image-12.jpg" />
-              <div>
-                <h4 class="mb-0 fw-bold notificationText">lightdark02</h4>
-                <p class="mb-1 notificationText">Aimed to kill - Jared LeMac</p>
-                <p><i class="fas fa-music me-1" style="color: #ffffff"></i> Aimed to Kill</p>
-              </div>
-            </div>
-            <p class="time d-none d-lg-block">8 ore</p>
-          </div>
-          <div class="d-flex justify-content-between gap-1 mt-3">
-            <div class="d-flex gap-2">
-              <img style="width: 35px; height: 35px; border-radius: 50%" class="img-fluid"
-                src="./assets/imgs/search/image-15.jpg" />
-              <div>
-                <h4 class="mb-0 fw-bold notificationText">Valeria Traverso</h4>
-                <p class="mb-1 notificationText">New Kings - Sleeping Wolf</p>
-                <p><i class="fas fa-music me-1" style="color: #ffffff"></i>Twint Badass mood</p>
-              </div>
-            </div>
-            <p class="time d-none d-lg-block">3 giorni</p>
-          </div>
-        </div>
-      </aside>
-    </div>
-  </div>
-  <nav class="navbar navbar-expand-lg sticky-bottom text-white" style="background-color: #181818">
+  <body>
     <div class="container-fluid">
-      <div class="d-flex align-items-center gap-2">
-        <img src="./assets/imgs/4b135b9f16b30caa386a32c6a64990c9.png" class="spotify" id="defaultImg" alt="" />
-        <div class="playerSong"></div>
-        <div>
-          <h6 class="text-white m-0 titolo"></h6>
-          <p class="text-secondary m-0 subtitle artista"></p>
-        </div>
-        <button class="btn btn-link text-secondary p-0 like d-none">
-          <i class="far fa-heart"></i>
-        </button>
-        <button class="btn btn-link text-secondary p-0 d-none dislike">
-          <i class="fas fa-heart"></i>
-        </button>
-      </div>
-      <div class="row-column">
-        <div class="d-flex justify-content-center align-items-center gap-3 flex-grow-1">
-          <button class="btn btn-link text-success p-0">
-            <i class="fas fa-random"></i>
-          </button>
-          <button class="btn btn-link text-secondary p-0">
-            <i class="fas fa-step-backward"></i>
-          </button>
-          <button class="btn btn-link text-white p-0">
-            <i class="far fa-play-circle fa-2x"></i>
-          </button>
-          <button class="btn btn-link text-secondary p-0">
-            <i class="fas fa-step-forward"></i>
-          </button>
-          <button class="btn btn-link text-success p-0">
-            <i class="fas fa-history"></i>
-          </button>
-        </div>
-        <input class="slider-track-input mousetrap" type="range" step="1" style="width: 100%" />
-      </div>
-      <div class="d-flex gap-3">
-        <button class="btn btn-link text-white p-0">
-          <i class="fas fa-microphone-alt"></i>
-        </button>
+      <div class="row">
+        <header class="col-2 px-0 bg-black pt-4">
+          <div class="d-flex flex-column h-100 sidebar">
+            <nav class="navbar navbar-expand-lg">
+              <div class="container-fluid">
+                <div id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column">
+                    <li class="nav-item">
+                      <a class="nav-link text-gray px-0 d-flex align-items-center" aria-current="page" href="./index.html"
+                        ><i class="fa-solid fa-house me-3 iconNav"></i> Home</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link px-0" aria-current="page" href="#">
+                        <button
+                          class="btn p-0"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#searchBar"
+                          aria-expanded="false"
+                          aria-controls="searchBar"
+                        >
+                          <p class="text-gray m-0 searchText"><i class="fa fa-magnifying-glass me-3 iconNav"></i>Cerca</p>
+                        </button>
 
-        <button class="btn btn-link text-white p-0"><i class="fas fa-list"></i></button>
+                        <div class="d-flex px-1 align-items-center">
+                          <div class="collapse collapse-horizontal" id="searchBar">
+                            <input class="form-control me-2 bg-dark border-0 p-1 text-white" type="search" placeholder="Search" aria-label="Search" />
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-gray px-0" href="#"
+                        ><svg
+                          data-encore-id="icon"
+                          role="img"
+                          aria-hidden="true"
+                          class="Svg-sc-ytk21e-0 bneLcE e-9541-icon"
+                          viewBox="0 0 24 24"
+                          style="width: 22px; fill: #abb0ad"
+                        >
+                          <path
+                            d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"
+                          ></path>
+                        </svg>
+                        La tua libreria</a
+                      >
+                    </li>
+                  </ul>
 
-        <button class="btn btn-link text-white p-0"><i class="bi bi-speaker"></i></button>
-        <button class="btn btn-link text-white p-0 volume"><i class="fas fa-volume-up"></i></button>
-        <button class="btn btn-link text-white p-0 d-none noVolume"><i class="fas fa-volume-mute"></i></button>
-        <div>
-          <input class="slider-track-input mousetrap" type="range" step="1" />
-        </div>
-        <button class="btn btn-link text-white p-0"><i class="fas fa-expand-alt"></i></button>
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column mt-5">
+                    <li class="nav-item d-flex">
+                      <a class="nav-link text-gray px-0 d-flex align-items-center" aria-current="page" href="#"
+                        ><i class="fa-solid fa-plus me-3 iconNav rounded-1 bg-secondary text-black"></i>Crea playlist</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-gray px-0 d-flex align-items-center" aria-current="page" href="#"
+                        ><i class="fa-solid me-3 heart fa-heart iconNav rounded-1"></i>Brani che ti piacciono</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-gray px-0 d-flex align-items-center" href="#"
+                        ><i class="fas fa-bookmark me-3 bg-success iconNav rounded-1" style="color: #27ddaa"></i>I tuoi episodi</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+            <div class="container">
+              <hr class="text-white" />
+            </div>
+
+            <div class="container overflow-y-scroll">
+              <div class="playlists text-gray bg-black"></div>
+            </div>
+          </div>
+        </header>
+
+        <main class="container p-0 col overflow-y-scroll">
+          <div class="container mt-4">
+            <div class="d-flex justify-content-between">
+              <div class="text-white mb-3">
+                <i class="fa-solid fa-angle-left text-secondary rounded-circle fs-5"></i>
+                <i class="fa-solid fa-angle-right text-secondary rounded-circle fs-5 ms-3"></i>
+              </div>
+              <div class="d-flex bg-black rounded-pill align-items-center gap-2 pe-2" style="height: 30px">
+                <img src="./assets/imgs/search/image-1.jpeg" class="img-fluid h-100 rounded-circle" />
+                <button class="bg-transparent border-0 text-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Username
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item text-white" href="#">Modifica Profilo</a></li>
+                  <li><a class="dropdown-item text-white" href="#">Impostazioni</a></li>
+                  <li><a class="dropdown-item text-white showAside" href="#">Attività Amici</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="container d-flex p-4 music-box gap-3 banner">
+            <div style="width: 350px">
+              <img id="albumImg" src="https://iili.io/HlHy9Yx.png" class="img-fluid shadow-lg" />
+            </div>
+            <div class="container text-white">
+              <div class="d-flex flex-column justify-content-center h-100">
+                <div class="my-auto">
+                  <p class="mb-0">ALBUM</p>
+                  <h2 id="songName">TITOLO</h2>
+                </div>
+                <div class="d-flex align-items-center mt-auto">
+                  <img src="https://iili.io/HlHy9Yx.png" alt="albumart" height="25px" class="rounded-circle artistPic" />
+                  <p class="mb-0 ms-2">
+                    <span class="fw-bold" id="artist">Artista</span> - <span class="year fw-bold">Anno</span> -
+                    <span class="tracks fw-bold">Numero Brani</span>,
+                    <span class="duration text-gray">Durata totale</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <section
+            style="background: linear-gradient(0deg, rgba(0, 0, 0, 1) 45%, rgba(33, 37, 41, 0.599118871181285) 100%); min-height: 100%"
+            class="container-fluid"
+          >
+            <div class="container musicList h-100">
+              <div class="d-flex align-items-center">
+                <i class="fa-solid fa-play text-black play rounded-circle m-3 fs-5"></i>
+                <i class="fa-regular fa-heart text-white fs-3 ms-3"></i>
+                <i class="fa-regular fa-circle-down text-white fs-3 ms-4"></i>
+                <div class="dropdown">
+                  <button class="bg-transparent border-0 text-secondary ms-3 fs-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="container mt-2" id="songsContainer">
+                <div class="row">
+                  <div class="col-1">
+                    <h3 class="text-secondary">
+                      <p class="text-end mb-0">#</p>
+                    </h3>
+                  </div>
+                  <div class="col-7">
+                    <h3 class="text-secondary">TITOLO</h3>
+                  </div>
+                  <div class="col-4 d-flex justify-content-between">
+                    <span class="text-secondary">RIPRODUZIONI</span>
+                    <h3>
+                      <i class="fa-regular fa-clock text-secondary align-self-end"></i>
+                    </h3>
+                  </div>
+                  <hr class="text-secondary" />
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <aside class="col-2 bg-black">
+          <div class="container pt-4 ps-1 pe-0">
+            <div class="d-flex justify-content-between align-items-center">
+              <h3 class="text-white mb-0">Attività amici</h3>
+              <div class="text-secondary d-flex flex-nowrap">
+                <button class="asideBtn bg-transparent border-0 d-none d-lg-block">
+                  <i class="fa-solid fa-user-group text-gray me-1"></i>
+                </button>
+                <button class="asideBtn bg-transparent border-0 closeAside">
+                  <i class="fa-solid fa-x text-gray"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="container mt-5 text-gray notifications ps-1 pe-0">
+            <div class="d-flex justify-content-between gap-1">
+              <div class="d-flex gap-2">
+                <img style="width: 35px; height: 35px; border-radius: 50%" class="img-fluid" src="./assets/imgs/search/image-11.jpg" />
+                <div>
+                  <h4 class="mb-0 fw-bold notificationText">Charlie Hookham</h4>
+                  <p class="mb-1 notificationText">In Camera - Yumi Zouma</p>
+                  <p><i class="fas fa-music me-1" style="color: #ffffff"></i> EP III</p>
+                </div>
+              </div>
+              <p class="time d-none d-lg-block">4 ore</p>
+            </div>
+            <div class="d-flex justify-content-between gap-1 mt-3">
+              <div class="d-flex gap-2">
+                <img style="width: 35px; height: 35px; border-radius: 50%" class="img-fluid" src="./assets/imgs/search/image-12.jpg" />
+                <div>
+                  <h4 class="mb-0 fw-bold notificationText">lightdark02</h4>
+                  <p class="mb-1 notificationText">Aimed to kill - Jared LeMac</p>
+                  <p><i class="fas fa-music me-1" style="color: #ffffff"></i> Aimed to Kill</p>
+                </div>
+              </div>
+              <p class="time d-none d-lg-block">8 ore</p>
+            </div>
+            <div class="d-flex justify-content-between gap-1 mt-3">
+              <div class="d-flex gap-2">
+                <img style="width: 35px; height: 35px; border-radius: 50%" class="img-fluid" src="./assets/imgs/search/image-15.jpg" />
+                <div>
+                  <h4 class="mb-0 fw-bold notificationText">Valeria Traverso</h4>
+                  <p class="mb-1 notificationText">New Kings - Sleeping Wolf</p>
+                  <p><i class="fas fa-music me-1" style="color: #ffffff"></i>Twint Badass mood</p>
+                </div>
+              </div>
+              <p class="time d-none d-lg-block">3 giorni</p>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
-  </nav>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="./assets/js/album.js"></script>
-</body>
+    <nav class="navbar navbar-expand-lg sticky-bottom text-white" style="background-color: #181818">
+      <div class="container-fluid">
+        <div class="d-flex align-items-center gap-2">
+          <img src="./assets/imgs/4b135b9f16b30caa386a32c6a64990c9.png" class="spotify" id="defaultImg" alt="" />
+          <div class="playerSong"></div>
+          <div>
+            <h6 class="text-white m-0 titolo"></h6>
+            <p class="text-secondary m-0 subtitle artista"></p>
+          </div>
+          <button class="btn btn-link text-secondary p-0 like d-none">
+            <i class="far fa-heart"></i>
+          </button>
+          <button class="btn btn-link text-secondary p-0 d-none dislike">
+            <i class="fas fa-heart"></i>
+          </button>
+        </div>
+        <div class="row-column">
+          <div class="d-flex justify-content-center align-items-center gap-3 flex-grow-1">
+            <button class="btn btn-link text-success p-0">
+              <i class="fas fa-random"></i>
+            </button>
+            <button class="btn btn-link text-secondary p-0">
+              <i class="fas fa-step-backward"></i>
+            </button>
+            <button class="btn btn-link text-white p-0 start">
+              <i class="far fa-play-circle fa-2x"></i>
+            </button>
+            <button class="btn btn-link text-white p-0 d-none pausa">
+              <i class="far fa-pause-circle fa-2x"></i>
+            </button>
+            <button class="btn btn-link text-secondary p-0">
+              <i class="fas fa-step-forward"></i>
+            </button>
+            <button class="btn btn-link text-success p-0">
+              <i class="fas fa-history"></i>
+            </button>
+          </div>
+          <input class="slider-track-input mousetrap" type="range" step="1" style="width: 100%" />
+        </div>
+        <div class="d-flex gap-3">
+          <button class="btn btn-link text-white p-0">
+            <i class="fas fa-microphone-alt"></i>
+          </button>
 
+          <button class="btn btn-link text-white p-0"><i class="fas fa-list"></i></button>
+
+          <button class="btn btn-link text-white p-0"><i class="bi bi-speaker"></i></button>
+          <button class="btn btn-link text-white p-0 volume"><i class="fas fa-volume-up"></i></button>
+          <button class="btn btn-link text-white p-0 d-none noVolume"><i class="fas fa-volume-mute"></i></button>
+          <div>
+            <input class="slider-track-input mousetrap" type="range" step="1" />
+          </div>
+          <button class="btn btn-link text-white p-0"><i class="fas fa-expand-alt"></i></button>
+        </div>
+      </div>
+    </nav>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/js/album.js"></script>
+  </body>
 </html>
