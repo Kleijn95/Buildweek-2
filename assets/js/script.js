@@ -105,9 +105,9 @@ arrayPlaylist.forEach((playlistId) => {
     })
     .then((data) => {
       if (cardCount >= maxCards) return;
-      const playlist = data;
+      const albums = data;
       const arrayAlbums = data.tracks.data;
-      console.log(playlist);
+      console.log(albums);
       console.log(arrayAlbums);
       console.log(albums.picture_xl);
 
@@ -126,12 +126,12 @@ arrayPlaylist.forEach((playlistId) => {
       imgContainer.style.cursor = "pointer";
 
       imgContainer.addEventListener("click", function () {
-        window.location.assign(`./album.html?playlistId=${playlist.id}`);
+        window.location.assign(`./album.html?albumsId=${albums.id}`);
       });
       const img1 = document.createElement("img");
       img1.classList.add("img-fluid", "w-50", "p-0");
       img1.alt = `img1 alt`;
-      img1.src = playlist.picture_xl;
+      img1.src = albums.picture_xl;
       const img2 = document.createElement("img");
 
       img2.classList.add("img-fluid", "w-50", "p-0");
