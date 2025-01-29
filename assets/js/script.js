@@ -284,16 +284,17 @@ fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
         }
       }
     };
+    33333;
   });
 
 //CAROSELLO
 
-fetch("https://striveschool-api.herokuapp.com/api/deezer/album/119606", {
+fetch("https://deezerdevs-deezer.p.rapidapi.com/playlist/1282495565", {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
-
-    Authorization: "Bearer cdd499bc73msh8003c69cf9aa9dcp12c566jsnf97718531566", // Verifica se è necessario
+    "x-rapidapi-key": "ad4ebc50e8msh21d6de872e740a5p1740a2jsn2f44656a84db",
+    "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com", // Verifica se è necessario
   },
 })
   .then((resp) => {
@@ -337,7 +338,7 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/album/119606", {
         pAlbum.innerText = "ALBUM";
 
         let h2 = document.createElement("h2");
-        h2.classList.add("fw-bold");
+        h2.classList.add("fw-bold", "text-truncate");
         h2.innerText = song.title;
 
         let pArtist = document.createElement("p");
