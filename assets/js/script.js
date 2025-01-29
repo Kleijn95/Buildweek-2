@@ -81,13 +81,12 @@ arrayPlaylist.forEach((playlistId) => {
       if (!playlists.some((pl) => pl.id === data.id)) {
         playlists.push(data);
       }
+      fetchCount++;
     })
     .catch((error) => {
       console.error(`Errore per playlist ${playlistId}:`, error);
     })
     .finally(() => {
-      fetchCount++;
-
       if (fetchCount === arrayPlaylist.length) {
         if (playlists.length > 12) {
           playlists = playlists.slice(-12);
@@ -199,9 +198,8 @@ setTimeout(() => {
     //   window.location.assign(`./album.html?albumId=${albums.picture_xl}`);
     // });
   });
-}, 1500);
+}, 1000);
 
-/*
 fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
   method: "GET",
   headers: {
@@ -381,4 +379,3 @@ fetch("https://striveschool-api.herokuapp.com/api/deezer/album/119606", {
         divBtn.append(playBtn, saveBtn, dropdownDiv);
       });
   });
- */
