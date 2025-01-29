@@ -75,13 +75,21 @@ arrayPlaylist.forEach((playlistId) => {
       }
     })
     .then((data) => {
-      const albums = data;
+      const playlist = data;
       let placeholderPlaylist = document.querySelector(".playlists");
-      console.log(placeholderPlaylist);
+
       let pPlaylist = document.createElement("p");
-      pPlaylist.innerText = albums.title;
+      pPlaylist.style.cursor = "pointer";
+      pPlaylist.innerText = playlist.title;
+
+      // Aggiunge l'evento click solo a questo <p>
+      pPlaylist.addEventListener("click", function () {
+        window.location.assign(`./album.html?playlistId=${playlist.id}`);
+      });
+
       placeholderPlaylist.appendChild(pPlaylist);
-    });
+    })
+    .catch((error) => console.error(error));
 });
 
 let cardCount = 0;
