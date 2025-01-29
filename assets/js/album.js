@@ -10,6 +10,16 @@ function formatDuration(seconds) {
 let audio = document.createElement("audio");
 //Variabile che si aggiorna se un audio è in riproduzione
 let currentAudio = null;
+
+//Variabile per imgPlayer
+let imgPlayer = document.createElement("img");
+//Variabile che tine conto dell'immagine nel player
+let currentImg = null;
+
+let player = document.querySelector(".playerSong");
+
+let logo = document.querySelector(".spotify");
+
 const arrayPlaylist = [
   8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064, 1313621735, 1116187241, 733113466,
 ];
@@ -67,7 +77,9 @@ if (URL) {
           songTitle.classList.add("text-white", "mb-0");
           songTitle.innerText = album[i].title;
           const artist = document.createElement("a");
-          console.log(album[i].preview);
+
+          console.log(album[i].album.cover_small);
+          const imgCanz = album[i].album.cover_small;
           songTitle.style.cursor = "pointer";
           const preview = album[i].preview;
           songTitle.style.cursor = "pointer";
@@ -85,9 +97,20 @@ if (URL) {
               currentAudio = previewUrl;
             }
           }
+          function imgSong(imgSong) {
+            if (currentImg === imgSong) {
+              imgPlayer.src.remove();
+              logo.classList.add("d-none");
+            } else {
+              imgPlayer.src = imgSong;
+              player.appendChild(imgPlayer);
+              logo.classList.add("d-none");
+            }
+          }
           //Evento che chiama la funzione per far partire le canzoni
           songTitle.addEventListener("click", () => {
             playSong(preview);
+            imgSong(imgCanz);
           });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
