@@ -66,6 +66,18 @@ function fetchArtist() {
         const showOthers = document.createElement("p");
         showOthers.setAttribute("id", "showOthers");
         showOthers.classList.add("text-secondary");
+        const preview = artist.data[i].preview;
+        songTitle.addEventListener("click", () => {
+          const audio = document.createElement("audio");
+          audio.controls = true;
+          audio.innerHTML = `
+                  <source src="${preview}" type="audio/mpeg">
+                  Il tuo browser non supporta l'elemento audio.`;
+          document.body.appendChild(audio);
+          audio.play().catch((error) => {
+            console.error("Errore durante la riproduzione:", error);
+          });
+        });
 
         songsContainer.appendChild(songRow);
         songRow.append(songNumberContainer, albumArtContainer, titleContainer, durationContainer);
