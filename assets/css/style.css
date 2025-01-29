@@ -1,6 +1,8 @@
 body {
   font-family: "Circular";
   font-size: 1rem;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .text-gray {
@@ -32,7 +34,7 @@ header {
     }
   }
   .e-9541-icon {
-    margin-right: 1em;
+    margin-right: 0.8em;
   }
 }
 
