@@ -10,7 +10,7 @@ body {
 }
 
 header {
-  height: 100vh;
+  height: calc(100vh - 77px);
   .iconNav {
     font-size: 1.2em;
     width: 22px;
@@ -53,8 +53,7 @@ header {
 
 main {
   background-color: #202020;
-
-  height: 100vh;
+  height: calc(100vh - 77px);
 }
 
 .fa-angle-left,
