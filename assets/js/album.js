@@ -6,6 +6,20 @@ function formatDuration(seconds) {
   // Formatta i secondi per avere 2 cifre (es. "05" invece di "5")
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
+
+const arrayPlaylist = [
+  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
+  1313621735, 1116187241, 733113466,
+];
+const params = new URLSearchParams(window.location.search);
+const albumId = params.get("albumId");
+const playlistId = params.get("playlistId");
+
+let URL;
+let headers = {
+  "Content-Type": "application/json",
+};
+
 //Variabile per l'audio
 let audio = document.createElement("audio");
 //Variabile che si aggiorna se un audio è in riproduzione
@@ -31,6 +45,8 @@ let dislike = document.querySelector(".dislike");
 let volume = document.querySelector(".volume");
 let noVolume = document.querySelector(".noVolume");
 
+let barraVolume = document.querySelector(".barraVolume");
+
 let start = document.querySelector(".start");
 let pause = document.querySelector(".pausa");
 
@@ -42,28 +58,6 @@ dislike.addEventListener("click", () => {
   like.classList.remove("d-none");
   dislike.classList.add("d-none");
 });
-
-volume.addEventListener("click", () => {
-  volume.classList.add("d-none");
-  noVolume.classList.remove("d-none");
-});
-noVolume.addEventListener("click", () => {
-  volume.classList.remove("d-none");
-  noVolume.classList.add("d-none");
-});
-
-const arrayPlaylist = [
-  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
-  1313621735, 1116187241, 733113466,
-];
-const params = new URLSearchParams(window.location.search);
-const albumId = params.get("albumId");
-const playlistId = params.get("playlistId");
-
-let URL;
-let headers = {
-  "Content-Type": "application/json",
-};
 
 if (playlistId) {
   URL = "https://deezerdevs-deezer.p.rapidapi.com/playlist/" + playlistId;
@@ -111,7 +105,7 @@ if (URL) {
           songTitle.innerText = album[i].title;
           const artist = document.createElement("a");
 
-          console.log(album[i].album.cover_small);
+          console.log(album[i].preview);
           const imgCanz = album[i].album.cover_small;
           songTitle.style.cursor = "pointer";
           const preview = album[i].preview;
@@ -126,21 +120,22 @@ if (URL) {
                 audio.pause();
               } else {
                 audio.play();
+                barraVolume.disabled = false;
                 pause.classList.add("d-none");
               }
             } else {
               audio.src = previewUrl;
               audio.play();
               currentAudio = previewUrl;
+              barraVolume.disabled = false;
               start.classList.add("d-none");
             }
           }
           //Funzione per il tasto play
           function playSong2(previewUrl) {
-            if (currentAudio === previewUrl) {
-              if (!audio.paused) {
-                audio.pause();
-              }
+            if (!audio.paused) {
+              audio.pause();
+              barraVolume.disabled = false;
             }
           }
           //Funzione per l'immagine nella playbar
@@ -171,6 +166,25 @@ if (URL) {
             }
           }
 
+          function noVol() {
+            if (!audio.paused) {
+              volume.classList.add("d-none");
+              noVolume.classList.remove("d-none");
+              audio.muted = true;
+              barraVolume.max = "";
+              barraVolume.disabled = true;
+            }
+          }
+          function vol() {
+            if (!audio.paused) {
+              volume.classList.remove("d-none");
+              noVolume.classList.add("d-none");
+              audio.muted = false;
+              barraVolume.disabled = false;
+              barraVolume.max = "10";
+            }
+          }
+
           //Evento che chiama la funzione per far partire le canzoni
           songTitle.addEventListener("click", () => {
             playSong(preview);
@@ -180,9 +194,10 @@ if (URL) {
             artista(nomeArtista);
             pause.classList.remove("d-none");
           });
+
           //Eventi della playbar
           start.addEventListener("click", () => {
-            playSong(preview);
+            playSong(album[i].preview);
             imgSong(imgCanz);
             like.classList.remove("d-none");
             titleSong(titolo);
@@ -194,6 +209,12 @@ if (URL) {
             playSong2(preview);
             start.classList.remove("d-none");
             pause.classList.add("d-none");
+          });
+          volume.addEventListener("click", () => {
+            noVol();
+          });
+          noVolume.addEventListener("click", () => {
+            vol();
           });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");

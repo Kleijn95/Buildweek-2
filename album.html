@@ -179,9 +179,11 @@
 
           <button class="btn btn-link text-white p-0"><i class="bi bi-speaker"></i></button>
           <button class="btn btn-link text-white p-0 volume"><i class="fas fa-volume-up"></i></button>
-          <button class="btn btn-link text-white p-0 d-none noVolume"><i class="fas fa-volume-mute"></i></button>
+          <button class="btn btn-link text-white p-0 d-none noVolume">
+            <i class="fas fa-volume-mute"></i>
+          </button>
           <div>
-            <input class="slider-track-input mousetrap" type="range" step="1" />
+            <input class="slider-track-input mousetrap barraVolume" type="range" min="0" max="10" disabled />
           </div>
           <button class="btn btn-link text-white p-0"><i class="fas fa-expand-alt"></i></button>
         </div>
