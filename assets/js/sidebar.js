@@ -535,7 +535,8 @@ function toggleAside() {
       }
     } else {
       aside.classList.add("d-none");
-      if (wwindow.location.pathname.endsWith("index.html")) {
+      if (window.location.pathname.endsWith("index.html")) {
+        let hideDiv = document.querySelector(".hideDiv");
         hideDiv.classList.add("hideDiv2");
       }
     }

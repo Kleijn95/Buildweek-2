@@ -1,5 +1,6 @@
 body {
   font-family: "Circular";
+  background-color: #202020;
 }
 .text-gray {
   color: #abb0ad;
@@ -126,6 +127,10 @@ body {
     width: 200%;
   }
 
+  .timeSongStyle {
+    font-size: 0.5em;
+  }
+
   .progress {
     height: 8px;
     background-color: #333;
@@ -156,12 +161,12 @@ body {
     font-size: 12px;
   }
 
-  .hide,
+  .hideBanner,
   .show {
     cursor: pointer;
     background-color: #222222;
   }
-  .hide,
+  .hideBanner,
   .show,
   .album {
     font-size: 0.7em;

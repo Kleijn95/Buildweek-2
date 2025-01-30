@@ -2,8 +2,8 @@ mediaQuery();
 
 function mediaQuery() {
   if (mediaQueryMd.matches) {
-    bannerHide();
     carosello();
+    bannerHide();
   } else {
     playlistCard2();
   }
@@ -101,6 +101,9 @@ function playlistCard2() {
 
       const card = document.createElement("div");
       card.classList.add("card", "mb-3", "p-3", "bg-CardMobile");
+      card.addEventListener("click", function () {
+        window.location.assign(`./album.html?playlistId=${playlistId.id}`);
+      });
       const row = document.createElement("div");
       row.classList.add("row", "g-0", "flex-nowrap");
 
@@ -193,15 +196,18 @@ function playlistCard2() {
 }
 
 function bannerHide() {
-  let hide = document.querySelector(".hide");
+  let hideBanner = document.querySelector(".hideBanner");
   let banner = document.querySelector(".banner");
-  hide.addEventListener("click", () => {
+  hideBanner.addEventListener("click", () => {
     if (banner.classList.contains("d-none")) {
       banner.classList.remove("d-none");
-      hide.innerText = "NASCONDI ANNUNCI";
+      banner.classList.add("d-md-block");
+      hideBanner.innerText = "NASCONDI ANNUNCI";
     } else {
       banner.classList.add("d-none");
-      hide.innerText = "MOSTRA ANNUNCI";
+      banner.classList.remove("d-md-block");
+
+      hideBanner.innerText = "MOSTRA ANNUNCI";
     }
   });
 }
