@@ -60,6 +60,7 @@ document.addEventListener("playlistsLoaded", () => {
         outerCardBody.style.cursor = "pointer";
         const cardBody = document.createElement("div");
         cardBody.classList.add("card-body");
+
         const cardTitle = document.createElement("h5");
         cardTitle.classList.add("card-title", "text-white", "text-truncate-multiline");
         cardTitle.innerText = playlistId.title;
@@ -153,7 +154,10 @@ function altroChePiace() {
 
         containerRow.appendChild(cardAlbum);
         albumRaw.appendChild(containerRow);
-
+        cardAlbum.setAttribute("data-bs-toggle", "tooltip");
+        cardAlbum.setAttribute("data-bs-placement", "top");
+        cardAlbum.setAttribute("title", "Vai all'album completo");
+        var tooltip = new bootstrap.Tooltip(cardAlbum);
         if (i > 4) {
           cardAlbum.classList.add("hideAndShow", "d-none");
         }
