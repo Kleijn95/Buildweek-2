@@ -112,3 +112,10 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 }); // <-- Questa è la chiusura per il document.addEventListener
+const closeModalBtn = document.getElementById("closeModalBtn");
+
+// Aggiungi un event listener per il click sul bottone di chiusura
+closeModalBtn.addEventListener("click", function () {
+  // Rimuovi la query string e fai il redirect alla pagina /search
+  window.location.href = "/search.html";
+});
