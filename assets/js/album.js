@@ -136,18 +136,23 @@ if (URL) {
               } else {
                 audio.play();
                 barraVolume.disabled = false;
+                currentIndex += index; // Aggiorna currentIndex
                 timeSong.innerHTML = formatDuration(album[i].duration);
                 pause.classList.add("d-none");
+                songTitle.classList.remove("text-white");
+                songTitle.classList.add("text-success");
               }
             } else {
               audio.src = previewUrl;
               audio.play();
               currentAudio = previewUrl;
-              currentIndex = index; // Aggiorna currentIndex
+              currentIndex += index; // Aggiorna currentIndex
               barraVolume.disabled = false;
               timeSong.innerHTML = formatDuration(album[i].duration);
               start.classList.add("d-none");
               pause.classList.remove("d-none");
+              songTitle.classList.remove("text-white");
+              songTitle.classList.add("text-success");
             }
           }
           //Funzione per il tasto play
@@ -263,6 +268,7 @@ if (URL) {
           start.addEventListener("click", () => {
             if (album.length > 0) {
               //parte dalla prima
+
               playSong(album[0].preview);
               imgSong(album[0].album.cover_small);
               like.classList.remove("d-none");
