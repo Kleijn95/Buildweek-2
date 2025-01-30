@@ -31,5 +31,13 @@
 }
 
 @media screen and (max-width: 769px) {
-  background-color: ;
+  .bg-CardMobile {
+    background-color: #242424;
+  }
+  .playMobile {
+    padding-top: 5px;
+    padding-inline: 6px;
+    background-color: #1b1b1b;
+    border-radius: 50%;
+  }
 }

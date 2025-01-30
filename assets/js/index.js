@@ -1,13 +1,16 @@
+mediaQuery();
+
 function mediaQuery() {
   if (mediaQueryMd.matches) {
     bannerHide();
     carosello();
   } else {
-    altroChePiace();
+    playlistCard2();
   }
 }
-
+altroChePiace();
 playlistCard();
+
 function playlistCard() {
   setTimeout(() => {
     let playlists = JSON.parse(sessionStorage.getItem("playlists"));
@@ -22,14 +25,14 @@ function playlistCard() {
       const card = document.createElement("div");
       card.classList.add("col-6", "col-md-4");
       const innerCard = document.createElement("div");
-      innerCard.classList.add("card", "d-flex", "mb-3", "bg-card", "overflow-hidden");
+      innerCard.classList.add("card", "d-flex", "mb-3", "bg-card", "overflow-hidden", "flex-nowrap");
       innerCard.addEventListener("click", function () {
         window.location.assign(`./album.html?playlistId=${playlistId.id}`);
       });
       const cardRow = document.createElement("div");
-      cardRow.classList.add("row", "g-0");
+      cardRow.classList.add("row", "g-0", "flex-nowrap");
       const containerBig = document.createElement("div");
-      containerBig.classList.add("col-md-4", "w-25");
+      containerBig.classList.add("col-md-4", "w-25", "h-100");
       const imgContainer = document.createElement("div");
       imgContainer.classList.add("d-flex", "flex-wrap", "h-100");
       imgContainer.style.cursor = "pointer";
@@ -64,7 +67,7 @@ function playlistCard() {
       const cardBody = document.createElement("div");
       cardBody.classList.add("card-body");
       const cardTitle = document.createElement("h5");
-      cardTitle.classList.add("card-title", "text-white", "text-truncate-multiline");
+      cardTitle.classList.add("card-title", "text-white", "text-truncate-multiline", "titleCard");
       cardTitle.innerText = playlistId.title;
       mainRow.appendChild(card);
       card.appendChild(innerCard);
@@ -82,6 +85,109 @@ function playlistCard() {
       // outerCardBody.addEventListener("click", function () {
       //   window.location.assign(`./album.html?albumId=${albums.picture_xl}`);
       // });
+    });
+  }, 500);
+}
+
+function playlistCard2() {
+  setTimeout(() => {
+    let playlists = JSON.parse(sessionStorage.getItem("playlists"));
+    let cardCount2 = 0;
+    let maxCards2 = 3;
+
+    playlists.reverse().forEach((playlistId) => {
+      if (cardCount2 >= maxCards2) return;
+      const arrayAlbums = playlistId.tracks.data;
+
+      const card = document.createElement("div");
+      card.classList.add("card", "mb-3", "p-3", "bg-CardMobile");
+      const row = document.createElement("div");
+      row.classList.add("row", "g-0", "flex-nowrap");
+
+      const containerBig = document.createElement("div");
+      containerBig.classList.add("col-md-4", "w-25");
+      const imgContainer = document.createElement("div");
+      imgContainer.classList.add("d-flex", "flex-wrap", "w-50");
+      imgContainer.style.cursor = "pointer";
+
+      const img1 = document.createElement("img");
+      img1.classList.add("img-fluid", "w-50", "p-0");
+      img1.alt = `img1 alt`;
+      img1.src = playlistId.picture_xl;
+      const img2 = document.createElement("img");
+
+      img2.classList.add("img-fluid", "w-50", "p-0");
+      img2.alt = `img2 alt`;
+      img2.src = "";
+      const img3 = document.createElement("img");
+      img3.classList.add("img-fluid", "w-50", "p-0");
+      img3.alt = `img3 alt`;
+      img3.src = "./assets/imgs/main/image-10.jpg";
+      const img4 = document.createElement("img");
+      img4.classList.add("img-fluid", "w-50", "p-0");
+      img4.alt = `img4 alt`;
+      img4.src = "./assets/imgs/main/image-10.jpg";
+      for (let index = 0; index < arrayAlbums.length; index++) {
+        img1.src = arrayAlbums[0].album.cover_xl;
+        img2.src = arrayAlbums[1].album.cover_xl;
+        img3.src = arrayAlbums[2].album.cover_xl;
+        img4.src = arrayAlbums[3].album.cover_xl;
+      }
+
+      const colText = document.createElement("div");
+      colText.classList.add("col-md-8");
+
+      const cardBody = document.createElement("div");
+      cardBody.classList.add("card-body", "py-0");
+
+      const cardText = document.createElement("p");
+      cardText.classList.add("card-text", "text-gray");
+      cardText.innerText = "Playlist";
+
+      const cardTitle = document.createElement("h5");
+      cardTitle.classList.add("card-title", "text-white", "fs-2");
+      cardTitle.innerText = playlistId.title;
+
+      cardBody.append(cardText, cardTitle);
+      colText.appendChild(cardBody);
+
+      const actionRow = document.createElement("div");
+      actionRow.classList.add("d-flex", "justify-content-between", "mt-2");
+
+      const leftActions = document.createElement("div");
+      leftActions.classList.add("d-flex", "gap-3", "algin-items-center", "pt-1");
+
+      const heartIcon = document.createElement("i");
+      heartIcon.classList.add("bi", "bi-heart", "fs-1", "text-success");
+
+      const dotsIcon = document.createElement("i");
+      dotsIcon.classList.add("bi", "bi-three-dots-vertical", "fs-1", "text-white", "ms-4");
+
+      leftActions.append(heartIcon, dotsIcon);
+
+      const rightActions = document.createElement("div");
+      rightActions.classList.add("d-flex", "gap-2", "align-items-center");
+
+      const numTracks = document.createElement("p");
+      numTracks.classList.add("text-gray", "mb-0");
+      numTracks.innerText = `${playlistId.nb_tracks} brani`;
+
+      const playIcon = document.createElement("i");
+      playIcon.classList.add("bi", "bi-play-fill", "fs-1", "text-white", "playMobile");
+
+      rightActions.append(numTracks, playIcon);
+
+      // Costruzione della card
+      imgContainer.appendChild(img1);
+      imgContainer.appendChild(img2);
+      imgContainer.appendChild(img3);
+      imgContainer.appendChild(img4);
+
+      actionRow.append(leftActions, rightActions);
+      row.append(imgContainer, colText);
+      card.append(row, actionRow);
+      let box2 = document.querySelector(".box2");
+      box2.appendChild(card);
     });
   }, 500);
 }
@@ -127,7 +233,7 @@ function altroChePiace() {
         const cardAlbum = document.createElement("div");
         cardAlbum.classList.add(
           "card",
-          "col-4",
+          "col-5",
           "col-md-3",
           "col-lg-2",
           "me-md-0",
