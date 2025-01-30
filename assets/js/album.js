@@ -19,8 +19,8 @@ let currentImg = null;
 let titlePlayer = document.querySelector(".titolo");
 let artistPlayer = document.querySelector(".artista");
 
-currentTitlePlayer = null;
-currentArtistPlayer = null;
+let currentTitlePlayer = null;
+let currentArtistPlayer = null;
 
 let player = document.querySelector(".playerSong");
 
@@ -93,7 +93,7 @@ if (URL) {
         const album = data.tracks.data || [];
         console.log(album);
 
-        for (i = 0; i < album.length; i++) {
+        for (let i = 0; i < album.length; i++) {
           /* console.log(album[i].album.title); */
           // iterare la playlist o l'album
           const songsContainer = document.getElementById("songsContainer");
@@ -330,38 +330,3 @@ if (URL) {
     })
     .catch((error) => console.error(error));
 }
-
-let aside = document.querySelector("aside");
-let closeAside = document.querySelector(".closeAside");
-let showAside = document.querySelector(".showAside");
-
-closeAside.addEventListener("click", () => {
-  aside.classList.add("d-none");
-});
-
-showAside.addEventListener("click", () => {
-  if (aside.classList.contains("d-none")) {
-    aside.classList.remove("d-none");
-  } else {
-    aside.classList.add("d-none");
-  }
-});
-
-let playlists = JSON.parse(sessionStorage.getItem("playlists"));
-
-console.log(playlists);
-
-playlists.forEach((playlistId) => {
-  let placeholderPlaylist = document.querySelector(".playlists");
-
-  let pPlaylist = document.createElement("p");
-  pPlaylist.style.cursor = "pointer";
-  pPlaylist.innerText = playlistId.title;
-
-  // Aggiunge l'evento click solo a questo <p>
-  pPlaylist.addEventListener("click", function () {
-    window.location.assign(`./album.html?playlistId=${playlistId.id}`);
-  });
-
-  placeholderPlaylist.appendChild(pPlaylist);
-});
