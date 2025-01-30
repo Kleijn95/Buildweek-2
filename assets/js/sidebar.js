@@ -1,5 +1,5 @@
 createHeader();
-playlistNav();
+/* playlistNav(); */
 createAside();
 toggleAside();
 
