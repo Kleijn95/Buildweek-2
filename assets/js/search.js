@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
             picture.crossOrigin = "Anonymous";
             const colorThief = new ColorThief();
             const cardBody = document.createElement("div");
-            cardBody.classList.add("card-body");
+            cardBody.classList.add("card-body", "d-flex", "flex-column");
 
             const title = document.createElement("h5");
             title.classList.add("card-title", "text-light");
