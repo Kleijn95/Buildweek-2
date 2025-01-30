@@ -38,6 +38,8 @@ let currentArtistPlayer = null;
 
 let player = document.querySelector(".playerSong");
 
+let logo = document.querySelector(".spotify");
+
 let like = document.querySelector(".like");
 let dislike = document.querySelector(".dislike");
 let volume = document.querySelector(".volume");
@@ -118,10 +120,8 @@ if (URL) {
           }
           //Funzione per il tasto play
           function playSong2(previewUrl) {
-            if (currentAudio === previewUrl) {
-              if (!audio.paused) {
-                audio.pause();
-              }
+            if (!audio.paused) {
+              audio.pause();
             }
           }
           //Funzione per l'immagine nella playbar
@@ -156,11 +156,12 @@ if (URL) {
           songTitle.addEventListener("click", () => {
             playSong(preview);
             imgSong(imgCanz);
-            like.classList.add("d-none");
+            like.classList.remove("d-none");
             titleSong(titolo);
             artista(nomeArtista);
             pause.classList.remove("d-none");
           });
+
           //Eventi della playbar
           start.addEventListener("click", () => {
             playSong(preview);
@@ -168,13 +169,13 @@ if (URL) {
             like.classList.remove("d-none");
             titleSong(titolo);
             artista(nomeArtista);
-            // pause.classList.remove("d-none");
-            // start.classList.add("d-none");
+            pause.classList.remove("d-none");
+            start.classList.add("d-none");
           });
           pause.addEventListener("click", () => {
             playSong2(preview);
-            ///start.classList.remove("d-none");
-            //pause.classList.add("d-none");
+            start.classList.remove("d-none");
+            pause.classList.add("d-none");
           });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
