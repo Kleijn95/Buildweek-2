@@ -51,6 +51,11 @@ let timeSong = document.querySelector(".timeSong");
 let start = document.querySelector(".start");
 let pause = document.querySelector(".pausa");
 
+let back = document.querySelector(".back");
+let next = document.querySelector(".next");
+
+let currentSong = [];
+
 like.addEventListener("click", () => {
   like.classList.add("d-none");
   dislike.classList.remove("d-none");
@@ -112,6 +117,9 @@ if (URL) {
           const preview = album[i].preview;
           const titolo = album[i].title;
           const nomeArtista = album[i].artist.name;
+          let timePlay = formatDuration(album[i].duration);
+
+          currentSong.push(preview);
 
           songTitle.style.cursor = "pointer";
           //Funzione per far partire le canzoni
@@ -187,6 +195,51 @@ if (URL) {
               barraVolume.max = "10";
             }
           }
+          let currentIndex = 0;
+
+          function nextSong() {
+            if (currentIndex < album.length - 1) {
+              currentIndex++; // Va alla traccia successiva
+            } else {
+              currentIndex = 0;
+            }
+
+            currentAudio = album[currentIndex].preview;
+            playSong(currentAudio);
+            imgSong(album[currentIndex].album.cover_small);
+            titleSong(album[currentIndex].title);
+            artista(album[currentIndex].artist.name);
+
+            let newAudio = album[currentIndex].preview;
+            audio.src = newAudio;
+            audio.play();
+
+            start.classList.add("d-none");
+            pause.classList.remove("d-none");
+          }
+
+          let backCurrentIndex = 0;
+
+          function backSong() {
+            if (backCurrentIndex < album.length) {
+              backCurrentIndex++; // Va alla traccia precedente
+            } else {
+              currentIndex = 0;
+            }
+
+            currentAudio = album[backCurrentIndex].preview;
+            playSong(currentAudio);
+            imgSong(album[backCurrentIndex].album.cover_small);
+            titleSong(album[backCurrentIndex].title);
+            artista(album[backCurrentIndex].artist.name);
+
+            let newAudio = album[backCurrentIndex].preview;
+            audio.src = newAudio;
+            audio.play();
+
+            start.classList.add("d-none");
+            pause.classList.remove("d-none");
+          }
 
           //Evento che chiama la funzione per far partire le canzoni
           songTitle.addEventListener("click", () => {
@@ -196,17 +249,22 @@ if (URL) {
             titleSong(titolo);
             artista(nomeArtista);
             pause.classList.remove("d-none");
+            console.log(currentSong);
           });
 
           //Eventi della playbar
+
           start.addEventListener("click", () => {
-            playSong(album[i].preview);
-            imgSong(imgCanz);
-            like.classList.remove("d-none");
-            titleSong(titolo);
-            artista(nomeArtista);
-            pause.classList.remove("d-none");
-            start.classList.add("d-none");
+            if (album.length > 0) {
+              //parte dalla prima
+              playSong(album[0].preview);
+              imgSong(album[0].album.cover_small);
+              like.classList.remove("d-none");
+              titleSong(album[0].title);
+              artista(album[0].artist.name);
+              pause.classList.remove("d-none");
+              start.classList.add("d-none");
+            }
           });
           pause.addEventListener("click", () => {
             playSong2(preview);
@@ -218,6 +276,16 @@ if (URL) {
           });
           noVolume.addEventListener("click", () => {
             vol();
+          });
+          next.addEventListener("click", () => {
+            nextSong();
+
+            //console.log(currentSong);
+            //console.log(currentAudio);
+          });
+
+          back.addEventListener("click", () => {
+            backSong();
           });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
