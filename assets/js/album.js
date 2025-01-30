@@ -19,8 +19,8 @@ let currentImg = null;
 let titlePlayer = document.querySelector(".titolo");
 let artistPlayer = document.querySelector(".artista");
 
-currentTitlePlayer = null;
-currentArtistPlayer = null;
+let currentTitlePlayer = null;
+let currentArtistPlayer = null;
 
 let player = document.querySelector(".playerSong");
 
@@ -53,7 +53,8 @@ noVolume.addEventListener("click", () => {
 });
 
 const arrayPlaylist = [
-  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064, 1313621735, 1116187241, 733113466,
+  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
+  1313621735, 1116187241, 733113466,
 ];
 const params = new URLSearchParams(window.location.search);
 const albumId = params.get("albumId");
@@ -92,7 +93,7 @@ if (URL) {
         const album = data.tracks.data || [];
         console.log(album);
 
-        for (i = 0; i < album.length; i++) {
+        for (let i = 0; i < album.length; i++) {
           /* console.log(album[i].album.title); */
           // iterare la playlist o l'album
           const songsContainer = document.getElementById("songsContainer");
@@ -213,6 +214,28 @@ if (URL) {
           albumImg.src = album[0].album.cover_big;
           artistName.innerText = album[0].artist.name;
           songName.innerText = album[0].album.title;
+          albumImg.crossOrigin = "Anonymous";
+
+          const colorThief = new ColorThief();
+
+          // Quando l'immagine è caricata, estrai il colore dominante
+          albumImg.onload = () => {
+            // Estrai il colore dominante
+            const dominantColor = colorThief.getColor(albumImg); // Passa l'elemento immagine, non l'URL
+            console.log(dominantColor);
+            const darkColor = dominantColor.map((c) => Math.max(c - 50, 0)); // Riduce la luminosità di 50
+
+            // Crea un gradiente che va dal colore dominante al colore più scuro
+            const gradient = `linear-gradient(to bottom, rgb(${dominantColor.join(",")}), rgb(${darkColor.join(",")}))`;
+
+            // Imposta il gradiente come sfondo
+            document.querySelector("main").style.background = gradient;
+          };
+
+          // Gestisci l'errore nel caso l'immagine non si carichi
+          albumImg.onerror = () => {
+            console.error("Immagine non caricata correttamente.");
+          };
 
           document.querySelector(".artistPic").src = data.artist.picture;
           document.querySelector(".artistPic").alt = data.artist.name;
@@ -267,6 +290,29 @@ if (URL) {
           artistName.innerText = data.creator.name;
           songName.innerText = data.title;
 
+          albumImg.crossOrigin = "Anonymous";
+
+          const colorThief = new ColorThief();
+
+          // Quando l'immagine è caricata, estrai il colore dominante
+          albumImg.onload = () => {
+            // Estrai il colore dominante
+            const dominantColor = colorThief.getColor(albumImg); // Passa l'elemento immagine, non l'URL
+            console.log(dominantColor);
+            const darkColor = dominantColor.map((c) => Math.max(c - 50, 0)); // Riduce la luminosità di 50
+
+            // Crea un gradiente che va dal colore dominante al colore più scuro
+            const gradient = `linear-gradient(to bottom, rgb(${dominantColor.join(",")}), rgb(${darkColor.join(",")}))`;
+
+            // Imposta il gradiente come sfondo
+            document.querySelector("main").style.background = gradient;
+          };
+
+          // Gestisci l'errore nel caso l'immagine non si carichi
+          albumImg.onerror = () => {
+            console.error("Immagine non caricata correttamente.");
+          };
+
           document.querySelector(".artistPic").src = data.picture_xl;
           document.querySelector(".artistPic").alt = data.creator.name;
           document.querySelector(".tracks").innerText = i + 1 + " brani";
@@ -283,38 +329,3 @@ if (URL) {
     })
     .catch((error) => console.error(error));
 }
-
-let aside = document.querySelector("aside");
-let closeAside = document.querySelector(".closeAside");
-let showAside = document.querySelector(".showAside");
-
-closeAside.addEventListener("click", () => {
-  aside.classList.add("d-none");
-});
-
-showAside.addEventListener("click", () => {
-  if (aside.classList.contains("d-none")) {
-    aside.classList.remove("d-none");
-  } else {
-    aside.classList.add("d-none");
-  }
-});
-
-let playlists = JSON.parse(sessionStorage.getItem("playlists"));
-
-console.log(playlists);
-
-playlists.forEach((playlistId) => {
-  let placeholderPlaylist = document.querySelector(".playlists");
-
-  let pPlaylist = document.createElement("p");
-  pPlaylist.style.cursor = "pointer";
-  pPlaylist.innerText = playlistId.title;
-
-  // Aggiunge l'evento click solo a questo <p>
-  pPlaylist.addEventListener("click", function () {
-    window.location.assign(`./album.html?playlistId=${playlistId.id}`);
-  });
-
-  placeholderPlaylist.appendChild(pPlaylist);
-});
