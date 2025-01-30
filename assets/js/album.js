@@ -51,6 +51,9 @@ let timeSong = document.querySelector(".timeSong");
 let start = document.querySelector(".start");
 let pause = document.querySelector(".pausa");
 
+let back = document.querySelector(".back");
+let next = document.querySelector(".next");
+
 like.addEventListener("click", () => {
   like.classList.add("d-none");
   dislike.classList.remove("d-none");
@@ -120,6 +123,7 @@ if (URL) {
           const preview = album[i].preview;
           const titolo = album[i].title;
           const nomeArtista = album[i].artist.name;
+          let timePlay = formatDuration(album[i].duration);
 
           songTitle.style.cursor = "pointer";
           //Funzione per far partire le canzoni
@@ -195,6 +199,52 @@ if (URL) {
               barraVolume.max = "10";
             }
           }
+          let currentIndex = 0;
+
+          function nextSong() {
+            if (currentIndex < album.length - 1) {
+              currentIndex++; // Va alla traccia successiva
+            } else {
+              currentIndex = 0;
+            }
+
+            currentAudio = album[currentIndex].preview;
+            playSong(currentAudio);
+            imgSong(album[currentIndex].album.cover_small);
+            titleSong(album[currentIndex].title);
+            artista(album[currentIndex].artist.name);
+
+            let newAudio = album[currentIndex].preview;
+            audio.src = newAudio;
+            audio.play();
+
+            start.classList.add("d-none");
+            pause.classList.remove("d-none");
+          }
+
+          console.log(currentAudio);
+          let backCurrentIndex = currentAudio;
+
+          function backSong() {
+            if (backCurrentIndex < album.length - 1) {
+              backCurrentIndex--; // Va alla traccia precedente
+            } else {
+              backCurrentIndex = 0;
+            }
+
+            currentAudio = album[backCurrentIndex].preview;
+            playSong(currentAudio);
+            imgSong(album[backCurrentIndex].album.cover_small);
+            titleSong(album[backCurrentIndex].title);
+            artista(album[backCurrentIndex].artist.name);
+
+            let newAudio = album[backCurrentIndex].preview;
+            audio.src = newAudio;
+            audio.play();
+
+            start.classList.add("d-none");
+            pause.classList.remove("d-none");
+          }
 
           //Evento che chiama la funzione per far partire le canzoni
           songTitle.addEventListener("click", () => {
@@ -207,14 +257,18 @@ if (URL) {
           });
 
           //Eventi della playbar
+
           start.addEventListener("click", () => {
-            playSong(album[i].preview);
-            imgSong(imgCanz);
-            like.classList.remove("d-none");
-            titleSong(titolo);
-            artista(nomeArtista);
-            pause.classList.remove("d-none");
-            start.classList.add("d-none");
+            if (album.length > 0) {
+              //parte dalla prima
+              playSong(album[0].preview);
+              imgSong(album[0].album.cover_small);
+              like.classList.remove("d-none");
+              titleSong(album[0].title);
+              artista(album[0].artist.name);
+              pause.classList.remove("d-none");
+              start.classList.add("d-none");
+            }
           });
           pause.addEventListener("click", () => {
             playSong2(preview);
@@ -226,6 +280,15 @@ if (URL) {
           });
           noVolume.addEventListener("click", () => {
             vol();
+          });
+          next.addEventListener("click", () => {
+            nextSong();
+
+            //console.log(currentAudio);
+          });
+
+          back.addEventListener("click", () => {
+            backSong();
           });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
@@ -283,7 +346,7 @@ if (URL) {
         }
       } else if (playlistId) {
         const playlist = data.tracks.data;
-        console.log(data);
+        console.log(playlist);
         for (i = 0; i < playlist.length; i++) {
           /* console.log(playlist[i].album.title); */
           // iterare la playlist o l'album
@@ -298,7 +361,7 @@ if (URL) {
           const titleContainer = document.createElement("div");
           titleContainer.classList.add("col-7", "mb-3");
           const songTitle = document.createElement("h3");
-
+          console.log(playlist[i].artist.id);
           songTitle.classList.add("text-white", "mb-0");
           songTitle.innerText = playlist[i].title;
           const artist = document.createElement("a");
