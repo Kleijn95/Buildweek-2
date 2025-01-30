@@ -6,6 +6,20 @@ function formatDuration(seconds) {
   // Formatta i secondi per avere 2 cifre (es. "05" invece di "5")
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
+
+const arrayPlaylist = [
+  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
+  1313621735, 1116187241, 733113466,
+];
+const params = new URLSearchParams(window.location.search);
+const albumId = params.get("albumId");
+const playlistId = params.get("playlistId");
+
+let URL;
+let headers = {
+  "Content-Type": "application/json",
+};
+
 //Variabile per l'audio
 let audio = document.createElement("audio");
 //Variabile che si aggiorna se un audio è in riproduzione
@@ -24,8 +38,6 @@ let currentArtistPlayer = null;
 
 let player = document.querySelector(".playerSong");
 
-let logo = document.querySelector(".spotify");
-
 let like = document.querySelector(".like");
 let dislike = document.querySelector(".dislike");
 let volume = document.querySelector(".volume");
@@ -33,37 +45,6 @@ let noVolume = document.querySelector(".noVolume");
 
 let start = document.querySelector(".start");
 let pause = document.querySelector(".pausa");
-
-like.addEventListener("click", () => {
-  like.classList.add("d-none");
-  dislike.classList.remove("d-none");
-});
-dislike.addEventListener("click", () => {
-  like.classList.remove("d-none");
-  dislike.classList.add("d-none");
-});
-
-volume.addEventListener("click", () => {
-  volume.classList.add("d-none");
-  noVolume.classList.remove("d-none");
-});
-noVolume.addEventListener("click", () => {
-  volume.classList.remove("d-none");
-  noVolume.classList.add("d-none");
-});
-
-const arrayPlaylist = [
-  8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
-  1313621735, 1116187241, 733113466,
-];
-const params = new URLSearchParams(window.location.search);
-const albumId = params.get("albumId");
-const playlistId = params.get("playlistId");
-
-let URL;
-let headers = {
-  "Content-Type": "application/json",
-};
 
 if (playlistId) {
   URL = "https://deezerdevs-deezer.p.rapidapi.com/playlist/" + playlistId;
@@ -175,7 +156,7 @@ if (URL) {
           songTitle.addEventListener("click", () => {
             playSong(preview);
             imgSong(imgCanz);
-            like.classList.remove("d-none");
+            like.classList.add("d-none");
             titleSong(titolo);
             artista(nomeArtista);
             pause.classList.remove("d-none");
@@ -187,13 +168,13 @@ if (URL) {
             like.classList.remove("d-none");
             titleSong(titolo);
             artista(nomeArtista);
-            pause.classList.remove("d-none");
-            start.classList.add("d-none");
+            // pause.classList.remove("d-none");
+            // start.classList.add("d-none");
           });
           pause.addEventListener("click", () => {
             playSong2(preview);
-            start.classList.remove("d-none");
-            pause.classList.add("d-none");
+            ///start.classList.remove("d-none");
+            //pause.classList.add("d-none");
           });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
