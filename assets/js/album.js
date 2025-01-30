@@ -6,51 +6,6 @@ function formatDuration(seconds) {
   // Formatta i secondi per avere 2 cifre (es. "05" invece di "5")
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
-//Variabile per l'audio
-let audio = document.createElement("audio");
-//Variabile che si aggiorna se un audio è in riproduzione
-let currentAudio = null;
-
-//Variabile per imgPlayer
-let imgPlayer = document.createElement("img");
-//Variabile che tine conto dell'immagine nel player
-let currentImg = null;
-
-let titlePlayer = document.querySelector(".titolo");
-let artistPlayer = document.querySelector(".artista");
-
-currentTitlePlayer = null;
-currentArtistPlayer = null;
-
-let player = document.querySelector(".playerSong");
-
-let logo = document.querySelector(".spotify");
-
-let like = document.querySelector(".like");
-let dislike = document.querySelector(".dislike");
-let volume = document.querySelector(".volume");
-let noVolume = document.querySelector(".noVolume");
-
-let start = document.querySelector(".start");
-let pause = document.querySelector(".pausa");
-
-like.addEventListener("click", () => {
-  like.classList.add("d-none");
-  dislike.classList.remove("d-none");
-});
-dislike.addEventListener("click", () => {
-  like.classList.remove("d-none");
-  dislike.classList.add("d-none");
-});
-
-volume.addEventListener("click", () => {
-  volume.classList.add("d-none");
-  noVolume.classList.remove("d-none");
-});
-noVolume.addEventListener("click", () => {
-  volume.classList.remove("d-none");
-  noVolume.classList.add("d-none");
-});
 
 const arrayPlaylist = [
   8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
@@ -64,6 +19,49 @@ let URL;
 let headers = {
   "Content-Type": "application/json",
 };
+
+//Variabile per l'audio
+let audio = document.createElement("audio");
+//Variabile che si aggiorna se un audio è in riproduzione
+let currentAudio = null;
+
+//Variabile per imgPlayer
+let imgPlayer = document.createElement("img");
+//Variabile che tine conto dell'immagine nel player
+let currentImg = null;
+
+let titlePlayer = document.querySelector(".titolo");
+let artistPlayer = document.querySelector(".artista");
+
+let currentTitlePlayer = null;
+let currentArtistPlayer = null;
+
+let player = document.querySelector(".playerSong");
+
+let logo = document.querySelector(".spotify");
+
+let like = document.querySelector(".like");
+let dislike = document.querySelector(".dislike");
+let volume = document.querySelector(".volume");
+let noVolume = document.querySelector(".noVolume");
+
+let barraVolume = document.querySelector(".barraVolume");
+let timeSong = document.querySelector(".timeSong");
+
+let start = document.querySelector(".start");
+let pause = document.querySelector(".pausa");
+
+let back = document.querySelector(".back");
+let next = document.querySelector(".next");
+
+like.addEventListener("click", () => {
+  like.classList.add("d-none");
+  dislike.classList.remove("d-none");
+});
+dislike.addEventListener("click", () => {
+  like.classList.remove("d-none");
+  dislike.classList.add("d-none");
+});
 
 if (playlistId) {
   URL = "https://deezerdevs-deezer.p.rapidapi.com/playlist/" + playlistId;
@@ -93,7 +91,7 @@ if (URL) {
         const album = data.tracks.data || [];
         console.log(album);
 
-        for (i = 0; i < album.length; i++) {
+        for (let i = 0; i < album.length; i++) {
           /* console.log(album[i].album.title); */
           // iterare la playlist o l'album
           const songsContainer = document.getElementById("songsContainer");
@@ -109,14 +107,23 @@ if (URL) {
           const songTitle = document.createElement("h3");
           songTitle.classList.add("text-white", "mb-0");
           songTitle.innerText = album[i].title;
+          songTitle.style.cursor = "pointer";
+          songTitle.setAttribute("data-bs-toggle", "tooltip");
+          songTitle.setAttribute("data-bs-placement", "left");
+          songTitle.setAttribute("title", "Play song");
+          var tooltip = new bootstrap.Tooltip(songTitle);
           const artist = document.createElement("a");
-
-          console.log(album[i].album.cover_small);
+          artist.setAttribute("data-bs-toggle", "tooltip");
+          artist.setAttribute("data-bs-placement", "right");
+          artist.setAttribute("title", "Vai alla pagina artista");
+          var tooltip = new bootstrap.Tooltip(artist);
+          console.log(album[i].preview);
           const imgCanz = album[i].album.cover_small;
           songTitle.style.cursor = "pointer";
           const preview = album[i].preview;
           const titolo = album[i].title;
           const nomeArtista = album[i].artist.name;
+          let timePlay = formatDuration(album[i].duration);
 
           songTitle.style.cursor = "pointer";
           //Funzione per far partire le canzoni
@@ -126,21 +133,24 @@ if (URL) {
                 audio.pause();
               } else {
                 audio.play();
+                barraVolume.disabled = false;
+                timeSong.innerHTML = formatDuration(album[i].duration);
                 pause.classList.add("d-none");
               }
             } else {
               audio.src = previewUrl;
               audio.play();
               currentAudio = previewUrl;
+              barraVolume.disabled = false;
+              timeSong.innerHTML = formatDuration(album[i].duration);
               start.classList.add("d-none");
             }
           }
           //Funzione per il tasto play
           function playSong2(previewUrl) {
-            if (currentAudio === previewUrl) {
-              if (!audio.paused) {
-                audio.pause();
-              }
+            if (!audio.paused) {
+              audio.pause();
+              barraVolume.disabled = false;
             }
           }
           //Funzione per l'immagine nella playbar
@@ -170,7 +180,72 @@ if (URL) {
               artistPlayer.innerHTML = artista;
             }
           }
-          console.log(preview);
+
+          function noVol() {
+            if (!audio.paused) {
+              volume.classList.add("d-none");
+              noVolume.classList.remove("d-none");
+              audio.muted = true;
+              barraVolume.max = "";
+              barraVolume.disabled = true;
+            }
+          }
+          function vol() {
+            if (!audio.paused) {
+              volume.classList.remove("d-none");
+              noVolume.classList.add("d-none");
+              audio.muted = false;
+              barraVolume.disabled = false;
+              barraVolume.max = "10";
+            }
+          }
+          let currentIndex = 0;
+
+          function nextSong() {
+            if (currentIndex < album.length - 1) {
+              currentIndex++; // Va alla traccia successiva
+            } else {
+              currentIndex = 0;
+            }
+
+            currentAudio = album[currentIndex].preview;
+            playSong(currentAudio);
+            imgSong(album[currentIndex].album.cover_small);
+            titleSong(album[currentIndex].title);
+            artista(album[currentIndex].artist.name);
+
+            let newAudio = album[currentIndex].preview;
+            audio.src = newAudio;
+            audio.play();
+
+            start.classList.add("d-none");
+            pause.classList.remove("d-none");
+          }
+
+          console.log(currentAudio);
+          let backCurrentIndex = currentAudio;
+
+          function backSong() {
+            if (backCurrentIndex < album.length - 1) {
+              backCurrentIndex--; // Va alla traccia precedente
+            } else {
+              backCurrentIndex = 0;
+            }
+
+            currentAudio = album[backCurrentIndex].preview;
+            playSong(currentAudio);
+            imgSong(album[backCurrentIndex].album.cover_small);
+            titleSong(album[backCurrentIndex].title);
+            artista(album[backCurrentIndex].artist.name);
+
+            let newAudio = album[backCurrentIndex].preview;
+            audio.src = newAudio;
+            audio.play();
+
+            start.classList.add("d-none");
+            pause.classList.remove("d-none");
+          }
+
           //Evento che chiama la funzione per far partire le canzoni
           songTitle.addEventListener("click", () => {
             playSong(preview);
@@ -181,20 +256,40 @@ if (URL) {
             artista(nomeArtista);
             pause.classList.remove("d-none");
           });
+
           //Eventi della playbar
+
           start.addEventListener("click", () => {
-            playSong(preview);
-            imgSong(imgCanz);
-            like.classList.remove("d-none");
-            titleSong(titolo);
-            artista(nomeArtista);
-            pause.classList.remove("d-none");
-            start.classList.add("d-none");
+            if (album.length > 0) {
+              //parte dalla prima
+              playSong(album[0].preview);
+              imgSong(album[0].album.cover_small);
+              like.classList.remove("d-none");
+              titleSong(album[0].title);
+              artista(album[0].artist.name);
+              pause.classList.remove("d-none");
+              start.classList.add("d-none");
+            }
           });
           pause.addEventListener("click", () => {
             playSong2(preview);
             start.classList.remove("d-none");
             pause.classList.add("d-none");
+          });
+          volume.addEventListener("click", () => {
+            noVol();
+          });
+          noVolume.addEventListener("click", () => {
+            vol();
+          });
+          next.addEventListener("click", () => {
+            nextSong();
+
+            //console.log(currentAudio);
+          });
+
+          back.addEventListener("click", () => {
+            backSong();
           });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
@@ -252,7 +347,7 @@ if (URL) {
         }
       } else if (playlistId) {
         const playlist = data.tracks.data;
-        console.log(data);
+        console.log(playlist);
         for (i = 0; i < playlist.length; i++) {
           /* console.log(playlist[i].album.title); */
           // iterare la playlist o l'album
@@ -267,6 +362,7 @@ if (URL) {
           const titleContainer = document.createElement("div");
           titleContainer.classList.add("col-7", "mb-3");
           const songTitle = document.createElement("h3");
+          console.log(playlist[i].artist.id);
           songTitle.classList.add("text-white", "mb-0");
           songTitle.innerText = playlist[i].title;
           const artist = document.createElement("a");
@@ -330,38 +426,3 @@ if (URL) {
     })
     .catch((error) => console.error(error));
 }
-
-let aside = document.querySelector("aside");
-let closeAside = document.querySelector(".closeAside");
-let showAside = document.querySelector(".showAside");
-
-closeAside.addEventListener("click", () => {
-  aside.classList.add("d-none");
-});
-
-showAside.addEventListener("click", () => {
-  if (aside.classList.contains("d-none")) {
-    aside.classList.remove("d-none");
-  } else {
-    aside.classList.add("d-none");
-  }
-});
-
-let playlists = JSON.parse(sessionStorage.getItem("playlists"));
-
-console.log(playlists);
-
-playlists.forEach((playlistId) => {
-  let placeholderPlaylist = document.querySelector(".playlists");
-
-  let pPlaylist = document.createElement("p");
-  pPlaylist.style.cursor = "pointer";
-  pPlaylist.innerText = playlistId.title;
-
-  // Aggiunge l'evento click solo a questo <p>
-  pPlaylist.addEventListener("click", function () {
-    window.location.assign(`./album.html?playlistId=${playlistId.id}`);
-  });
-
-  placeholderPlaylist.appendChild(pPlaylist);
-});
