@@ -155,7 +155,7 @@ function playSong(songData) {
     audio.src = songData.preview;
     audio.play();
     currentAudio = songData.preview;
-    currentIndex = songData.index; // Aggiorna currentIndex
+    currentIndex += songData.index; // Aggiorna currentIndex
     barraVolume.disabled = false;
     timeSong.innerHTML = formatDuration(songData.duration);
     start.classList.add("d-none");

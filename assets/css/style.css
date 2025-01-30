@@ -149,6 +149,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   .title {
     font-size: 17px;
     display: -webkit-box;
