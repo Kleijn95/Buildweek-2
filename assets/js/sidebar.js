@@ -173,61 +173,26 @@ function createHeader() {
   sidebar.append(nav, hr, playlistContainer);
   header.appendChild(sidebar);
 }
+
 function playlistNav() {
-  //FETCH////////////////////////////////////////////////////////////////
-  const arrayPlaylist = [
-    8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
-    1313621735, 1116187241, 733113466,
-  ];
-  let playlists = JSON.parse(sessionStorage.getItem("playlists")) || [];
-
-  let fetchCount = 0;
-
-  // ciclo per popolare asidebar sinistra delle playlist. L'array playlist è chiamato in cima (reminder!! ho dato display none ai placeholder)
-  arrayPlaylist.forEach((playlistId) => {
-    fetch(`https://deezerdevs-deezer.p.rapidapi.com/playlist/${playlistId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "x-rapidapi-key": "ad4ebc50e8msh21d6de872e740a5p1740a2jsn2f44656a84db",
-        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-      },
+  fetch("./assets/js/playlists.json")
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.json();
+      } else {
+        throw new Error("Impossibile recuperare gli album. Riprova più tardi.");
+      }
     })
-      .then((resp) => {
-        if (resp.ok) {
-          return resp.json();
-        } else {
-          throw new Error("Impossibile recuperare gli album. Riprova più tardi.");
-        }
-      })
-      .then((data) => {
-        if (!playlists.some((pl) => pl.id === data.id)) {
-          playlists.push(data);
-        }
-        fetchCount++;
-      })
-      .catch((error) => {
-        console.error(`Errore per playlist ${playlistId}:`, error);
-      })
-      .finally(() => {
-        if (fetchCount === arrayPlaylist.length) {
-          if (playlists.length > 12) {
-            playlists = playlists.slice(0, 12);
-          }
+    .then((data) => {
+      console.log(data);
+      sessionStorage.setItem("playlists", JSON.stringify(data));
+    })
+    .finally(() => {
+      playlistsBar();
+    });
 
-          sessionStorage.setItem("playlists", JSON.stringify(playlists));
-          console.log("Controllo Console:", playlists);
-
-          document.dispatchEvent(new Event("playlistsLoaded")); //Evento per aspettare che finisca prima di essere caricato, o almeno credo
-        }
-      });
-  });
-  document.addEventListener("playlistsLoaded", () => {
-    if (!playlists) {
-      playlists = [];
-    }
-
-    sessionStorage.setItem("playlists", JSON.stringify(playlists));
+  function playlistsBar() {
+    let playlists = JSON.parse(sessionStorage.getItem("playlists"));
     playlists.forEach((playlistId) => {
       let placeholderPlaylist = document.querySelector(".playlists");
 
@@ -241,8 +206,8 @@ function playlistNav() {
       });
 
       placeholderPlaylist.appendChild(pPlaylist);
-    }, 1000);
-  });
+    });
+  }
 }
 
 //Aside
@@ -364,3 +329,76 @@ function toggleAside() {
     }
   });
 }
+
+/* function playlistNav() {
+  //FETCH////////////////////////////////////////////////////////////////
+  const arrayPlaylist = [
+    8454338222, 13015611143, 248297032, 1976454162, 2298075882, 8606835902, 2153050122, 1282495565, 6682665064,
+    1313621735, 1116187241, 733113466,
+  ];
+  let playlists = JSON.parse(sessionStorage.getItem("playlists")) || [];
+
+  let fetchCount = 0;
+
+  // ciclo per popolare asidebar sinistra delle playlist. L'array playlist è chiamato in cima (reminder!! ho dato display none ai placeholder)
+  arrayPlaylist.forEach((playlistId) => {
+    fetch(`https://deezerdevs-deezer.p.rapidapi.com/playlist/${playlistId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-rapidapi-key": "ad4ebc50e8msh21d6de872e740a5p1740a2jsn2f44656a84db",
+        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+      },
+    })
+      .then((resp) => {
+        if (resp.ok) {
+          return resp.json();
+        } else {
+          throw new Error("Impossibile recuperare gli album. Riprova più tardi.");
+        }
+      })
+      .then((data) => {
+        if (!playlists.some((pl) => pl.id === data.id)) {
+          playlists.push(data);
+        }
+        fetchCount++;
+      })
+      .catch((error) => {
+        console.error(`Errore per playlist ${playlistId}:`, error);
+      })
+      .finally(() => {
+        if (fetchCount === arrayPlaylist.length) {
+          if (playlists.length > 12) {
+            playlists = playlists.slice(0, 12);
+          }
+
+          sessionStorage.setItem("playlists", JSON.stringify(playlists));
+          console.log("Controllo Console:", playlists);
+
+          document.dispatchEvent(new Event("playlistsLoaded")); //Evento per aspettare che finisca prima di essere caricato, o almeno credo
+        }
+      });
+  });
+  document.addEventListener("playlistsLoaded", () => {
+    if (!playlists) {
+      playlists = [];
+    }
+
+    sessionStorage.setItem("playlists", JSON.stringify(playlists));
+    playlists.forEach((playlistId) => {
+      let placeholderPlaylist = document.querySelector(".playlists");
+
+      let pPlaylist = document.createElement("p");
+      pPlaylist.style.cursor = "pointer";
+      pPlaylist.innerText = playlistId.title;
+
+      // Aggiunge l'evento click solo a questo <p>
+      pPlaylist.addEventListener("click", function () {
+        window.location.assign(`./album.html?playlistId=${playlistId.id}`);
+      });
+
+      placeholderPlaylist.appendChild(pPlaylist);
+    }, 1000);
+  });
+}
+ */
