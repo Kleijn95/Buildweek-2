@@ -1,88 +1,90 @@
-bannerHide();
-altroChePiace();
-carosello();
-
-document.addEventListener("playlistsLoaded", () => {
-  //Richiama l'evento concluso della sidebar
-  let playlists = JSON.parse(sessionStorage.getItem("playlists"));
-  playlistCard();
-  function playlistCard() {
-    setTimeout(() => {
-      let cardCount = 0;
-      const maxCards = 6;
-
-      playlists.forEach((playlistId) => {
-        if (cardCount >= maxCards) return;
-        const arrayAlbums = playlistId.tracks.data;
-
-        const mainRow = document.getElementById("mainRow");
-        const card = document.createElement("div");
-        card.classList.add("col-4");
-        const innerCard = document.createElement("div");
-        innerCard.classList.add("card", "mb-3", "bg-secondary", "overflow-hidden");
-        const cardRow = document.createElement("div");
-        cardRow.classList.add("row", "g-0");
-        const containerBig = document.createElement("div");
-        containerBig.classList.add("col-md-4");
-        const imgContainer = document.createElement("div");
-        imgContainer.classList.add("d-flex", "flex-wrap", "h-100");
-        imgContainer.style.cursor = "pointer";
-
-        imgContainer.addEventListener("click", function () {
-          window.location.assign(`./album.html?playlistId=${playlistId.id}`);
-        });
-        const img1 = document.createElement("img");
-        img1.classList.add("img-fluid", "w-50", "p-0");
-        img1.alt = `img1 alt`;
-        img1.src = playlistId.picture_xl;
-        const img2 = document.createElement("img");
-
-        img2.classList.add("img-fluid", "w-50", "p-0");
-        img2.alt = `img2 alt`;
-        img2.src = "";
-        const img3 = document.createElement("img");
-        img3.classList.add("img-fluid", "w-50", "p-0");
-        img3.alt = `img3 alt`;
-        img3.src = "./assets/imgs/main/image-10.jpg";
-        const img4 = document.createElement("img");
-        img4.classList.add("img-fluid", "w-50", "p-0");
-        img4.alt = `img4 alt`;
-        img4.src = "./assets/imgs/main/image-10.jpg";
-        for (let index = 0; index < arrayAlbums.length; index++) {
-          img1.src = arrayAlbums[0].album.cover_xl;
-          img2.src = arrayAlbums[1].album.cover_xl;
-          img3.src = arrayAlbums[2].album.cover_xl;
-          img4.src = arrayAlbums[3].album.cover_xl;
-        }
-
-        const outerCardBody = document.createElement("div");
-        outerCardBody.classList.add("col-md-8", "d-flex", "align-items-center");
-        outerCardBody.style.cursor = "pointer";
-        const cardBody = document.createElement("div");
-        cardBody.classList.add("card-body");
-        const cardTitle = document.createElement("h5");
-        cardTitle.classList.add("card-title", "text-white", "text-truncate-multiline");
-        cardTitle.innerText = playlistId.title;
-        mainRow.appendChild(card);
-        card.appendChild(innerCard);
-        innerCard.appendChild(cardRow);
-        cardRow.appendChild(containerBig);
-        containerBig.appendChild(imgContainer);
-        imgContainer.appendChild(img1);
-        imgContainer.appendChild(img2);
-        imgContainer.appendChild(img3);
-        imgContainer.appendChild(img4);
-        cardRow.appendChild(outerCardBody);
-        outerCardBody.appendChild(cardBody);
-        cardBody.appendChild(cardTitle);
-        cardCount++;
-        // outerCardBody.addEventListener("click", function () {
-        //   window.location.assign(`./album.html?albumId=${albums.picture_xl}`);
-        // });
-      });
-    }, 1000);
+function mediaQuery() {
+  if (mediaQueryMd.matches) {
+    bannerHide();
+    carosello();
+  } else {
+    altroChePiace();
   }
-});
+}
+
+playlistCard();
+function playlistCard() {
+  setTimeout(() => {
+    let playlists = JSON.parse(sessionStorage.getItem("playlists"));
+    let cardCount = 0;
+    const maxCards = 6;
+
+    playlists.forEach((playlistId) => {
+      if (cardCount >= maxCards) return;
+      const arrayAlbums = playlistId.tracks.data;
+
+      const mainRow = document.getElementById("mainRow");
+      const card = document.createElement("div");
+      card.classList.add("col-6", "col-md-4");
+      const innerCard = document.createElement("div");
+      innerCard.classList.add("card", "d-flex", "mb-3", "bg-card", "overflow-hidden");
+      innerCard.addEventListener("click", function () {
+        window.location.assign(`./album.html?playlistId=${playlistId.id}`);
+      });
+      const cardRow = document.createElement("div");
+      cardRow.classList.add("row", "g-0");
+      const containerBig = document.createElement("div");
+      containerBig.classList.add("col-md-4", "w-25");
+      const imgContainer = document.createElement("div");
+      imgContainer.classList.add("d-flex", "flex-wrap", "h-100");
+      imgContainer.style.cursor = "pointer";
+
+      const img1 = document.createElement("img");
+      img1.classList.add("img-fluid", "w-50", "p-0");
+      img1.alt = `img1 alt`;
+      img1.src = playlistId.picture_xl;
+      const img2 = document.createElement("img");
+
+      img2.classList.add("img-fluid", "w-50", "p-0");
+      img2.alt = `img2 alt`;
+      img2.src = "";
+      const img3 = document.createElement("img");
+      img3.classList.add("img-fluid", "w-50", "p-0");
+      img3.alt = `img3 alt`;
+      img3.src = "./assets/imgs/main/image-10.jpg";
+      const img4 = document.createElement("img");
+      img4.classList.add("img-fluid", "w-50", "p-0");
+      img4.alt = `img4 alt`;
+      img4.src = "./assets/imgs/main/image-10.jpg";
+      for (let index = 0; index < arrayAlbums.length; index++) {
+        img1.src = arrayAlbums[0].album.cover_xl;
+        img2.src = arrayAlbums[1].album.cover_xl;
+        img3.src = arrayAlbums[2].album.cover_xl;
+        img4.src = arrayAlbums[3].album.cover_xl;
+      }
+
+      const outerCardBody = document.createElement("div");
+      outerCardBody.classList.add("col-md-8", "d-flex", "align-items-center");
+      outerCardBody.style.cursor = "pointer";
+      const cardBody = document.createElement("div");
+      cardBody.classList.add("card-body");
+      const cardTitle = document.createElement("h5");
+      cardTitle.classList.add("card-title", "text-white", "text-truncate-multiline");
+      cardTitle.innerText = playlistId.title;
+      mainRow.appendChild(card);
+      card.appendChild(innerCard);
+      innerCard.appendChild(cardRow);
+      cardRow.appendChild(containerBig);
+      containerBig.appendChild(imgContainer);
+      imgContainer.appendChild(img1);
+      imgContainer.appendChild(img2);
+      imgContainer.appendChild(img3);
+      imgContainer.appendChild(img4);
+      cardRow.appendChild(outerCardBody);
+      outerCardBody.appendChild(cardBody);
+      cardBody.appendChild(cardTitle);
+      cardCount++;
+      // outerCardBody.addEventListener("click", function () {
+      //   window.location.assign(`./album.html?albumId=${albums.picture_xl}`);
+      // });
+    });
+  }, 500);
+}
 
 function bannerHide() {
   let hide = document.querySelector(".hide");
@@ -120,10 +122,23 @@ function altroChePiace() {
       const albumRaw = document.querySelector("#albumRaw");
 
       const containerRow = document.createElement("div");
-      containerRow.classList.add("row", "d-felx", "gap-1", "justify-content-between");
+      containerRow.classList.add("row", "d-flex", "gap-lg-1", "gap-md-0", "justify-content-between");
       albums.forEach((album, i) => {
         const cardAlbum = document.createElement("div");
-        cardAlbum.classList.add("card", "col-2", "bg-dark", "h-100", "rounded", "p-2", "d-flex", "flex-column", "m-2");
+        cardAlbum.classList.add(
+          "card",
+          "col-4",
+          "col-md-3",
+          "col-lg-2",
+          "me-md-0",
+          "bg-dark",
+          "h-100",
+          "rounded",
+          "p-2",
+          "d-flex",
+          "flex-column",
+          "m-2"
+        );
         cardAlbum.style.cursor = "pointer";
 
         const imgAlbum = document.createElement("img");
