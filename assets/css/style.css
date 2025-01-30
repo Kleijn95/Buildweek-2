@@ -163,3 +163,15 @@ h6 {
 .album {
   font-size: 0.7em;
 }
+.genres > div {
+  width: 32%;
+}
+.genres > div:hover {
+  cursor: pointer;
+}
+#artistBanner {
+  height: 400px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
