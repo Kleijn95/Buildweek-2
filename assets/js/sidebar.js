@@ -342,7 +342,8 @@ function toggleAside() {
 
   closeAside.addEventListener("click", () => {
     aside.classList.add("d-none");
-    if (window.location.pathname === "/index.html") {
+    if (window.location.pathname.endsWith("index.html")) {
+      let hideDiv = document.querySelector(".hideDiv");
       hideDiv.classList.add("hideDiv2");
     }
   });
@@ -351,13 +352,13 @@ function toggleAside() {
     if (aside.classList.contains("d-none")) {
       aside.classList.remove("d-none");
 
-      if (window.location.pathname === "/index.html") {
+      if (window.location.pathname.endsWith("index.html")) {
         let hideDiv = document.querySelector(".hideDiv");
         hideDiv.classList.remove("hideDiv2");
       }
     } else {
       aside.classList.add("d-none");
-      if (window.location.pathname === "/index.html") {
+      if (wwindow.location.pathname.endsWith("index.html")) {
         hideDiv.classList.add("hideDiv2");
       }
     }

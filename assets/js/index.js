@@ -87,7 +87,6 @@ document.addEventListener("playlistsLoaded", () => {
 function bannerHide() {
   let hide = document.querySelector(".hide");
   let banner = document.querySelector(".banner");
-
   hide.addEventListener("click", () => {
     if (banner.classList.contains("d-none")) {
       banner.classList.remove("d-none");
