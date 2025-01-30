@@ -1,6 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   const query = urlParams.get("query");
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("searchForm");
+    const input = document.getElementById("searchInput");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault(); // Previene il comportamento predefinito del form
+      const query = input.value.trim();
+      if (query) {
+        const apiUrl = `https://deezerdevs-deezer.p.rapidapi.com/search?query=${encodeURIComponent(query)}`;
+        window.location.href = apiUrl;
+      } else {
+        // Gestisci il caso in cui l'input è vuoto, se necessario
+        alert("Per favore, inserisci una query di ricerca.");
+      }
+    });
+  });
 
   if (query) {
     const apiUrl = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${encodeURIComponent(query)}`;
@@ -26,7 +42,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const row = document.createElement("div");
         row.classList.add("row");
         main.appendChild(row);
-
+        if (searchResults.length === 0) {
+          // Se non ci sono risultati, mostra la modale
+          const noResultsModal = new bootstrap.Modal(document.getElementById("noResultsModal"));
+          noResultsModal.show();
+        } else {
+          // Crea un nuovo elemento <div> con la classe "row"
+          const row = document.createElement("div");
+          row.classList.add("row");
+          main.appendChild(row);
+        }
         // Itera su searchResults
         searchResults.forEach((result) => {
           // Qui puoi gestire ogni elemento 'result' come preferisci
