@@ -96,7 +96,7 @@ function bannerHide() {
 }
 
 function altroChePiace() {
-  fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=rap", {
+  fetch(" https://striveschool-api.herokuapp.com/api/deezer/search?q=soundtracks", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

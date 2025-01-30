@@ -54,8 +54,6 @@ let pause = document.querySelector(".pausa");
 let back = document.querySelector(".back");
 let next = document.querySelector(".next");
 
-let currentSong = [];
-
 like.addEventListener("click", () => {
   like.classList.add("d-none");
   dislike.classList.remove("d-none");
@@ -126,8 +124,6 @@ if (URL) {
           const titolo = album[i].title;
           const nomeArtista = album[i].artist.name;
           let timePlay = formatDuration(album[i].duration);
-
-          currentSong.push(preview);
 
           songTitle.style.cursor = "pointer";
           //Funzione per far partire le canzoni
@@ -226,13 +222,14 @@ if (URL) {
             pause.classList.remove("d-none");
           }
 
-          let backCurrentIndex = 0;
+          console.log(currentAudio);
+          let backCurrentIndex = currentAudio;
 
           function backSong() {
-            if (backCurrentIndex < album.length) {
-              backCurrentIndex++; // Va alla traccia precedente
+            if (backCurrentIndex < album.length - 1) {
+              backCurrentIndex--; // Va alla traccia precedente
             } else {
-              currentIndex = 0;
+              backCurrentIndex = 0;
             }
 
             currentAudio = album[backCurrentIndex].preview;
@@ -257,7 +254,6 @@ if (URL) {
             titleSong(titolo);
             artista(nomeArtista);
             pause.classList.remove("d-none");
-            console.log(currentSong);
           });
 
           //Eventi della playbar
@@ -288,7 +284,6 @@ if (URL) {
           next.addEventListener("click", () => {
             nextSong();
 
-            //console.log(currentSong);
             //console.log(currentAudio);
           });
 
