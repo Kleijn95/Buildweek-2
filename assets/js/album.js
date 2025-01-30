@@ -45,8 +45,19 @@ let dislike = document.querySelector(".dislike");
 let volume = document.querySelector(".volume");
 let noVolume = document.querySelector(".noVolume");
 
+let barraVolume = document.querySelector(".barraVolume");
+
 let start = document.querySelector(".start");
 let pause = document.querySelector(".pausa");
+
+like.addEventListener("click", () => {
+  like.classList.add("d-none");
+  dislike.classList.remove("d-none");
+});
+dislike.addEventListener("click", () => {
+  like.classList.remove("d-none");
+  dislike.classList.add("d-none");
+});
 
 if (playlistId) {
   URL = "https://deezerdevs-deezer.p.rapidapi.com/playlist/" + playlistId;
@@ -94,7 +105,7 @@ if (URL) {
           songTitle.innerText = album[i].title;
           const artist = document.createElement("a");
 
-          console.log(album[i].album.cover_small);
+          console.log(album[i].preview);
           const imgCanz = album[i].album.cover_small;
           songTitle.style.cursor = "pointer";
           const preview = album[i].preview;
@@ -109,12 +120,14 @@ if (URL) {
                 audio.pause();
               } else {
                 audio.play();
+                barraVolume.disabled = false;
                 pause.classList.add("d-none");
               }
             } else {
               audio.src = previewUrl;
               audio.play();
               currentAudio = previewUrl;
+              barraVolume.disabled = false;
               start.classList.add("d-none");
             }
           }
@@ -122,6 +135,7 @@ if (URL) {
           function playSong2(previewUrl) {
             if (!audio.paused) {
               audio.pause();
+              barraVolume.disabled = false;
             }
           }
           //Funzione per l'immagine nella playbar
@@ -152,6 +166,25 @@ if (URL) {
             }
           }
 
+          function noVol() {
+            if (!audio.paused) {
+              volume.classList.add("d-none");
+              noVolume.classList.remove("d-none");
+              audio.muted = true;
+              barraVolume.max = "";
+              barraVolume.disabled = true;
+            }
+          }
+          function vol() {
+            if (!audio.paused) {
+              volume.classList.remove("d-none");
+              noVolume.classList.add("d-none");
+              audio.muted = false;
+              barraVolume.disabled = false;
+              barraVolume.max = "10";
+            }
+          }
+
           //Evento che chiama la funzione per far partire le canzoni
           songTitle.addEventListener("click", () => {
             playSong(preview);
@@ -164,7 +197,7 @@ if (URL) {
 
           //Eventi della playbar
           start.addEventListener("click", () => {
-            playSong(preview);
+            playSong(album[i].preview);
             imgSong(imgCanz);
             like.classList.remove("d-none");
             titleSong(titolo);
@@ -176,6 +209,12 @@ if (URL) {
             playSong2(preview);
             start.classList.remove("d-none");
             pause.classList.add("d-none");
+          });
+          volume.addEventListener("click", () => {
+            noVol();
+          });
+          noVolume.addEventListener("click", () => {
+            vol();
           });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
