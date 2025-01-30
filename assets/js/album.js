@@ -125,9 +125,11 @@ if (URL) {
           const nomeArtista = album[i].artist.name;
           let timePlay = formatDuration(album[i].duration);
 
+          let currentIndex = -1;
+
           songTitle.style.cursor = "pointer";
           //Funzione per far partire le canzoni
-          function playSong(previewUrl) {
+          function playSong(previewUrl, index) {
             if (currentAudio === previewUrl) {
               if (!audio.paused) {
                 audio.pause();
@@ -141,9 +143,11 @@ if (URL) {
               audio.src = previewUrl;
               audio.play();
               currentAudio = previewUrl;
+              currentIndex = index; // Aggiorna currentIndex
               barraVolume.disabled = false;
               timeSong.innerHTML = formatDuration(album[i].duration);
               start.classList.add("d-none");
+              pause.classList.remove("d-none");
             }
           }
           //Funzione per il tasto play
@@ -199,7 +203,6 @@ if (URL) {
               barraVolume.max = "10";
             }
           }
-          let currentIndex = 0;
 
           function nextSong() {
             if (currentIndex < album.length - 1) {
@@ -209,7 +212,7 @@ if (URL) {
             }
 
             currentAudio = album[currentIndex].preview;
-            playSong(currentAudio);
+            playSong(currentAudio, currentIndex);
             imgSong(album[currentIndex].album.cover_small);
             titleSong(album[currentIndex].title);
             artista(album[currentIndex].artist.name);
@@ -223,32 +226,31 @@ if (URL) {
           }
 
           console.log(currentAudio);
-          let backCurrentIndex = currentAudio;
 
           function backSong() {
-            if (backCurrentIndex < album.length - 1) {
-              backCurrentIndex--; // Va alla traccia precedente
+            if (currentIndex < album.length - 1) {
+              currentIndex--;
             } else {
-              backCurrentIndex = 0;
+              currentIndex = album.length;
             }
 
-            currentAudio = album[backCurrentIndex].preview;
-            playSong(currentAudio);
-            imgSong(album[backCurrentIndex].album.cover_small);
-            titleSong(album[backCurrentIndex].title);
-            artista(album[backCurrentIndex].artist.name);
+            currentAudio = album[currentIndex].preview;
+            playSong(currentAudio, currentIndex);
+            imgSong(album[currentIndex].album.cover_small);
+            titleSong(album[currentIndex].title);
+            artista(album[currentIndex].artist.name);
 
-            let newAudio = album[backCurrentIndex].preview;
-            audio.src = newAudio;
+            audio.src = currentAudio;
             audio.play();
-
             start.classList.add("d-none");
             pause.classList.remove("d-none");
           }
 
           //Evento che chiama la funzione per far partire le canzoni
           songTitle.addEventListener("click", () => {
-            playSong(preview);
+            currentIndex = i;
+            console.log(currentIndex);
+            playSong(album[i].preview, currentIndex);
             imgSong(imgCanz);
             like.classList.remove("d-none");
             titleSong(titolo);
