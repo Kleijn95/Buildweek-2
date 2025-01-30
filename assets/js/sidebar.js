@@ -1,6 +1,14 @@
 const mediaQueryMd = window.matchMedia("(min-width: 769px)");
 const mediaQuerySm = window.matchMedia("(max-width: 768px)");
+const breakpoint = window.matchMedia("(width: 768px)");
 
+breakpoint.addEventListener("change", () => {
+  window.location.reload();
+});
+mediaQuerySm.addEventListener("change", () => {
+  window.location.reload();
+});
+console.log(breakpoint);
 mediaQuery();
 
 function mediaQuery() {
