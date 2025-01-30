@@ -37,10 +37,11 @@ let volume = document.querySelector(".volume");
 let noVolume = document.querySelector(".noVolume");
 
 let barraVolume = document.querySelector(".barraVolume");
+let timeSong = document.querySelector(".timeSong");
 
 let start = document.querySelector(".start");
 let pause = document.querySelector(".pausa");
-
+//Fine elementi player
 like.addEventListener("click", () => {
   like.classList.add("d-none");
   dislike.classList.remove("d-none");
@@ -142,6 +143,7 @@ function fetchArtist() {
             } else {
               audio.play();
               barraVolume.disabled = false;
+              timeSong.innerHTML = formatDuration(artist.data[i].duration);
               pause.classList.add("d-none");
             }
           } else {
@@ -149,6 +151,7 @@ function fetchArtist() {
             audio.play();
             currentAudio = previewUrl;
             barraVolume.disabled = false;
+            timeSong.innerHTML = formatDuration(artist.data[i].duration);
             start.classList.add("d-none");
           }
         }
