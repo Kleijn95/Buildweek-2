@@ -46,6 +46,7 @@ let volume = document.querySelector(".volume");
 let noVolume = document.querySelector(".noVolume");
 
 let barraVolume = document.querySelector(".barraVolume");
+let timeSong = document.querySelector(".timeSong");
 
 let start = document.querySelector(".start");
 let pause = document.querySelector(".pausa");
@@ -121,6 +122,7 @@ if (URL) {
               } else {
                 audio.play();
                 barraVolume.disabled = false;
+                timeSong.innerHTML = formatDuration(album[i].duration);
                 pause.classList.add("d-none");
               }
             } else {
@@ -128,6 +130,7 @@ if (URL) {
               audio.play();
               currentAudio = previewUrl;
               barraVolume.disabled = false;
+              timeSong.innerHTML = formatDuration(album[i].duration);
               start.classList.add("d-none");
             }
           }
