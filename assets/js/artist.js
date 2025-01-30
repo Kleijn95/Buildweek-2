@@ -88,14 +88,15 @@ function fetchArtist() {
     })
     .then((data) => {
       const artist = data;
-      console.log(artist);
+      console.log(artist.data[1].artist.name);
       console.log(artist.data[0].contributors[0].picture_xl);
       const artistBanner = document.getElementById("artistBanner");
-      artistBanner.style.backgroundImage = `url(${artist.data[0].contributors[0].picture_xl})`;
+      artistBanner.style.backgroundImage = `url(${artist.data[2].contributors[0].picture_xl})`;
       const artistName = document.getElementById("artistName");
-      artistName.innerText = artist.data[0].artist.name;
+      artistName.innerText = artist.data[1].artist.name;
 
       for (let i = 0; i < 15; i++) {
+        console.log(artist.data[0]);
         const songRow = document.createElement("div");
         songRow.classList.add("row", "align-items-center", "d-flex", "pb-3");
         const songNumberContainer = document.createElement("div");
@@ -125,7 +126,10 @@ function fetchArtist() {
         showOthers.setAttribute("id", "showOthers");
         showOthers.classList.add("text-secondary");
         songTitle.style.cursor = "pointer";
-
+        songTitle.setAttribute("data-bs-toggle", "tooltip");
+        songTitle.setAttribute("data-bs-placement", "left");
+        songTitle.setAttribute("title", "Play song");
+        var tooltip = new bootstrap.Tooltip(songTitle);
         const preview = artist.data[i].preview;
         console.log(preview);
         const imgCanz = artist.data[i].album.cover_small;

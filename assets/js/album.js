@@ -109,8 +109,16 @@ if (URL) {
           const songTitle = document.createElement("h3");
           songTitle.classList.add("text-white", "mb-0");
           songTitle.innerText = album[i].title;
+          songTitle.style.cursor = "pointer";
+          songTitle.setAttribute("data-bs-toggle", "tooltip");
+          songTitle.setAttribute("data-bs-placement", "left");
+          songTitle.setAttribute("title", "Play song");
+          var tooltip = new bootstrap.Tooltip(songTitle);
           const artist = document.createElement("a");
-
+          artist.setAttribute("data-bs-toggle", "tooltip");
+          artist.setAttribute("data-bs-placement", "right");
+          artist.setAttribute("title", "Vai alla pagina artista");
+          var tooltip = new bootstrap.Tooltip(artist);
           console.log(album[i].preview);
           const imgCanz = album[i].album.cover_small;
           songTitle.style.cursor = "pointer";
@@ -343,7 +351,7 @@ if (URL) {
         }
       } else if (playlistId) {
         const playlist = data.tracks.data;
-        console.log(data);
+        console.log(playlist);
         for (i = 0; i < playlist.length; i++) {
           /* console.log(playlist[i].album.title); */
           // iterare la playlist o l'album
@@ -358,6 +366,7 @@ if (URL) {
           const titleContainer = document.createElement("div");
           titleContainer.classList.add("col-7", "mb-3");
           const songTitle = document.createElement("h3");
+          console.log(playlist[i].artist.id);
           songTitle.classList.add("text-white", "mb-0");
           songTitle.innerText = playlist[i].title;
           const artist = document.createElement("a");
