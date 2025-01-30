@@ -151,7 +151,10 @@ function altroChePiace() {
 
         cardAlbum.appendChild(imgAlbum);
         cardAlbum.appendChild(cardBody);
-
+        cardAlbum.setAttribute("data-bs-toggle", "tooltip");
+        cardAlbum.setAttribute("data-bs-placement", "top");
+        cardAlbum.setAttribute("title", "Vai all'album");
+        var tooltip = new bootstrap.Tooltip(cardAlbum);
         containerRow.appendChild(cardAlbum);
         albumRaw.appendChild(containerRow);
         cardAlbum.setAttribute("data-bs-toggle", "tooltip");

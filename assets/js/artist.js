@@ -37,10 +37,11 @@ let volume = document.querySelector(".volume");
 let noVolume = document.querySelector(".noVolume");
 
 let barraVolume = document.querySelector(".barraVolume");
+let timeSong = document.querySelector(".timeSong");
 
 let start = document.querySelector(".start");
 let pause = document.querySelector(".pausa");
-
+//Fine elementi player
 like.addEventListener("click", () => {
   like.classList.add("d-none");
   dislike.classList.remove("d-none");
@@ -124,7 +125,10 @@ function fetchArtist() {
         showOthers.setAttribute("id", "showOthers");
         showOthers.classList.add("text-secondary");
         songTitle.style.cursor = "pointer";
-
+        songTitle.setAttribute("data-bs-toggle", "tooltip");
+        songTitle.setAttribute("data-bs-placement", "left");
+        songTitle.setAttribute("title", "Play song");
+        var tooltip = new bootstrap.Tooltip(songTitle);
         const preview = artist.data[i].preview;
         console.log(preview);
         const imgCanz = artist.data[i].album.cover_small;
@@ -142,6 +146,7 @@ function fetchArtist() {
             } else {
               audio.play();
               barraVolume.disabled = false;
+              timeSong.innerHTML = formatDuration(artist.data[i].duration);
               pause.classList.add("d-none");
             }
           } else {
@@ -149,6 +154,7 @@ function fetchArtist() {
             audio.play();
             currentAudio = previewUrl;
             barraVolume.disabled = false;
+            timeSong.innerHTML = formatDuration(artist.data[i].duration);
             start.classList.add("d-none");
           }
         }

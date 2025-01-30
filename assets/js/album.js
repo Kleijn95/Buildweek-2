@@ -46,6 +46,7 @@ let volume = document.querySelector(".volume");
 let noVolume = document.querySelector(".noVolume");
 
 let barraVolume = document.querySelector(".barraVolume");
+let timeSong = document.querySelector(".timeSong");
 
 let start = document.querySelector(".start");
 let pause = document.querySelector(".pausa");
@@ -103,8 +104,16 @@ if (URL) {
           const songTitle = document.createElement("h3");
           songTitle.classList.add("text-white", "mb-0");
           songTitle.innerText = album[i].title;
+          songTitle.style.cursor = "pointer";
+          songTitle.setAttribute("data-bs-toggle", "tooltip");
+          songTitle.setAttribute("data-bs-placement", "left");
+          songTitle.setAttribute("title", "Play song");
+          var tooltip = new bootstrap.Tooltip(songTitle);
           const artist = document.createElement("a");
-
+          artist.setAttribute("data-bs-toggle", "tooltip");
+          artist.setAttribute("data-bs-placement", "right");
+          artist.setAttribute("title", "Vai alla pagina artista");
+          var tooltip = new bootstrap.Tooltip(artist);
           console.log(album[i].preview);
           const imgCanz = album[i].album.cover_small;
           songTitle.style.cursor = "pointer";
@@ -121,6 +130,7 @@ if (URL) {
               } else {
                 audio.play();
                 barraVolume.disabled = false;
+                timeSong.innerHTML = formatDuration(album[i].duration);
                 pause.classList.add("d-none");
               }
             } else {
@@ -128,6 +138,7 @@ if (URL) {
               audio.play();
               currentAudio = previewUrl;
               barraVolume.disabled = false;
+              timeSong.innerHTML = formatDuration(album[i].duration);
               start.classList.add("d-none");
             }
           }
@@ -287,6 +298,7 @@ if (URL) {
           const titleContainer = document.createElement("div");
           titleContainer.classList.add("col-7", "mb-3");
           const songTitle = document.createElement("h3");
+
           songTitle.classList.add("text-white", "mb-0");
           songTitle.innerText = playlist[i].title;
           const artist = document.createElement("a");

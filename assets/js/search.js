@@ -57,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
         row.classList.add("row");
         main.appendChild(row);
 
-        // Verifica se i risultati della ricerca sono vuoti
         if (searchResults.length === 0) {
           // Mostra il modale se non ci sono risultati
           const noResultsModal = new bootstrap.Modal(document.getElementById("noResults"));
@@ -65,27 +64,29 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
           // Se ci sono risultati, mostra le informazioni
           searchResults.forEach((result) => {
-            // Creazione della card per ogni risultato
             const col = document.createElement("div");
             col.classList.add("col-md-4"); // Aggiunge una colonna con larghezza 4 su dispositivi medi
+            console.log(result.artist.picture);
             const card = document.createElement("div");
             card.classList.add("card", "mb-4");
             const picture = document.createElement("img");
             picture.src = `${result.artist.picture_medium}`;
             picture.classList.add("img-fluid");
-            picture.crossOrigin = "Anonymous"; // Impostazione per evitare errori CORS
+            picture.crossOrigin = "Anonymous";
+            const colorThief = new ColorThief();
             const cardBody = document.createElement("div");
             cardBody.classList.add("card-body");
 
             const title = document.createElement("h5");
             title.classList.add("card-title", "text-light");
-            title.textContent = result.title;
+            title.textContent = result.title; // Supponendo che 'result' abbia una proprietà 'title'
 
             const artist = document.createElement("a");
             artist.classList.add("card-text", "text-decoration-none", "text-light");
-            artist.textContent = "Artista: " + result.artist.name;
+            artist.textContent = "Artista: " + result.artist.name; // Supponendo che 'result' abbia una struttura con 'artist.name'
             artist.href = "./artist.html?artistId=" + result.artist.id;
 
+            // Aggiungi gli elementi al DOM
             cardBody.appendChild(title);
             cardBody.appendChild(artist);
             cardBody.appendChild(picture);
@@ -93,16 +94,18 @@ document.addEventListener("DOMContentLoaded", function () {
             col.appendChild(card);
             row.appendChild(col);
 
-            // Carica l'immagine per determinare il colore dominante
             picture.onload = () => {
-              const colorThief = new ColorThief(); // Creazione dell'oggetto ColorThief
-              const dominantColor = colorThief.getColor(picture); // Passa l'elemento immagine
+              const dominantColor = colorThief.getColor(picture); // Passa l'elemento immagine, non l'URL
+              console.log(dominantColor);
               const darkColor = dominantColor.map((c) => Math.max(c - 50, 0)); // Riduce la luminosità di 50
 
+              // Crea un gradiente che va dal colore dominante al colore più scuro
               const gradient = `linear-gradient(to bottom, rgb(${dominantColor.join(",")}), rgb(${darkColor.join(
                 ","
               )}))`;
-              card.style.background = gradient; // Imposta il gradiente come sfondo della card
+
+              // Imposta il gradiente come sfondo
+              card.style.background = gradient;
             };
           });
         }
@@ -111,7 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Errore nella richiesta API:", error);
       });
   }
-}); // <-- Questa è la chiusura per il document.addEventListener
+});
+
 const closeModalBtn = document.getElementById("closeModalBtn");
 
 // Aggiungi un event listener per il click sul bottone di chiusura
