@@ -283,7 +283,7 @@ if (URL) {
         }
       } else if (playlistId) {
         const playlist = data.tracks.data;
-        console.log(data);
+        console.log(playlist);
         for (i = 0; i < playlist.length; i++) {
           /* console.log(playlist[i].album.title); */
           // iterare la playlist o l'album
@@ -298,7 +298,7 @@ if (URL) {
           const titleContainer = document.createElement("div");
           titleContainer.classList.add("col-7", "mb-3");
           const songTitle = document.createElement("h3");
-
+          console.log(playlist[i].artist.id);
           songTitle.classList.add("text-white", "mb-0");
           songTitle.innerText = playlist[i].title;
           const artist = document.createElement("a");
