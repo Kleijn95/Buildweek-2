@@ -175,3 +175,14 @@ h6 {
   background-size: cover;
   background-position: center;
 }
+
+@media screen and (max-width: 768px) {
+  .genres > div {
+    width: 49%;
+  }
+}
+@media screen and (max-width: 576px) {
+  .genres > div {
+    width: 100%;
+  }
+}
