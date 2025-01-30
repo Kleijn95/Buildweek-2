@@ -125,7 +125,10 @@ function fetchArtist() {
         showOthers.setAttribute("id", "showOthers");
         showOthers.classList.add("text-secondary");
         songTitle.style.cursor = "pointer";
-
+        songTitle.setAttribute("data-bs-toggle", "tooltip");
+        songTitle.setAttribute("data-bs-placement", "left");
+        songTitle.setAttribute("title", "Play song");
+        var tooltip = new bootstrap.Tooltip(songTitle);
         const preview = artist.data[i].preview;
         console.log(preview);
         const imgCanz = artist.data[i].album.cover_small;
