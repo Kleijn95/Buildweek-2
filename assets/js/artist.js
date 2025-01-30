@@ -11,6 +11,62 @@ const artistId = params.get("artistId");
 const URL = "https://striveschool-api.herokuapp.com/api/deezer/artist/" + artistId + "/top?limit=15";
 const songsContainer = document.getElementById("artistTracks");
 
+//Variabile per l'audio
+let audio = document.createElement("audio");
+//Variabile che si aggiorna se un audio è in riproduzione
+let currentAudio = null;
+
+//Variabile per imgPlayer
+let imgPlayer = document.createElement("img");
+//Variabile che tine conto dell'immagine nel player
+let currentImg = null;
+
+let titlePlayer = document.querySelector(".titolo");
+let artistPlayer = document.querySelector(".artista");
+
+let currentTitlePlayer = null;
+let currentArtistPlayer = null;
+
+let player = document.querySelector(".playerSong");
+
+let logo = document.querySelector(".spotify");
+
+let like = document.querySelector(".like");
+let dislike = document.querySelector(".dislike");
+let volume = document.querySelector(".volume");
+let noVolume = document.querySelector(".noVolume");
+
+let barraVolume = document.querySelector(".barraVolume");
+
+let start = document.querySelector(".start");
+let pause = document.querySelector(".pausa");
+
+like.addEventListener("click", () => {
+  like.classList.add("d-none");
+  dislike.classList.remove("d-none");
+});
+dislike.addEventListener("click", () => {
+  like.classList.remove("d-none");
+  dislike.classList.add("d-none");
+});
+
+volume.addEventListener("click", () => {
+  volume.classList.add("d-none");
+  noVolume.classList.remove("d-none");
+});
+noVolume.addEventListener("click", () => {
+  volume.classList.remove("d-none");
+  noVolume.classList.add("d-none");
+});
+
+/*let like = document.querySelector(".like");
+let dislike = document.querySelector(".dislike");
+let volume = document.querySelector(".volume");
+let noVolume = document.querySelector(".noVolume");
+
+let start = document.querySelector(".start");
+let pause = document.querySelector(".pausa");*/
+
 // ciclo per popolare asidebar sinistra delle playlist. L'array playlist è chiamato in cima (reminder!! ho dato display none ai placeholder)
 
 function fetchArtist() {
@@ -34,11 +90,11 @@ function fetchArtist() {
       console.log(artist);
       console.log(artist.data[0].contributors[0].picture_xl);
       const artistBanner = document.getElementById("artistBanner");
-      artistBanner.style.backgroundImage = `url(${artist.data[0].contributors[0].picture_xl}`;
+      artistBanner.style.backgroundImage = `url(${artist.data[0].contributors[0].picture_xl})`;
       const artistName = document.getElementById("artistName");
       artistName.innerText = artist.data[0].artist.name;
 
-      for (i = 0; i < 15; i++) {
+      for (let i = 0; i < 15; i++) {
         const songRow = document.createElement("div");
         songRow.classList.add("row", "align-items-center", "d-flex", "pb-3");
         const songNumberContainer = document.createElement("div");
@@ -67,17 +123,119 @@ function fetchArtist() {
         const showOthers = document.createElement("p");
         showOthers.setAttribute("id", "showOthers");
         showOthers.classList.add("text-secondary");
+        songTitle.style.cursor = "pointer";
+
         const preview = artist.data[i].preview;
+        console.log(preview);
+        const imgCanz = artist.data[i].album.cover_small;
+        console.log(imgCanz);
+        songTitle.style.cursor = "pointer";
+        const titolo = artist.data[i].title;
+        const nomeArtista = artist.data[i].artist.name;
+
+        songTitle.style.cursor = "pointer";
+        //Funzione per far partire le canzoni
+        function playSong(previewUrl) {
+          if (currentAudio === previewUrl) {
+            if (!audio.paused) {
+              audio.pause();
+            } else {
+              audio.play();
+              barraVolume.disabled = false;
+              pause.classList.add("d-none");
+            }
+          } else {
+            audio.src = previewUrl;
+            audio.play();
+            currentAudio = previewUrl;
+            barraVolume.disabled = false;
+            start.classList.add("d-none");
+          }
+        }
+        //Funzione per il tasto play
+        function playSong2(previewUrl) {
+          if (!audio.paused) {
+            audio.pause();
+            barraVolume.disabled = false;
+          }
+        }
+        //Funzione per l'immagine nella playbar
+        function imgSong(imgSong) {
+          if (currentImg === imgSong) {
+            imgPlayer.src.remove();
+            logo.classList.add("d-none");
+          } else {
+            imgPlayer.src = imgSong;
+            player.appendChild(imgPlayer);
+            logo.classList.add("d-none");
+          }
+        }
+        //Funzione per il titolo della canzone nella play
+        function titleSong(titleSong) {
+          if (currentTitlePlayer === titleSong) {
+            titlePlayer.innerHTML = "";
+          } else {
+            titlePlayer.innerHTML = titleSong;
+          }
+        }
+        //Funzione per il nome dell'artista nella play
+        function artista(artista) {
+          if (currentArtistPlayer === artista) {
+            artistPlayer.innerHTML = "";
+          } else {
+            artistPlayer.innerHTML = artista;
+          }
+        }
+
+        function noVol() {
+          if (!audio.paused) {
+            volume.classList.add("d-none");
+            noVolume.classList.remove("d-none");
+            audio.muted = true;
+            barraVolume.max = "";
+            barraVolume.disabled = true;
+          }
+        }
+        function vol() {
+          if (!audio.paused) {
+            volume.classList.remove("d-none");
+            noVolume.classList.add("d-none");
+            audio.muted = false;
+            barraVolume.disabled = false;
+            barraVolume.max = "10";
+          }
+        }
+
+        //Evento che chiama la funzione per far partire le canzoni
         songTitle.addEventListener("click", () => {
-          const audio = document.createElement("audio");
-          audio.controls = true;
-          audio.innerHTML = `
-                  <source src="${preview}" type="audio/mpeg">
-                  Il tuo browser non supporta l'elemento audio.`;
-          document.body.appendChild(audio);
-          audio.play().catch((error) => {
-            console.error("Errore durante la riproduzione:", error);
-          });
+          playSong(preview);
+          imgSong(imgCanz);
+          like.classList.remove("d-none");
+          titleSong(titolo);
+          artista(nomeArtista);
+          pause.classList.remove("d-none");
+        });
+
+        //Eventi della playbar
+        start.addEventListener("click", () => {
+          playSong(album[i].preview);
+          imgSong(imgCanz);
+          like.classList.remove("d-none");
+          titleSong(titolo);
+          artista(nomeArtista);
+          pause.classList.remove("d-none");
+          start.classList.add("d-none");
+        });
+        pause.addEventListener("click", () => {
+          playSong2(preview);
+          start.classList.remove("d-none");
+          pause.classList.add("d-none");
+        });
+        volume.addEventListener("click", () => {
+          noVol();
+        });
+        noVolume.addEventListener("click", () => {
+          vol();
         });
 
         songsContainer.appendChild(songRow);
@@ -118,19 +276,3 @@ function fetchArtist() {
     });
 }
 fetchArtist();
-let aside = document.querySelector("aside");
-let closeAside = document.querySelector(".closeAside");
-
-let showAside = document.querySelector(".showAside");
-
-closeAside.addEventListener("click", () => {
-  aside.classList.add("d-none");
-});
-
-showAside.addEventListener("click", () => {
-  if (aside.classList.contains("d-none")) {
-    aside.classList.remove("d-none");
-  } else {
-    aside.classList.add("d-none");
-  }
-});
