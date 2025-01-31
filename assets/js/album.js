@@ -45,11 +45,9 @@ if (URL) {
     .then((data) => {
       if (albumId) {
         playlistPlayer = data.tracks.data;
-        console.log(playlistPlayer);
         const album = data.tracks.data || [];
 
         for (let i = 0; i < album.length; i++) {
-          console.log(album);
           // iterare la playlist o l'album
 
           const songsContainer = document.getElementById("songsContainer");
