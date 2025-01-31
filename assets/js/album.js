@@ -175,7 +175,7 @@ if (URL) {
           titleContainer.classList.add("col-7", "mb-3");
           const songTitle = document.createElement("h3");
           console.log(playlist[j].artist.id);
-          songTitle.classList.add("text-white", "mb-0");
+          songTitle.classList.add("text-white", "mb-0", "songTitle");
           songTitle.innerText = playlist[j].title;
           songTitle.style.cursor = "pointer";
           const artist = document.createElement("a");
@@ -236,6 +236,13 @@ if (URL) {
           durationContainer.append(reproductions, duration);
 
           songTitle.addEventListener("click", () => {
+            for (element of document.querySelectorAll(".songTitle")) {
+              element.classList.remove("text-success");
+              element.classList.add("text-white");
+            }
+            songTitle.classList.remove("text-white");
+            songTitle.classList.add("text-success");
+
             let songData = {
               preview: playlist[j].preview,
               title: playlist[j].title,
