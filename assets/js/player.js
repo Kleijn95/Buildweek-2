@@ -166,6 +166,8 @@ function playSong(songData) {
       start.classList.remove("d-none");
       pause2.classList.add("d-none");
       start2.classList.remove("d-none");
+      pauseGreen.classList.add("d-none");
+      startGreen.classList.remove("d-none");
     } else {
       audio.play();
       barraVolume.disabled = false;
@@ -181,6 +183,8 @@ function playSong(songData) {
     pause.classList.remove("d-none");
     start2.classList.add("d-none");
     pause2.classList.remove("d-none");
+    startGreen.classList.add("d-none");
+    pauseGreen.classList.remove("d-none");
 
     titlePlayer.innerText = songData.title;
     artistPlayer.innerText = songData.artist;
