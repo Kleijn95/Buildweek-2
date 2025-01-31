@@ -58,7 +58,7 @@ playerNav.innerHTML = `<div class="container-fluid">
   </div>
   <div class="d-flex flex-nowrap justify-content-center align-items-center hideMobile">
      <span class="timeSongStyle">00:00</span>
-    <input class="slider-track-input mousetrap mx-2" type="range" step="1" style="width: 100%" value="0" />
+    <input class="slider-track-input mousetrap mx-2" id="progressBar" type="range" step="1" style="width: 100%" value="0" />
     <span class="timeSong timeSongStyle">00:00</span>
   </div>
 </div>
@@ -94,6 +94,16 @@ let playlistPlayer = [];
 let audio = new Audio();
 //Variabile che si aggiorna se un audio è in riproduzione
 let currentAudio = null;
+
+let progressBar = document.querySelector("#progressBar");
+
+audio.addEventListener("timeupdate", () => {
+  progressBar.value = (audio.currentTime / audio.duration) * 100;
+});
+
+progressBar.addEventListener("input", () => {
+  audio.currentTime = (progressBar.value / 100) * audio.duration;
+});
 
 //Variabile per imgPlayer
 let imgPlayer = document.querySelector(".imgPlayer");
