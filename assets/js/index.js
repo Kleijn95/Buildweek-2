@@ -435,3 +435,10 @@ function carosello() {
         });
     });
 }
+const currentTime = new Date();
+const currentHour = currentTime.getHours();
+if (currentHour >= 17) {
+  document.querySelector(".saluto").innerText = "Buonasera";
+} else {
+  document.querySelector(".saluto").innerText = "Buongiorno";
+}
