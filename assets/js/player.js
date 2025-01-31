@@ -261,6 +261,13 @@ start.addEventListener("click", () => {
     cover: playlistPlayer[currentIndex].album.cover_small,
     duration: playlistPlayer[currentIndex].duration,
   };
+  let song = document.querySelectorAll(".songTitle");
+  for (element of document.querySelectorAll(".songTitle")) {
+    element.classList.remove("text-success");
+    element.classList.add("text-white");
+  }
+  song[currentIndex].classList.remove("text-white");
+  song[currentIndex].classList.add("text-success");
   playSong(songData);
 });
 startGreen.addEventListener("click", () => {
@@ -268,6 +275,14 @@ startGreen.addEventListener("click", () => {
     playSong(playlistPlayer[currentIndex]);
     startGreen.classList.add("d-none");
     pauseGreen.classList.remove("d-none");
+
+    let song = document.querySelectorAll(".songTitle");
+    for (element of document.querySelectorAll(".songTitle")) {
+      element.classList.remove("text-success");
+      element.classList.add("text-white");
+    }
+    song[currentIndex].classList.remove("text-white");
+    song[currentIndex].classList.add("text-success");
   }
 });
 
