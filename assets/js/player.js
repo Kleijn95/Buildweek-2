@@ -1,6 +1,6 @@
 let playerNav = document.querySelector(".player");
 playerNav.innerHTML = `<div class="container-fluid">
-<div class="d-flex align-items-center gap-2">
+<div class="d-flex align-items-center gap-2 overflow-x-visible" style="width:250px">
   <img
     src="./assets/imgs/4b135b9f16b30caa386a32c6a64990c9.png"
     class="song hideMobile imgPlayer spotify"
@@ -153,32 +153,25 @@ function playSong(songData) {
     } else {
       audio.play();
       barraVolume.disabled = false;
-      timeSong.innerHTML = formatDuration(album[i].duration);
+      timeSong.innerHTML = formatDuration(songData.duration);
     }
   } else {
     audio.src = songData.preview;
     audio.play();
     currentAudio = songData.preview;
-    currentIndex += songData.index; // Aggiorna currentIndex
+    currentIndex = playlistPlayer.indexOf(songData);
     barraVolume.disabled = false;
     timeSong.innerHTML = formatDuration(songData.duration);
     start.classList.add("d-none");
     pause.classList.remove("d-none");
 
-    titlePlayer.innerText = songData.title; //Ho accorciato la funzione così. Spero non crei problemi
+    titlePlayer.innerText = songData.title;
     artistPlayer.innerText = songData.artist;
     imgPlayer.src = songData.cover;
   }
 }
 
 //Funzione per il tasto play
-function playSong2(songData) {
-  if (!audio.paused) {
-    audio.pause();
-    barraVolume.disabled = false;
-  }
-}
-
 function noVol() {
   if (!audio.paused) {
     volume.classList.add("d-none");
@@ -199,9 +192,9 @@ function vol() {
 }
 console.log(playlistPlayer);
 
-function nextSong(songData) {
+function nextSong() {
   if (currentIndex < playlistPlayer.length - 1) {
-    currentIndex++; // Va alla traccia successiva
+    currentIndex++;
   } else {
     currentIndex = 0;
   }
@@ -236,8 +229,6 @@ pause.addEventListener("click", () => {
   audio.pause();
   start.classList.remove("d-none");
   pause.classList.add("d-none");
-
-  imgPlayer.src = songData.cover;
 });
 
 next.addEventListener("click", () => {
