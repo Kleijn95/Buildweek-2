@@ -29,8 +29,11 @@ playerNav.innerHTML = `<div class="container-fluid">
     <button class="btn btn-link text-secondary p-0 d-none dislike">
       <i class="fas fa-heart fs-1 mx-4"></i>
     </button>
-    <button class="btn btn-link text-white p-0">
+    <button class="btn btn-link text-white p-0 start mb-0">
       <i class="far fa-play-circle fa-2x"></i>
+    </button>
+    <button class="btn btn-link text-white p-0  d-none pausa">
+      <i class="bi bi-pause-circle  fs-1"></i>
     </button>
   </div>
   <div class="d-flex justify-content-center align-items-center gap-3 flex-grow-1 hideMobile">

@@ -11,6 +11,16 @@ const artistId = params.get("artistId");
 const URL = "https://striveschool-api.herokuapp.com/api/deezer/artist/" + artistId + "/top?limit=15";
 const songsContainer = document.getElementById("artistTracks");
 
+function mediaQuery() {
+  if (!mediaQueryMd.matches) {
+    let likedTraces = document.querySelector("#likedTraces");
+    likedTraces.innerText = "";
+    let heart = document.createElement("p");
+    heart.classList.add("far", "fa-heart", "mb-0", "fs-2");
+    likedTraces.appendChild(heart);
+  }
+}
+
 function fetchArtist() {
   fetch(URL, {
     method: "GET",

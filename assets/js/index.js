@@ -23,7 +23,7 @@ function playlistCard() {
 
       const mainRow = document.getElementById("mainRow");
       const card = document.createElement("div");
-      card.classList.add("col-6", "col-md-4");
+      card.classList.add("col-6", "col-md-6", "col-lg-4");
       const innerCard = document.createElement("div");
       innerCard.classList.add("card", "d-flex", "mb-3", "bg-card", "overflow-hidden", "flex-nowrap");
       innerCard.addEventListener("click", function () {
@@ -191,6 +191,8 @@ function playlistCard2() {
       card.append(row, actionRow);
       let box2 = document.querySelector(".box2");
       box2.appendChild(card);
+
+      cardCount2++;
     });
   }, 500);
 }
