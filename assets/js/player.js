@@ -130,9 +130,11 @@ let barraVolume = document.querySelector(".barraVolume");
 let timeSong = document.querySelector(".timeSong");
 
 let start = document.querySelector(".start");
+
 let startGreen = document.querySelector(".playGreen");
-let pause = document.querySelector(".pausa");
 let pauseGreen = document.querySelector(".pauseGreen");
+let pause = document.querySelector(".pausa");
+
 let start2 = document.querySelector(".start2");
 let pause2 = document.querySelector(".pausa2");
 
@@ -158,37 +160,67 @@ noVolume.addEventListener("click", () => {
 });
 
 //Funzione per far partire le canzoni
-function playSong(songData) {
-  if (currentAudio === songData.preview) {
-    if (!audio.paused) {
-      audio.pause();
-      pause.classList.add("d-none");
-      start.classList.remove("d-none");
-      pause2.classList.add("d-none");
-      start2.classList.remove("d-none");
-      pauseGreen.classList.add("d-none");
-      startGreen.classList.remove("d-none");
+if (window.location.pathname.endsWith("artist.html") || window.location.pathname.endsWith("album.html")) {
+  function playSong(songData) {
+    if (currentAudio === songData.preview) {
+      if (!audio.paused) {
+        audio.pause();
+        pause.classList.add("d-none");
+        start.classList.remove("d-none");
+        pause2.classList.add("d-none");
+        start2.classList.remove("d-none");
+        pauseGreen.classList.add("d-none");
+        startGreen.classList.remove("d-none");
+      } else {
+        audio.play();
+        barraVolume.disabled = false;
+        timeSong.innerHTML = formatDuration(songData.duration);
+      }
     } else {
+      audio.src = songData.preview;
       audio.play();
+      currentAudio = songData.preview;
       barraVolume.disabled = false;
       timeSong.innerHTML = formatDuration(songData.duration);
-    }
-  } else {
-    audio.src = songData.preview;
-    audio.play();
-    currentAudio = songData.preview;
-    barraVolume.disabled = false;
-    timeSong.innerHTML = formatDuration(songData.duration);
-    start.classList.add("d-none");
-    pause.classList.remove("d-none");
-    start2.classList.add("d-none");
-    pause2.classList.remove("d-none");
-    startGreen.classList.add("d-none");
-    pauseGreen.classList.remove("d-none");
+      start.classList.add("d-none");
+      pause.classList.remove("d-none");
+      start2.classList.add("d-none");
+      pause2.classList.remove("d-none");
+      startGreen.classList.add("d-none");
+      pauseGreen.classList.remove("d-none");
 
-    titlePlayer.innerText = songData.title;
-    artistPlayer.innerText = songData.artist;
-    imgPlayer.src = songData.cover;
+      titlePlayer.innerText = songData.title;
+      artistPlayer.innerText = songData.artist;
+      imgPlayer.src = songData.cover;
+    }
+  }
+} else {
+  function playSong(songData) {
+    if (currentAudio === songData.preview) {
+      if (!audio.paused) {
+        audio.pause();
+        pause.classList.add("d-none");
+        start.classList.remove("d-none");
+        pause2.classList.add("d-none");
+        start2.classList.remove("d-none");
+      } else {
+        audio.play();
+        barraVolume.disabled = false;
+        timeSong.innerHTML = formatDuration(songData.duration);
+      }
+    } else {
+      audio.src = songData.preview;
+      audio.play();
+      currentAudio = songData.preview;
+      barraVolume.disabled = false;
+      timeSong.innerHTML = formatDuration(songData.duration);
+      start.classList.add("d-none");
+      pause.classList.remove("d-none");
+
+      titlePlayer.innerText = songData.title;
+      artistPlayer.innerText = songData.artist;
+      imgPlayer.src = songData.cover;
+    }
   }
 }
 
@@ -253,35 +285,19 @@ noVolume.addEventListener("click", () => {
   vol();
 });
 
-start.addEventListener("click", () => {
-  if (playlistPlayer.length > 0) {
-    start.classList.add("d-none");
-    pause.classList.remove("d-none");
-  }
-  let songData = {
-    preview: playlistPlayer[currentIndex].preview,
-    title: playlistPlayer[currentIndex].title,
-    artist: playlistPlayer[currentIndex].artist.name,
-    cover: playlistPlayer[currentIndex].album.cover_small,
-    duration: playlistPlayer[currentIndex].duration,
-  };
-  let song = document.querySelectorAll(".songTitle");
-  for (element of document.querySelectorAll(".songTitle")) {
-    element.classList.remove("text-success");
-    element.classList.add("text-white");
-  }
-  song[currentIndex].classList.remove("text-white");
-  song[currentIndex].classList.add("text-success");
-  playSong(songData);
-});
-
-startGreen.addEventListener("click", () => {
-  if (playlistPlayer.length > 0) {
-    startGreen.classList.add("d-none");
-    pauseGreen.classList.remove("d-none");
-    start.classList.add("d-none");
-    pause.classList.remove("d-none");
-
+if (window.location.pathname.endsWith("artist.html") || window.location.pathname.endsWith("album.html")) {
+  start.addEventListener("click", () => {
+    if (playlistPlayer.length > 0) {
+      start.classList.add("d-none");
+      pause.classList.remove("d-none");
+    }
+    let songData = {
+      preview: playlistPlayer[currentIndex].preview,
+      title: playlistPlayer[currentIndex].title,
+      artist: playlistPlayer[currentIndex].artist.name,
+      cover: playlistPlayer[currentIndex].album.cover_small,
+      duration: playlistPlayer[currentIndex].duration,
+    };
     let song = document.querySelectorAll(".songTitle");
     for (element of document.querySelectorAll(".songTitle")) {
       element.classList.remove("text-success");
@@ -289,6 +305,14 @@ startGreen.addEventListener("click", () => {
     }
     song[currentIndex].classList.remove("text-white");
     song[currentIndex].classList.add("text-success");
+    playSong(songData);
+  });
+} else {
+  start.addEventListener("click", () => {
+    if (playlistPlayer.length > 0) {
+      start.classList.add("d-none");
+      pause.classList.remove("d-none");
+    }
     let songData = {
       preview: playlistPlayer[currentIndex].preview,
       title: playlistPlayer[currentIndex].title,
@@ -297,21 +321,50 @@ startGreen.addEventListener("click", () => {
       duration: playlistPlayer[currentIndex].duration,
     };
     playSong(songData);
-  }
-});
+  });
+}
+
+if (window.location.pathname.endsWith("artist.html") || window.location.pathname.endsWith("album.html")) {
+  startGreen.addEventListener("click", () => {
+    if (playlistPlayer.length > 0) {
+      startGreen.classList.add("d-none");
+      pauseGreen.classList.remove("d-none");
+      start.classList.add("d-none");
+      pause.classList.remove("d-none");
+
+      let song = document.querySelectorAll(".songTitle");
+      for (element of document.querySelectorAll(".songTitle")) {
+        element.classList.remove("text-success");
+        element.classList.add("text-white");
+      }
+      song[currentIndex].classList.remove("text-white");
+      song[currentIndex].classList.add("text-success");
+      let songData = {
+        preview: playlistPlayer[currentIndex].preview,
+        title: playlistPlayer[currentIndex].title,
+        artist: playlistPlayer[currentIndex].artist.name,
+        cover: playlistPlayer[currentIndex].album.cover_small,
+        duration: playlistPlayer[currentIndex].duration,
+      };
+      playSong(songData);
+    }
+  });
+}
 
 pause.addEventListener("click", () => {
   audio.pause();
   start.classList.remove("d-none");
   pause.classList.add("d-none");
 });
-pauseGreen.addEventListener("click", () => {
-  audio.pause();
-  startGreen.classList.remove("d-none");
-  pauseGreen.classList.add("d-none");
-  start.classList.remove("d-none");
-  pause.classList.add("d-none");
-});
+if (window.location.pathname.endsWith("artist.html") || window.location.pathname.endsWith("album.html")) {
+  pauseGreen.addEventListener("click", () => {
+    audio.pause();
+    startGreen.classList.remove("d-none");
+    pauseGreen.classList.add("d-none");
+    start.classList.remove("d-none");
+    pause.classList.add("d-none");
+  });
+}
 
 pause2.addEventListener("click", () => {
   audio.pause();
@@ -327,34 +380,48 @@ start2.addEventListener("click", () => {
   }
 });
 
-next.addEventListener("click", () => {
-  let song = document.querySelectorAll(".songTitle");
-  if (currentIndex < song.length - 1) {
-    for (element of document.querySelectorAll(".songTitle")) {
-      element.classList.remove("text-success");
-      element.classList.add("text-white");
-    }
+if (window.location.pathname.endsWith("artist.html") || window.location.pathname.endsWith("album.html")) {
+  next.addEventListener("click", () => {
+    let song = document.querySelectorAll(".songTitle");
+    if (currentIndex < song.length - 1) {
+      for (element of document.querySelectorAll(".songTitle")) {
+        element.classList.remove("text-success");
+        element.classList.add("text-white");
+      }
 
-    song[currentIndex + 1].classList.remove("text-white");
-    song[currentIndex + 1].classList.add("text-success");
+      song[currentIndex + 1].classList.remove("text-white");
+      song[currentIndex + 1].classList.add("text-success");
+      nextSong();
+    }
+    //console.log(currentAudio);
+  });
+} else {
+  next.addEventListener("click", () => {
     nextSong();
-  }
-  //console.log(currentAudio);
-});
+  });
+}
 
-back.addEventListener("click", () => {
-  let song = document.querySelectorAll(".songTitle");
-  if (currentIndex > 0) {
-    for (element of document.querySelectorAll(".songTitle")) {
-      element.classList.remove("text-success");
-      element.classList.add("text-white");
+if (window.location.pathname.endsWith("artist.html") || window.location.pathname.endsWith("album.html")) {
+  back.addEventListener("click", () => {
+    let song = document.querySelectorAll(".songTitle");
+    if (currentIndex > 0) {
+      for (element of document.querySelectorAll(".songTitle")) {
+        element.classList.remove("text-success");
+        element.classList.add("text-white");
+      }
+
+      song[currentIndex - 1].classList.remove("text-white");
+      song[currentIndex - 1].classList.add("text-success");
+      backSong();
     }
-
-    song[currentIndex - 1].classList.remove("text-white");
-    song[currentIndex - 1].classList.add("text-success");
-    backSong();
-  }
-});
+  });
+} else {
+  back.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      backSong();
+    }
+  });
+}
 
 barraVolume.addEventListener("input", () => {
   audio.volume = barraVolume.value / 10;
