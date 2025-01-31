@@ -203,7 +203,16 @@ function nextSong() {
   } else {
     currentIndex = 0;
   }
+  let songData = {
+    preview: playlistPlayer[currentIndex].preview,
+    title: playlistPlayer[currentIndex].title,
+    artist: playlistPlayer[currentIndex].artist.name,
+    cover: playlistPlayer[currentIndex].album.cover_small,
+    duration: playlistPlayer[currentIndex].duration,
+  };
+  playSong(songData);
   playSong(playlistPlayer[currentIndex]);
+  console.log(playlistPlayer[currentIndex]);
 }
 
 function backSong() {
@@ -212,7 +221,14 @@ function backSong() {
   } else {
     currentIndex = playlistPlayer.length - 1;
   }
-  playSong(playlistPlayer[currentIndex]);
+  let songData = {
+    preview: playlistPlayer[currentIndex].preview,
+    title: playlistPlayer[currentIndex].title,
+    artist: playlistPlayer[currentIndex].artist.name,
+    cover: playlistPlayer[currentIndex].album.cover_small,
+    duration: playlistPlayer[currentIndex].duration,
+  };
+  playSong(songData);
 }
 
 volume.addEventListener("click", () => {
