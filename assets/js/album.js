@@ -45,6 +45,7 @@ if (URL) {
     .then((data) => {
       if (albumId) {
         playlistPlayer = data.tracks.data;
+        console.log(playlistPlayer);
         const album = data.tracks.data || [];
 
         for (let i = 0; i < album.length; i++) {
@@ -136,6 +137,14 @@ if (URL) {
           durationContainer.append(reproductions, duration);
 
           songTitle.addEventListener("click", () => {
+            if (!audio.paused) {
+              songTitle.classList.remove("text-success");
+              songTitle.classList.add("text-white");
+            } else {
+              songTitle.classList.remove("text-white");
+              songTitle.classList.add("text-success");
+            }
+
             let songData = {
               preview: album[i].preview,
               title: album[i].title,
