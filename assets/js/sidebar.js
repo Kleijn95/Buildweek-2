@@ -403,7 +403,7 @@ function createAsideSm() {
   let aside = document.querySelector("aside");
   let body = document.querySelector("body");
   let div = document.querySelector("aside > div");
-  let username = document.querySelector("main > div > div");
+  let username = document.querySelector(".username");
 
   username.classList.add("d-none");
 
@@ -517,6 +517,7 @@ function toggleAside() {
 
   closeAside.addEventListener("click", () => {
     aside.classList.add("d-none");
+    aside.classList.remove("d-lg-block");
     if (window.location.pathname.endsWith("index.html")) {
       let hideDiv = document.querySelector(".hideDiv");
       hideDiv.classList.add("hideDiv2");
@@ -524,18 +525,20 @@ function toggleAside() {
   });
 
   showAside.addEventListener("click", () => {
-    if (aside.classList.contains("d-none")) {
-      aside.classList.remove("d-none");
+    if (aside.classList.contains("d-lg-block")) {
+      aside.classList.add("d-none");
+      aside.classList.remove("d-lg-block");
 
       if (window.location.pathname.endsWith("index.html")) {
         let hideDiv = document.querySelector(".hideDiv");
-        hideDiv.classList.remove("hideDiv2");
+        hideDiv.classList.add("hideDiv2");
       }
     } else {
-      aside.classList.add("d-none");
+      aside.classList.remove("d-none");
+      aside.classList.add("d-lg-block");
       if (window.location.pathname.endsWith("index.html")) {
         let hideDiv = document.querySelector(".hideDiv");
-        hideDiv.classList.add("hideDiv2");
+        hideDiv.classList.remove("hideDiv2");
       }
     }
   });

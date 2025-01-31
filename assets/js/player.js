@@ -29,7 +29,7 @@ playerNav.innerHTML = `<div class="container-fluid">
     <button class="btn btn-link text-secondary p-0 d-none dislike">
       <i class="fas fa-heart fs-1 mx-4"></i>
     </button>
-    <button class="btn btn-link text-white p-0 start mb-0">
+    <button class="btn btn-link text-white p-0 start">
       <i class="far fa-play-circle fa-2x"></i>
     </button>
     <button class="btn btn-link text-white p-0  d-none pausa">
@@ -199,7 +199,7 @@ function vol() {
 }
 console.log(playlistPlayer);
 
-function nextSong() {
+function nextSong(songData) {
   if (currentIndex < playlistPlayer.length - 1) {
     currentIndex++; // Va alla traccia successiva
   } else {
