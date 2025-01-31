@@ -130,7 +130,9 @@ let barraVolume = document.querySelector(".barraVolume");
 let timeSong = document.querySelector(".timeSong");
 
 let start = document.querySelector(".start");
+let startGreen = document.querySelector(".playGreen");
 let pause = document.querySelector(".pausa");
+let pauseGreen = document.querySelector(".pauseGreen");
 let start2 = document.querySelector(".start2");
 let pause2 = document.querySelector(".pausa2");
 
@@ -254,11 +256,23 @@ start.addEventListener("click", () => {
     pause.classList.remove("d-none");
   }
 });
+startGreen.addEventListener("click", () => {
+  if (playlistPlayer.length > 0) {
+    playSong(playlistPlayer[currentIndex]);
+    startGreen.classList.add("d-none");
+    pauseGreen.classList.remove("d-none");
+  }
+});
 
 pause.addEventListener("click", () => {
   audio.pause();
   start.classList.remove("d-none");
   pause.classList.add("d-none");
+});
+pauseGreen.addEventListener("click", () => {
+  audio.pause();
+  startGreen.classList.remove("d-none");
+  pauseGreen.classList.add("d-none");
 });
 
 pause2.addEventListener("click", () => {

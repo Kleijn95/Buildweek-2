@@ -269,8 +269,17 @@ h3 {
   }
 }
 .rotate-45 {
-  transform: rotate(45deg) translate(-50%, -50%);
+  transform: rotate(20deg) translate(-50%, -50%);
   width: 50%;
-  top: 100%;
+  top: 80%;
   left: 50%;
+}
+.playGreen,
+.pauseGreen {
+  cursor: pointer;
+}
+.pauseGreen {
+  width: 49px;
+  display: flex;
+  justify-content: center;
 }
