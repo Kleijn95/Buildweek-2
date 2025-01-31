@@ -178,6 +178,7 @@ if (URL) {
           console.log(playlist[j].artist.id);
           songTitle.classList.add("text-white", "mb-0");
           songTitle.innerText = playlist[j].title;
+          songTitle.style.cursor = "pointer";
           const artist = document.createElement("a");
           console.log(playlist[j].preview);
 
