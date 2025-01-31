@@ -211,7 +211,6 @@ function nextSong() {
     duration: playlistPlayer[currentIndex].duration,
   };
   playSong(songData);
-  playSong(playlistPlayer[currentIndex]);
   console.log(playlistPlayer[currentIndex]);
 }
 
