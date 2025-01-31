@@ -76,7 +76,7 @@ playerNav.innerHTML = `<div class="container-fluid">
     <i class="fas fa-volume-mute"></i>
   </button>
   <div>
-    <input class="slider-track-input mousetrap barraVolume" type="range" min="0" max="10" disabled />
+    <input class="slider-track-input mousetrap barraVolume" type="range" min="0" max="5" value ="10" disabled />
   </div>
   <button class="btn btn-link text-white p-0"><i class="fas fa-expand-alt"></i></button>
 </div>
