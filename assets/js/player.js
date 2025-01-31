@@ -203,7 +203,7 @@ function nextSong() {
   } else {
     currentIndex = 0;
   }
-  playSong();
+  playSong(playlistPlayer[currentIndex]);
 }
 
 function backSong() {
