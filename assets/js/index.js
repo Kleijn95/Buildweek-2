@@ -334,6 +334,7 @@ function carosello() {
       }
     })
     .then((data) => {
+      playlistPlayer = data.tracks.data;
       console.log(data);
       let songs = data.tracks.data;
       songs
