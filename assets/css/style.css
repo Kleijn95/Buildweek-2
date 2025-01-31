@@ -177,13 +177,11 @@ h3 {
     font-size: 12px;
   }
 
-  .hideBanner,
-  .show {
+  .hideBanner {
     cursor: pointer;
     background-color: #222222;
   }
   .hideBanner,
-  .show,
   .album {
     font-size: 0.7em;
   }

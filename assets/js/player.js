@@ -249,10 +249,17 @@ noVolume.addEventListener("click", () => {
 
 start.addEventListener("click", () => {
   if (playlistPlayer.length > 0) {
-    playSong(playlistPlayer[currentIndex]);
     start.classList.add("d-none");
     pause.classList.remove("d-none");
   }
+  let songData = {
+    preview: playlistPlayer[currentIndex].preview,
+    title: playlistPlayer[currentIndex].title,
+    artist: playlistPlayer[currentIndex].artist.name,
+    cover: playlistPlayer[currentIndex].album.cover_small,
+    duration: playlistPlayer[currentIndex].duration,
+  };
+  playSong(songData);
 });
 
 pause.addEventListener("click", () => {
