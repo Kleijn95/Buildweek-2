@@ -145,8 +145,8 @@ function playSong(songData) {
   if (currentAudio === songData.preview) {
     if (!audio.paused) {
       audio.pause();
-      pause.classList.add("d-none");
-      start.classList.remove("d-none");
+      pause.classList.remove("d-none");
+      start.classList.add("d-none");
     } else {
       audio.play();
       barraVolume.disabled = false;
@@ -169,10 +169,16 @@ function playSong(songData) {
 }
 
 //Funzione per il tasto play
-function playSong2(songData) {
+function playSong2() {
   if (!audio.paused) {
     audio.pause();
-    barraVolume.disabled = false;
+    barraVolume.disabled = true;
+    pause.classList.add("d-none");
+    start.classList.remove("d-none");
+  } else {
+    audio.play();
+    start.classList.add("d-none");
+    pause.classList.remove("d-none");
   }
 }
 
@@ -224,17 +230,11 @@ noVolume.addEventListener("click", () => {
 start.addEventListener("click", () => {
   if (playlistPlayer.length > 0) {
     playSong(playlistPlayer[currentIndex]);
-    start.classList.add("d-none");
-    pause.classList.remove("d-none");
   }
 });
 
 pause.addEventListener("click", () => {
-  audio.pause();
-  start.classList.remove("d-none");
-  pause.classList.add("d-none");
-
-  imgPlayer.src = songData.cover;
+  playSong2();
 });
 
 next.addEventListener("click", () => {
