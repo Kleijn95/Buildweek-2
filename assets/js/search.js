@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // Se ci sono risultati, mostra le informazioni
           searchResults.forEach((result) => {
             const col = document.createElement("div");
-            col.classList.add("col-md-4"); // Aggiunge una colonna con larghezza 4 su dispositivi medi
+            col.classList.add("col-6", "col-md-4"); // Aggiunge una colonna con larghezza 4 su dispositivi medi
             console.log(result.artist.picture);
             const card = document.createElement("div");
             card.classList.add("card", "mb-4");

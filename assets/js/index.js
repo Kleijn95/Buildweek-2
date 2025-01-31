@@ -340,7 +340,8 @@ function carosello() {
         .sort(() => Math.random() - 0.5)
         .slice(0, 6)
         .forEach((song, index) => {
-          /* console.log(song) */ let carousel = document.querySelector(".carousel-inner");
+          console.log(song);
+          let carousel = document.querySelector(".carousel-inner");
 
           let carouselItem = document.createElement("div");
 
@@ -434,6 +435,19 @@ function carosello() {
           dropdownDiv.appendChild(dropdownButton);
           dropdownDiv.appendChild(dropdownMenu);
           divBtn.append(playBtn, saveBtn, dropdownDiv);
+
+          playBtn.addEventListener("click", () => {
+            let songData = {
+              preview: song.preview,
+              title: song.title,
+              artist: song.artist.name,
+              cover: song.album.cover_small,
+              duration: song.duration,
+              index: index,
+            };
+            currentIndex = index;
+            playSong(songData);
+          });
         });
     });
 }
