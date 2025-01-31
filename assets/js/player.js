@@ -1,6 +1,6 @@
 let playerNav = document.querySelector(".player");
 playerNav.innerHTML = `<div class="container-fluid">
-<div class="d-flex align-items-center gap-2">
+<div class="d-flex align-items-center gap-2 overflow-x-visible" style="width:250px">
   <img
     src="./assets/imgs/4b135b9f16b30caa386a32c6a64990c9.png"
     class="song hideMobile imgPlayer spotify"
@@ -29,8 +29,11 @@ playerNav.innerHTML = `<div class="container-fluid">
     <button class="btn btn-link text-secondary p-0 d-none dislike">
       <i class="fas fa-heart fs-1 mx-4"></i>
     </button>
-    <button class="btn btn-link text-white p-0">
+    <button class="btn btn-link text-white p-0 start2">
       <i class="far fa-play-circle fa-2x"></i>
+    </button>
+    <button class="btn btn-link text-white p-0  d-none pausa2">
+      <i class="bi bi-pause-circle  fs-1"></i>
     </button>
   </div>
   <div class="d-flex justify-content-center align-items-center gap-3 flex-grow-1 hideMobile">
@@ -118,6 +121,8 @@ let timeSong = document.querySelector(".timeSong");
 
 let start = document.querySelector(".start");
 let pause = document.querySelector(".pausa");
+let start2 = document.querySelector(".start2");
+let pause2 = document.querySelector(".pausa2");
 
 let next = document.querySelector(".next");
 let back = document.querySelector(".back");
@@ -145,43 +150,33 @@ function playSong(songData) {
   if (currentAudio === songData.preview) {
     if (!audio.paused) {
       audio.pause();
-      pause.classList.remove("d-none");
-      start.classList.add("d-none");
+      pause.classList.add("d-none");
+      start.classList.remove("d-none");
+      pause2.classList.add("d-none");
+      start2.classList.remove("d-none");
     } else {
       audio.play();
       barraVolume.disabled = false;
-      timeSong.innerHTML = formatDuration(album[i].duration);
+      timeSong.innerHTML = formatDuration(songData.duration);
     }
   } else {
     audio.src = songData.preview;
     audio.play();
     currentAudio = songData.preview;
-    currentIndex += songData.index; // Aggiorna currentIndex
     barraVolume.disabled = false;
     timeSong.innerHTML = formatDuration(songData.duration);
     start.classList.add("d-none");
     pause.classList.remove("d-none");
+    start2.classList.add("d-none");
+    pause2.classList.remove("d-none");
 
-    titlePlayer.innerText = songData.title; //Ho accorciato la funzione così. Spero non crei problemi
+    titlePlayer.innerText = songData.title;
     artistPlayer.innerText = songData.artist;
     imgPlayer.src = songData.cover;
   }
 }
 
 //Funzione per il tasto play
-function playSong2() {
-  if (!audio.paused) {
-    audio.pause();
-    barraVolume.disabled = true;
-    pause.classList.add("d-none");
-    start.classList.remove("d-none");
-  } else {
-    audio.play();
-    start.classList.add("d-none");
-    pause.classList.remove("d-none");
-  }
-}
-
 function noVol() {
   if (!audio.paused) {
     volume.classList.add("d-none");
@@ -204,11 +199,20 @@ console.log(playlistPlayer);
 
 function nextSong() {
   if (currentIndex < playlistPlayer.length - 1) {
-    currentIndex++; // Va alla traccia successiva
+    currentIndex++;
   } else {
     currentIndex = 0;
   }
+  let songData = {
+    preview: playlistPlayer[currentIndex].preview,
+    title: playlistPlayer[currentIndex].title,
+    artist: playlistPlayer[currentIndex].artist.name,
+    cover: playlistPlayer[currentIndex].album.cover_small,
+    duration: playlistPlayer[currentIndex].duration,
+  };
+  playSong(songData);
   playSong(playlistPlayer[currentIndex]);
+  console.log(playlistPlayer[currentIndex]);
 }
 
 function backSong() {
@@ -217,7 +221,14 @@ function backSong() {
   } else {
     currentIndex = playlistPlayer.length - 1;
   }
-  playSong(playlistPlayer[currentIndex]);
+  let songData = {
+    preview: playlistPlayer[currentIndex].preview,
+    title: playlistPlayer[currentIndex].title,
+    artist: playlistPlayer[currentIndex].artist.name,
+    cover: playlistPlayer[currentIndex].album.cover_small,
+    duration: playlistPlayer[currentIndex].duration,
+  };
+  playSong(songData);
 }
 
 volume.addEventListener("click", () => {
@@ -234,7 +245,23 @@ start.addEventListener("click", () => {
 });
 
 pause.addEventListener("click", () => {
-  playSong2();
+  audio.pause();
+  start.classList.remove("d-none");
+  pause.classList.add("d-none");
+});
+
+pause2.addEventListener("click", () => {
+  audio.pause();
+  start2.classList.remove("d-none");
+  pause2.classList.add("d-none");
+});
+
+start2.addEventListener("click", () => {
+  if (playlistPlayer.length > 0) {
+    playSong(playlistPlayer[currentIndex]);
+    start2.classList.add("d-none");
+    pause2.classList.remove("d-none");
+  }
 });
 
 next.addEventListener("click", () => {

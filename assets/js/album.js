@@ -63,7 +63,7 @@ if (URL) {
           const titleContainer = document.createElement("div");
           titleContainer.classList.add("col-7", "mb-3");
           const songTitle = document.createElement("h3");
-          songTitle.classList.add("text-white", "mb-0");
+          songTitle.classList.add("text-white", "mb-0", "songTitle");
           songTitle.innerText = album[i].title;
           songTitle.style.cursor = "pointer";
           songTitle.setAttribute("data-bs-toggle", "tooltip");
@@ -137,13 +137,12 @@ if (URL) {
           durationContainer.append(reproductions, duration);
 
           songTitle.addEventListener("click", () => {
-            if (!audio.paused) {
-              songTitle.classList.remove("text-success");
-              songTitle.classList.add("text-white");
-            } else {
-              songTitle.classList.remove("text-white");
-              songTitle.classList.add("text-success");
+            for (element of document.querySelectorAll(".songTitle")) {
+              element.classList.remove("text-success");
+              element.classList.add("text-white");
             }
+            songTitle.classList.remove("text-white");
+            songTitle.classList.add("text-success");
 
             let songData = {
               preview: album[i].preview,
@@ -159,9 +158,9 @@ if (URL) {
         }
       } else if (playlistId) {
         playlistPlayer = data.tracks.data;
-        const playlist = data.tracks.data;
-        console.log(playlist);
-        for (i = 0; i < playlist.length; i++) {
+        let playlist = data.tracks.data;
+        let album = data.tracks.data || [];
+        for (let j = 0; j < playlist.length; j++) {
           /* console.log(playlist[i].album.title); */
           // iterare la playlist o l'album
           const songsContainer = document.getElementById("songsContainer");
@@ -171,27 +170,28 @@ if (URL) {
           songNumberContainer.classList.add("col-1");
           const songNumber = document.createElement("p");
           songNumber.classList.add("text-secondary", "text-end", "songNumber", "fw-bold", "mb-2");
-          songNumber.innerText = i + 1;
+          songNumber.innerText = j + 1;
           const titleContainer = document.createElement("div");
           titleContainer.classList.add("col-7", "mb-3");
           const songTitle = document.createElement("h3");
-          console.log(playlist[i].artist.id);
+          console.log(playlist[j].artist.id);
           songTitle.classList.add("text-white", "mb-0");
-          songTitle.innerText = playlist[i].title;
+          songTitle.innerText = playlist[j].title;
+          songTitle.style.cursor = "pointer";
           const artist = document.createElement("a");
-          console.log(playlist[i].preview);
+          console.log(playlist[j].preview);
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
-          artist.href = "./artist.html?artistId=" + playlist[i].artist.id;
-          artist.innerText = playlist[i].artist.name;
+          artist.href = "./artist.html?artistId=" + playlist[j].artist.id;
+          artist.innerText = playlist[j].artist.name;
           const durationContainer = document.createElement("div");
           durationContainer.classList.add("col-4", "d-flex", "justify-content-between");
           const reproductions = document.createElement("span");
           reproductions.classList.add("text-secondary");
-          reproductions.innerText = playlist[i].rank;
+          reproductions.innerText = playlist[j].rank;
           const duration = document.createElement("h3");
           duration.classList.add("text-secondary");
-          duration.innerText = formatDuration(playlist[i].duration);
+          duration.innerText = formatDuration(playlist[j].duration);
 
           const albumImg = document.getElementById("albumImg");
           const artistName = document.getElementById("artist");
@@ -225,7 +225,7 @@ if (URL) {
 
           document.querySelector(".artistPic").src = data.picture_xl;
           document.querySelector(".artistPic").alt = data.creator.name;
-          document.querySelector(".tracks").innerText = i + 1 + " brani";
+          document.querySelector(".tracks").innerText = j + 1 + " brani";
           document.querySelector(".year").innerText = data.creation_date.slice(0, 4);
           document.querySelector(".duration").innerText = formatDuration(data.duration);
 
@@ -237,14 +237,14 @@ if (URL) {
 
           songTitle.addEventListener("click", () => {
             let songData = {
-              preview: album[i].preview,
-              title: album[i].title,
-              artist: album[i].artist.name,
-              cover: album[i].album.cover_small,
-              duration: album[i].duration,
-              index: i,
+              preview: playlist[j].preview,
+              title: playlist[j].title,
+              artist: playlist[j].artist.name,
+              cover: playlist[j].album.cover_small,
+              duration: playlist[j].duration,
+              index: j,
             };
-            currentIndex = i; // Imposta l'indice attuale
+            currentIndex = j; // Imposta l'indice attuale
             playSong(songData);
           });
         }

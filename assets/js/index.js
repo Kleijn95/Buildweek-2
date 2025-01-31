@@ -23,7 +23,7 @@ function playlistCard() {
 
       const mainRow = document.getElementById("mainRow");
       const card = document.createElement("div");
-      card.classList.add("col-6", "col-md-4");
+      card.classList.add("col-6", "col-md-6", "col-lg-4");
       const innerCard = document.createElement("div");
       innerCard.classList.add("card", "d-flex", "mb-3", "bg-card", "overflow-hidden", "flex-nowrap");
       innerCard.addEventListener("click", function () {
@@ -191,6 +191,8 @@ function playlistCard2() {
       card.append(row, actionRow);
       let box2 = document.querySelector(".box2");
       box2.appendChild(card);
+
+      cardCount2++;
     });
   }, 500);
 }
@@ -338,7 +340,8 @@ function carosello() {
         .sort(() => Math.random() - 0.5)
         .slice(0, 6)
         .forEach((song, index) => {
-          /* console.log(song) */ let carousel = document.querySelector(".carousel-inner");
+          console.log(song);
+          let carousel = document.querySelector(".carousel-inner");
 
           let carouselItem = document.createElement("div");
 
@@ -432,6 +435,26 @@ function carosello() {
           dropdownDiv.appendChild(dropdownButton);
           dropdownDiv.appendChild(dropdownMenu);
           divBtn.append(playBtn, saveBtn, dropdownDiv);
+
+          playBtn.addEventListener("click", () => {
+            let songData = {
+              preview: song.preview,
+              title: song.title,
+              artist: song.artist.name,
+              cover: song.album.cover_small,
+              duration: song.duration,
+              index: index,
+            };
+            currentIndex = index;
+            playSong(songData);
+          });
         });
     });
+}
+const currentTime = new Date();
+const currentHour = currentTime.getHours();
+if (currentHour >= 17) {
+  document.querySelector(".saluto").innerText = "Buonasera";
+} else {
+  document.querySelector(".saluto").innerText = "Buongiorno";
 }

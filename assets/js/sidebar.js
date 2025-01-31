@@ -312,7 +312,7 @@ function playlistNav() {
 //Aside
 function createAside() {
   let aside = document.querySelector("aside");
-  aside.classList.add("col-lg-2", "bg-black");
+  aside.classList.add("col-lg-2", "bg-black", "d-none", "d-lg-block");
 
   let container = document.createElement("div");
   container.classList.add("container", "pt-4", "ps-1", "pe-0");
@@ -403,27 +403,17 @@ function createAsideSm() {
   let aside = document.querySelector("aside");
   let body = document.querySelector("body");
   let div = document.querySelector("aside > div");
-  let username = document.querySelector("main > div > div");
+  let username = document.querySelector(".username");
 
   username.classList.add("d-none");
 
-  aside.classList.add("position-absolute", "text-white");
+  aside.classList.add("position-fixed", "text-white", "w-100");
   div.innerHTML = `<i class="bi bi-bell fs-1"></i>
             <i class="bi bi-clock fs-1 mx-4"></i>
             <i class="bi bi-gear fs-1"></i>`;
 
   let notify = document.createElement("div");
-  notify.classList.add(
-    "bg-black",
-    "d-none",
-    "position-absolute",
-    "top-0",
-    "start-0",
-    "notify",
-    "w-100",
-    "h-100",
-    "p-4"
-  );
+  notify.classList.add("bg-black", "d-none", "position-fixed", "top-0", "start-0", "notify", "w-100", "h-100", "p-4");
 
   let container = document.createElement("div");
   container.classList.add("container", "pt-4", "ps-1", "pe-0");
@@ -509,6 +499,14 @@ function createAsideSm() {
   container.append(activities, notifications);
   notify.appendChild(container);
   body.appendChild(notify);
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 90) {
+      aside.classList.add("scrollBg");
+    } else {
+      aside.classList.remove("scrollBg");
+    }
+  });
 }
 
 function toggleAside() {
@@ -519,6 +517,7 @@ function toggleAside() {
 
   closeAside.addEventListener("click", () => {
     aside.classList.add("d-none");
+    aside.classList.remove("d-lg-block");
     if (window.location.pathname.endsWith("index.html")) {
       let hideDiv = document.querySelector(".hideDiv");
       hideDiv.classList.add("hideDiv2");
@@ -526,18 +525,20 @@ function toggleAside() {
   });
 
   showAside.addEventListener("click", () => {
-    if (aside.classList.contains("d-none")) {
-      aside.classList.remove("d-none");
+    if (aside.classList.contains("d-lg-block")) {
+      aside.classList.add("d-none");
+      aside.classList.remove("d-lg-block");
 
       if (window.location.pathname.endsWith("index.html")) {
         let hideDiv = document.querySelector(".hideDiv");
-        hideDiv.classList.remove("hideDiv2");
+        hideDiv.classList.add("hideDiv2");
       }
     } else {
-      aside.classList.add("d-none");
+      aside.classList.remove("d-none");
+      aside.classList.add("d-lg-block");
       if (window.location.pathname.endsWith("index.html")) {
         let hideDiv = document.querySelector(".hideDiv");
-        hideDiv.classList.add("hideDiv2");
+        hideDiv.classList.remove("hideDiv2");
       }
     }
   });
