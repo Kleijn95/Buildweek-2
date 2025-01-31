@@ -58,7 +58,7 @@ playerNav.innerHTML = `<div class="container-fluid">
   </div>
   <div class="d-flex flex-nowrap justify-content-center align-items-center hideMobile">
      <span class="timeSongStyle">00:00</span>
-    <input class="slider-track-input mousetrap mx-2" type="range" step="1" style="width: 100%" value="0" />
+    <input class="slider-track-input mousetrap mx-2" id="progressBar" type="range" step="1" style="width: 100%" value="0" />
     <span class="timeSong timeSongStyle">00:00</span>
   </div>
 </div>
@@ -95,6 +95,16 @@ let audio = new Audio();
 //Variabile che si aggiorna se un audio è in riproduzione
 let currentAudio = null;
 
+let progressBar = document.querySelector("#progressBar");
+
+audio.addEventListener("timeupdate", () => {
+  progressBar.value = (audio.currentTime / audio.duration) * 100;
+});
+
+progressBar.addEventListener("input", () => {
+  audio.currentTime = (progressBar.value / 100) * audio.duration;
+});
+
 //Variabile per imgPlayer
 let imgPlayer = document.querySelector(".imgPlayer");
 //Variabile che tine conto dell'immagine nel player
@@ -120,7 +130,9 @@ let barraVolume = document.querySelector(".barraVolume");
 let timeSong = document.querySelector(".timeSong");
 
 let start = document.querySelector(".start");
+let startGreen = document.querySelector(".playGreen");
 let pause = document.querySelector(".pausa");
+let pauseGreen = document.querySelector(".pauseGreen");
 let start2 = document.querySelector(".start2");
 let pause2 = document.querySelector(".pausa2");
 
@@ -211,7 +223,6 @@ function nextSong() {
     duration: playlistPlayer[currentIndex].duration,
   };
   playSong(songData);
-  playSong(playlistPlayer[currentIndex]);
   console.log(playlistPlayer[currentIndex]);
 }
 
@@ -240,7 +251,23 @@ noVolume.addEventListener("click", () => {
 
 start.addEventListener("click", () => {
   if (playlistPlayer.length > 0) {
+    start.classList.add("d-none");
+    pause.classList.remove("d-none");
+  }
+  let songData = {
+    preview: playlistPlayer[currentIndex].preview,
+    title: playlistPlayer[currentIndex].title,
+    artist: playlistPlayer[currentIndex].artist.name,
+    cover: playlistPlayer[currentIndex].album.cover_small,
+    duration: playlistPlayer[currentIndex].duration,
+  };
+  playSong(songData);
+});
+startGreen.addEventListener("click", () => {
+  if (playlistPlayer.length > 0) {
     playSong(playlistPlayer[currentIndex]);
+    startGreen.classList.add("d-none");
+    pauseGreen.classList.remove("d-none");
   }
 });
 
@@ -248,6 +275,11 @@ pause.addEventListener("click", () => {
   audio.pause();
   start.classList.remove("d-none");
   pause.classList.add("d-none");
+});
+pauseGreen.addEventListener("click", () => {
+  audio.pause();
+  startGreen.classList.remove("d-none");
+  pauseGreen.classList.add("d-none");
 });
 
 pause2.addEventListener("click", () => {
@@ -265,13 +297,32 @@ start2.addEventListener("click", () => {
 });
 
 next.addEventListener("click", () => {
-  nextSong();
+  let song = document.querySelectorAll(".songTitle");
+  if (currentIndex < song.length - 1) {
+    for (element of document.querySelectorAll(".songTitle")) {
+      element.classList.remove("text-success");
+      element.classList.add("text-white");
+    }
 
+    song[currentIndex + 1].classList.remove("text-white");
+    song[currentIndex + 1].classList.add("text-success");
+    nextSong();
+  }
   //console.log(currentAudio);
 });
 
 back.addEventListener("click", () => {
-  backSong();
+  let song = document.querySelectorAll(".songTitle");
+  if (currentIndex > 0) {
+    for (element of document.querySelectorAll(".songTitle")) {
+      element.classList.remove("text-success");
+      element.classList.add("text-white");
+    }
+
+    song[currentIndex - 1].classList.remove("text-white");
+    song[currentIndex - 1].classList.add("text-success");
+    backSong();
+  }
 });
 
 barraVolume.addEventListener("input", () => {
