@@ -29,10 +29,10 @@ playerNav.innerHTML = `<div class="container-fluid">
     <button class="btn btn-link text-secondary p-0 d-none dislike">
       <i class="fas fa-heart fs-1 mx-4"></i>
     </button>
-    <button class="btn btn-link text-white p-0 start">
+    <button class="btn btn-link text-white p-0 start2">
       <i class="far fa-play-circle fa-2x"></i>
     </button>
-    <button class="btn btn-link text-white p-0  d-none pausa">
+    <button class="btn btn-link text-white p-0  d-none pausa2">
       <i class="bi bi-pause-circle  fs-1"></i>
     </button>
   </div>
@@ -121,6 +121,8 @@ let timeSong = document.querySelector(".timeSong");
 
 let start = document.querySelector(".start");
 let pause = document.querySelector(".pausa");
+let start2 = document.querySelector(".start2");
+let pause2 = document.querySelector(".pausa2");
 
 let next = document.querySelector(".next");
 let back = document.querySelector(".back");
@@ -150,6 +152,8 @@ function playSong(songData) {
       audio.pause();
       pause.classList.add("d-none");
       start.classList.remove("d-none");
+      pause2.classList.add("d-none");
+      start2.classList.remove("d-none");
     } else {
       audio.play();
       barraVolume.disabled = false;
@@ -159,11 +163,12 @@ function playSong(songData) {
     audio.src = songData.preview;
     audio.play();
     currentAudio = songData.preview;
-    currentIndex = playlistPlayer.indexOf(songData);
     barraVolume.disabled = false;
     timeSong.innerHTML = formatDuration(songData.duration);
     start.classList.add("d-none");
     pause.classList.remove("d-none");
+    start2.classList.add("d-none");
+    pause2.classList.remove("d-none");
 
     titlePlayer.innerText = songData.title;
     artistPlayer.innerText = songData.artist;
@@ -198,7 +203,7 @@ function nextSong() {
   } else {
     currentIndex = 0;
   }
-  playSong(playlistPlayer[currentIndex]);
+  playSong();
 }
 
 function backSong() {
@@ -229,6 +234,20 @@ pause.addEventListener("click", () => {
   audio.pause();
   start.classList.remove("d-none");
   pause.classList.add("d-none");
+});
+
+pause2.addEventListener("click", () => {
+  audio.pause();
+  start2.classList.remove("d-none");
+  pause2.classList.add("d-none");
+});
+
+start2.addEventListener("click", () => {
+  if (playlistPlayer.length > 0) {
+    playSong(playlistPlayer[currentIndex]);
+    start2.classList.add("d-none");
+    pause2.classList.remove("d-none");
+  }
 });
 
 next.addEventListener("click", () => {
