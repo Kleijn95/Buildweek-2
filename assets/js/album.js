@@ -82,6 +82,171 @@ if (URL) {
           const nomeArtista = album[i].artist.name;
 
           songTitle.style.cursor = "pointer";
+          //Funzione per far partire le canzoni
+          function playSong(previewUrl) {
+            if (currentAudio === previewUrl) {
+              if (!audio.paused) {
+                audio.pause();
+              } else {
+                audio.play();
+                barraVolume.disabled = false;
+                timeSong.innerHTML = formatDuration(album[i].duration);
+                pause.classList.add("d-none");
+              }
+            } else {
+              audio.src = previewUrl;
+              audio.play();
+              currentAudio = previewUrl;
+              barraVolume.disabled = false;
+              timeSong.innerHTML = formatDuration(album[i].duration);
+              start.classList.add("d-none");
+            }
+          }
+          //Funzione per il tasto play
+          function playSong2(previewUrl) {
+            if (!audio.paused) {
+              audio.pause();
+              barraVolume.disabled = false;
+            }
+          }
+          //Funzione per l'immagine nella playbar
+          function imgSong(imgSong) {
+            if (currentImg === imgSong) {
+              imgPlayer.src.remove();
+              logo.classList.add("d-none");
+            } else {
+              imgPlayer.src = imgSong;
+              player.appendChild(imgPlayer);
+              logo.classList.add("d-none");
+            }
+          }
+          //Funzione per il titolo della canzone nella play
+          function titleSong(titleSong) {
+            if (currentTitlePlayer === titleSong) {
+              titlePlayer.innerHTML = "";
+            } else {
+              titlePlayer.innerHTML = titleSong;
+            }
+          }
+          //Funzione per il nome dell'artista nella play
+          function artista(artista) {
+            if (currentArtistPlayer === artista) {
+              artistPlayer.innerHTML = "";
+            } else {
+              artistPlayer.innerHTML = artista;
+            }
+          }
+
+          function noVol() {
+            if (!audio.paused) {
+              volume.classList.add("d-none");
+              noVolume.classList.remove("d-none");
+              audio.muted = true;
+              barraVolume.max = "";
+              barraVolume.disabled = true;
+            }
+          }
+          function vol() {
+            if (!audio.paused) {
+              volume.classList.remove("d-none");
+              noVolume.classList.add("d-none");
+              audio.muted = false;
+              barraVolume.disabled = false;
+              barraVolume.max = "10";
+            }
+          }
+          let currentIndex = 0;
+
+          function nextSong() {
+            if (currentIndex < album.length - 1) {
+              currentIndex++; // Va alla traccia successiva
+            } else {
+              currentIndex = 0;
+            }
+
+            currentAudio = album[currentIndex].preview;
+            playSong(currentAudio);
+            imgSong(album[currentIndex].album.cover_small);
+            titleSong(album[currentIndex].title);
+            artista(album[currentIndex].artist.name);
+
+            let newAudio = album[currentIndex].preview;
+            audio.src = newAudio;
+            audio.play();
+
+            start.classList.add("d-none");
+            pause.classList.remove("d-none");
+          }
+
+          console.log(currentAudio);
+          let backCurrentIndex = currentAudio;
+
+          function backSong() {
+            if (backCurrentIndex < album.length - 1) {
+              backCurrentIndex--; // Va alla traccia precedente
+            } else {
+              backCurrentIndex = 0;
+            }
+
+            currentAudio = album[backCurrentIndex].preview;
+            playSong(currentAudio);
+            imgSong(album[backCurrentIndex].album.cover_small);
+            titleSong(album[backCurrentIndex].title);
+            artista(album[backCurrentIndex].artist.name);
+
+            let newAudio = album[backCurrentIndex].preview;
+            audio.src = newAudio;
+            audio.play();
+
+            start.classList.add("d-none");
+            pause.classList.remove("d-none");
+          }
+
+          //Evento che chiama la funzione per far partire le canzoni
+          songTitle.addEventListener("click", () => {
+            playSong(preview);
+
+            imgSong(imgCanz);
+            like.classList.remove("d-none");
+            titleSong(titolo);
+            artista(nomeArtista);
+            pause.classList.remove("d-none");
+          });
+
+          //Eventi della playbar
+
+          start.addEventListener("click", () => {
+            if (album.length > 0) {
+              //parte dalla prima
+              playSong(album[0].preview);
+              imgSong(album[0].album.cover_small);
+              like.classList.remove("d-none");
+              titleSong(album[0].title);
+              artista(album[0].artist.name);
+              pause.classList.remove("d-none");
+              start.classList.add("d-none");
+            }
+          });
+          pause.addEventListener("click", () => {
+            playSong2(preview);
+            start.classList.remove("d-none");
+            pause.classList.add("d-none");
+          });
+          volume.addEventListener("click", () => {
+            noVol();
+          });
+          noVolume.addEventListener("click", () => {
+            vol();
+          });
+          next.addEventListener("click", () => {
+            nextSong();
+
+            //console.log(currentAudio);
+          });
+
+          back.addEventListener("click", () => {
+            backSong();
+          });
 
           artist.classList.add("text-secondary", "text-decoration-none", "artist");
           artist.href = "./artist.html?artistId=" + album[i].artist.id;
