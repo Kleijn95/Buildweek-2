@@ -124,6 +124,10 @@ function createHeader() {
   let likedSongsItem = document.createElement("li");
   likedSongsItem.classList.add("nav-item");
 
+  likedSongsItem.addEventListener("click", () => {
+    window.location.assign("album.html"); // Reindirizza alla pagina album.html
+  });
+
   let likedSongsLink = document.createElement("a");
   likedSongsLink.classList.add("nav-link", "text-gray", "px-0", "d-flex", "align-items-center");
   likedSongsLink.href = "#";
