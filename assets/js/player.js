@@ -274,9 +274,9 @@ start.addEventListener("click", () => {
   song[currentIndex].classList.add("text-success");
   playSong(songData);
 });
+
 startGreen.addEventListener("click", () => {
   if (playlistPlayer.length > 0) {
-    playSong(playlistPlayer[currentIndex]);
     startGreen.classList.add("d-none");
     pauseGreen.classList.remove("d-none");
 
@@ -287,6 +287,14 @@ startGreen.addEventListener("click", () => {
     }
     song[currentIndex].classList.remove("text-white");
     song[currentIndex].classList.add("text-success");
+    let songData = {
+      preview: playlistPlayer[currentIndex].preview,
+      title: playlistPlayer[currentIndex].title,
+      artist: playlistPlayer[currentIndex].artist.name,
+      cover: playlistPlayer[currentIndex].album.cover_small,
+      duration: playlistPlayer[currentIndex].duration,
+    };
+    playSong(songData);
   }
 });
 
