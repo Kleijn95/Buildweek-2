@@ -104,15 +104,15 @@ function fetchArtist() {
         const titleContainer = document.createElement("div");
         titleContainer.classList.add("col", "mb-3");
         const songTitle = document.createElement("h3");
-        songTitle.classList.add("text-white", "mb-0");
+        songTitle.classList.add("text-white", "mb-0", "songTitle");
         songTitle.innerText = artist.data[i].title; //sostituire con titolo canzone
         const durationContainer = document.createElement("div");
-        durationContainer.classList.add("col-4", "d-flex", "justify-content-between");
+        durationContainer.classList.add("col-4", "d-flex", "justify-content-between", "align-items-center");
         const reproductions = document.createElement("span");
-        reproductions.classList.add("text-secondary");
+        reproductions.classList.add("text-secondary", "d-none", "d-lg-block");
         reproductions.innerText = artist.data[i].rank;
         const duration = document.createElement("h3");
-        duration.classList.add("text-secondary");
+        duration.classList.add("text-secondary", "mb-0");
         duration.innerText = formatDuration(artist.data[i].duration); //sostituire con durata
         const showOthers = document.createElement("p");
         showOthers.setAttribute("id", "showOthers");
@@ -170,11 +170,18 @@ function fetchArtist() {
         }
 
         songTitle.addEventListener("click", () => {
+          for (element of document.querySelectorAll(".songTitle")) {
+            element.classList.remove("text-success");
+            element.classList.add("text-white");
+          }
+          songTitle.classList.remove("text-white");
+          songTitle.classList.add("text-success");
+
           let songData = {
             preview: artist.data[i].preview,
             title: artist.data[i].title,
             artist: artist.data[i].artist.name,
-            cover: imgCanz,
+            cover: artist.data[i].album.cover_small,
             duration: artist.data[i].duration,
             index: i,
           };
