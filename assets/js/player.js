@@ -279,6 +279,8 @@ startGreen.addEventListener("click", () => {
   if (playlistPlayer.length > 0) {
     startGreen.classList.add("d-none");
     pauseGreen.classList.remove("d-none");
+    start.classList.add("d-none");
+    pause.classList.remove("d-none");
 
     let song = document.querySelectorAll(".songTitle");
     for (element of document.querySelectorAll(".songTitle")) {
@@ -307,6 +309,8 @@ pauseGreen.addEventListener("click", () => {
   audio.pause();
   startGreen.classList.remove("d-none");
   pauseGreen.classList.add("d-none");
+  start.classList.remove("d-none");
+  pause.classList.add("d-none");
 });
 
 pause2.addEventListener("click", () => {
