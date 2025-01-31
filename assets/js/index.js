@@ -409,7 +409,7 @@ function carosello() {
           dropdownButton.appendChild(icon);
 
           let dropdownMenu = document.createElement("ul");
-          dropdownMenu.classList.add("dropdown-menu");
+          dropdownMenu.classList.add("dropdown-menu", "dark");
 
           let actions = ["Action", "Another action", "Something else here"];
           actions.forEach((actionText) => {
