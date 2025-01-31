@@ -276,13 +276,32 @@ start2.addEventListener("click", () => {
 });
 
 next.addEventListener("click", () => {
-  nextSong();
+  let song = document.querySelectorAll(".songTitle");
+  if (currentIndex < song.length - 1) {
+    for (element of document.querySelectorAll(".songTitle")) {
+      element.classList.remove("text-success");
+      element.classList.add("text-white");
+    }
 
+    song[currentIndex + 1].classList.remove("text-white");
+    song[currentIndex + 1].classList.add("text-success");
+    nextSong();
+  }
   //console.log(currentAudio);
 });
 
 back.addEventListener("click", () => {
-  backSong();
+  let song = document.querySelectorAll(".songTitle");
+  if (currentIndex > 0) {
+    for (element of document.querySelectorAll(".songTitle")) {
+      element.classList.remove("text-success");
+      element.classList.add("text-white");
+    }
+
+    song[currentIndex - 1].classList.remove("text-white");
+    song[currentIndex - 1].classList.add("text-success");
+    backSong();
+  }
 });
 
 barraVolume.addEventListener("input", () => {
