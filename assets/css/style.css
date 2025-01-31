@@ -274,3 +274,12 @@ h3 {
   top: 100%;
   left: 50%;
 }
+.playGreen,
+.pauseGreen {
+  cursor: pointer;
+}
+.pauseGreen {
+  width: 49px;
+  display: flex;
+  justify-content: center;
+}
