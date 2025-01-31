@@ -145,11 +145,12 @@ function playSong(songData) {
   if (currentAudio === songData.preview) {
     if (!audio.paused) {
       audio.pause();
+      pause.classList.add("d-none");
+      start.classList.remove("d-none");
     } else {
       audio.play();
       barraVolume.disabled = false;
       timeSong.innerHTML = formatDuration(album[i].duration);
-      pause.classList.add("d-none");
     }
   } else {
     audio.src = songData.preview;
@@ -193,6 +194,7 @@ function vol() {
     barraVolume.max = "10";
   }
 }
+console.log(playlistPlayer);
 
 function nextSong() {
   if (currentIndex < playlistPlayer.length - 1) {
@@ -222,6 +224,8 @@ noVolume.addEventListener("click", () => {
 start.addEventListener("click", () => {
   if (playlistPlayer.length > 0) {
     playSong(playlistPlayer[currentIndex]);
+    start.classList.add("d-none");
+    pause.classList.remove("d-none");
   }
 });
 
@@ -229,6 +233,8 @@ pause.addEventListener("click", () => {
   audio.pause();
   start.classList.remove("d-none");
   pause.classList.add("d-none");
+
+  imgPlayer.src = songData.cover;
 });
 
 next.addEventListener("click", () => {
