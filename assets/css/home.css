@@ -1,29 +1,43 @@
-.music-box {
-  background: linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, #202020 91%);
-}
+@media screen and (min-width: 769px) {
+  .music-box {
+    background: linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, #202020 91%);
+  }
 
-h2 {
-  font-size: 4rem;
-}
+  h2 {
+    font-size: 4rem;
+  }
 
-.imgBanner {
-  width: 350px;
-  min-width: 200px;
-}
+  .imgBanner {
+    width: 350px;
+    min-width: 200px;
+  }
 
-.playBtn {
-  background-color: #1ed760;
-  &:hover {
-    background-color: #ffffff;
+  .playBtn {
+    background-color: #1ed760;
+    &:hover {
+      background-color: #ffffff;
+    }
+  }
+
+  .hideDiv {
+    right: 40px;
+    top: 100px;
+    z-index: 2;
+  }
+
+  .hideDiv2 {
+    right: 180px;
   }
 }
 
-.hideDiv {
-  right: 40px;
-  top: 100px;
-  z-index: 2;
-}
-
-.hideDiv2 {
-  right: 180px;
+@media screen and (max-width: 769px) {
+  .bg-CardMobile {
+    background-color: #242424;
+  }
+  .playMobile {
+    padding-top: 5px;
+    padding-inline: 6px;
+    background-color: #1b1b1b;
+    border-radius: 50%;
+  }
 }
